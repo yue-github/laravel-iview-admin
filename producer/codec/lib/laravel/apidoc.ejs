@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html style="height: 100%;">
+  <head>
+    <meta charset="UTF-8">
+    <title>后台接口参考文档</title>
+    <style>
+        body {height: 100%;padding: 0; margin: 0; font-family: "Microsoft Yahei"}
+        .code {font-family: "Courier New", "Microsoft Yahei"; margin-top: 10px; margin-bottom: 10px; padding: 10px; background: lightgray}
+        .left {
+          width: 200px;
+          position: fixed;
+          overflow-y: scroll;
+          height: 100%;
+        }
+        .right {
+            margin-left: 200px;
+            width: 980px;
+            padding-left: 20px;
+        }
+    </style>
+  </head>
+  <body>
+    <div style="height: 100%;width: 1200px; margin: 0 auto;display: flex;flex-direction: row;">
+    <div class="left">
+      <%_
+        var navs = {};
+        for (var n in locals.docs) {
+          for (var i = 0; i < locals.docs[n].length; i++) {
+            var oper = locals.docs[n][i];
+            var role = oper.role;
+            if(!role || !oper.page) {
+              continue;
+            }
+            if(!navs[role]) {
+              navs[role] = {};
+            }
+
+            var pages = oper.page.split(",");
+            for(var k = 0; k < pages.length; k++) {
+              var page = pages[k].replace(/(^\s*)|(\s*$)/g, "");
+              if(!navs[role][page]) {
+                navs[role][page] = [];
+              }
+
+              navs[role][page].push({name: oper.name, label: oper.label});
+            }
+            
+          }
+        }
+      _%>
+
+      <%_
+        for(var role in navs) {
+      _%>
+      <div style="margin-top: 20px;"><span style="font-weight: bold;">【<%=role%>】</span>
+      <%_
+          for(var page in navs[role]) {
+      _%>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #666;"><%=page%></span>
+      <%_
+            for(var i = 0; i < navs[role][page].length; i++) {
+      _%>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#<%=role+"_"+page+"_"+navs[role][page][i].label%>"><%=navs[role][page][i].label%></a></div>
+      <%_
+            }
+      _%>
+      </div>
+      <%_
+          }
+      _%>
+      </div>
+      <%_
+        }
+       _%>
+     
+    </div>
+      <div class="right">
+        <h1>后台接口参考文档</h1>
+          <%_ for (var n in locals.docs) { _%>
+          <h3 style="text-decoration: underline"><small>模块：</small> <%=n%></h3>
+          <%_ for (var i = 0; i < locals.docs[n].length; i++) { _%>
+          <div style="margin-left: 20px;">
+            <a  name="<%=(locals.docs[n][i].role || "无角色") +"_"+(locals.docs[n][i].page || "无页面") +"_"+locals.docs[n][i].label%>"></a>
+              (<%=i+1%>) <%=locals.docs[n][i].label%>：<%=n%>/<strong><%=locals.docs[n][i].name%></strong><br><br>
+              输入参数：
+              <div class="code">
+              <%-locals.docs[n][i].input%>
+              </div>
+              返回数据:
+              <div class="code">
+              <%-locals.docs[n][i].output%>
+              </div>
+          </div>
+          <%_ } _%>
+          <%_ } _%>
+      </div>
+        
+    </div>
+  </body>
+</html>

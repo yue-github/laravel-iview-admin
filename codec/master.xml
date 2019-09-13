@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>SnakeGame</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<!-- canvas HTML5中定义图形的标签，比如图表和其他图像-->                           
+
+<canvas id="can" width="400" height="400" style="background:Black"></canvas>
+<script>
+/*通过调用canvas对象的getContext()方法来获取绘图环境。                             
+* getContext()方法只需要一个参数：绘图环境的类型。                                 
+* 在游戏中，我们使用2D类型的绘图环境。 */                                          
+var sn = [42, 41], dz = 43, fx = 1, n, ctx = document.getElementById("can").getContext("2d");
+function draw(t, c) {
+ctx.fillStyle = c; 
+
+// 使用fillStyle方法设置所绘图形的颜色；使用fillRect(x,y,width,height)方法增加蛇的长度
+ctx.fillRect(t % 20 * 20 + 1, ~~(t / 20) * 20 + 1, 18, 18);
+}
+document.onkeydown = function(e) {
+// keyCode键码值，上38、下40、左37、右39                                          
+fx = sn[1] - sn[0] == (n = [-1, -20, 1, 20][(e || event).keyCode - 37] || fx) ? fx : n
+};
+!function() {
+// unshift() 方法可向数组的开头添加一个或更多元素，并返回新的长度                      
+sn.unshift(n = sn[0] + fx); 
+if (sn.indexOf(n, 1) > 0 || n < 0 || n > 399 || fx == 1 && n % 20 == 0 || fx == -1 && n % 20 == 19)
+return alert("GAME OVER");
+draw(n, "Lime");
+if (n == dz) {
+while (sn.indexOf(dz = ~~(Math.random() * 400)) >= 0);
+draw(dz, "Pink");
+} else
+draw(sn.pop(), "Black");
+/*callee返回正被执行的 Function 对象，也就是所指定的 Function 对象的正文。            
+* callee 属性的初始值就是正被执行的 Function 对象。这允许匿名的递归函数                
+* 通过setTimeout函数暂停一段时间后执行代码，可以实现一些特殊的效果                     
+*/
+setTimeout(arguments.callee, 230);
+}();
+</script>
+</body>
+</html>

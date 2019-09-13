@@ -1,0 +1,81 @@
+public function <%=oper.$.name%>(Request $request) {
+    
+    <%- include('validate', {val: {params: locals.data}}) %>
+    <%_ for (var i in locals.data) { -%>
+        <%_ if ( typeof( locals.data[i] ) == "object" ){
+            var names = i.split(".");
+                if(names.length == 6 && names[0] == "items"){-%>
+    DB::beginTransaction();
+    //查出购物车里的商品
+    $product_nums = DB::table('<%=names[1]%>')->select([
+                    <%_ for(var j in locals.data[i]){ _%> 
+            '<%= j %> as <%= data[i][j] %>',
+                    <%_ } _%>
+            ])
+        ->leftJoin('<%= names[2]%>', '<%= names[2]%>.id', '=', '<%= names[1]%>.<%= names[3]%>')
+        ->where('shopping_cart.user_id', '=', $this->token->id)
+        ->get();
+            <%_ } -%>
+        <%_ } -%>
+    <%_ } -%>
+    if(count($product_nums) == 0){
+        return $this->fails('购物车为空');
+    }
+    $total = 0;
+    //计算总价
+    foreach($product_nums as $product_num){
+        $total += $product_num->num * $product_num->price; 
+    }
+    $parentId = DB::table('orders')
+        ->insertGetId([
+        <%_ if (typeof(locals.data) === 'object'){ -%>
+                <%_ for(var i in locals.data) { -%>
+                    <%_ if ( typeof( data[i] ) != 'object' ) { -%>
+                        <%_ if( locals.data[i] == "GEN_CODE") { -%>
+        '<%= i %>' => date('YmdHis').time().mt_rand(1000,9999),         
+                        <%_ } else { -%>
+        '<%= i %>' => <%- tcvt(locals.data[i]) %>,
+                        <%_ } -%>
+                    <%_ } -%>
+                <%_ } -%>
+        <%_ } -%>
+        <%_ if (table.$.time === 'true') { _%>
+        'created_at' => date('Y-m-d H:i:s'),
+        'updated_at' => date('Y-m-d H:i:s')
+        <%_ } _%>
+        ]);
+        <%_ for (var i in locals.data) { -%>
+            <%_ if ( typeof( locals.data[i] ) == "object" ) {
+                    var names = i.split(".");
+                    if(names.length == 6 && names[0] == "items") { -%>
+    foreach($product_nums as $product_num){
+        DB::table('purchased')
+            ->insert([
+                '<%=names[5]%>' => $parentId,
+                        <%_ for(var j in locals.data[i]){ _%> 
+                '<%= locals.data[i][j] %>' => $product_num-><%= locals.data[i][j] %>,
+                        <%_ } _%>
+                    <%_ } _%>
+                <%_ } _%>
+            <%_ } _%>
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s')
+            ]);
+    }
+    <%_ for (var i in locals.data) { -%>
+        <%_ if ( typeof( data[i] ) == "object" ) {
+            var names = i.split(".");
+            if(names.length > 0 && names[0] == "items" && names[1] == "delete"){ -%>
+    //删除购物车
+    DB::table('<%= names[2]%>')
+                <%_ for(var j in locals.data[i]){ _%> 
+        ->where('<%= j %>', '=', <%- tcvt(data[i][j]) %>)
+                <%_ } _%>
+        ->where('selected', '=', 1)
+        ->delete();
+            <%_ } -%>
+        <%_ } -%>
+    <%_ } -%>
+    DB::commit();
+    return $this->success($parentId);
+}

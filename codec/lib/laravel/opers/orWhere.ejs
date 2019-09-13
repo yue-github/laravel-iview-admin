@@ -1,0 +1,68 @@
+<%_
+function sign(str) {
+    if (str === 'like' || str === 'likea' || str === 'likee') {
+        echo('like');
+    } else if (str === 'le') { 
+        echo('<=');
+    } else if (str === 'lt') {
+        echo('<');
+    } else if (str === 'ge') {
+        echo('>=');
+    } else if (str === 'gt') { 
+        echo('>');
+    } else if (str === 'ne') {
+        echo('!=');
+    }
+}
+function prefix(str) {
+    if (str === 'like' || str === 'likee') {
+        echo("'%'.");
+    }
+}
+function postfix(str) {
+    if (str === 'like' || str === 'likea') { 
+        echo(".'%'");
+    }
+}
+_%>
+        $result->where(function ($query) use ($request){
+        <%_ if (!locals.param && locals.autoid === true) { _%>
+        if ($request->has('id'))
+            $query->orWhere('<%=table.$.name%>.id', $request->input('id'));
+        <%_ } else if (Array.isArray(param)) { _%>
+        <%_ for (var i = 0; i < param.length; i++) { _%>
+        <%_ if (Array.isArray(param[i])) { _%>
+        if ($request->has('<%=param[i][1]%>'))
+            $query->orWhere('<%=table.$.name%>.<%=param[i][0]%>', '<%-sign(param[i][1])%>', <%-prefix(param[i][1])%>$request->input('<%=param[i][0]%>')<%-postfix(param[i][1])%>);
+        <%_ } else { _%>
+        $query->orWhere('<%=table.$.name%>.<%=param[i]%>', '=', <%-tcvt(param[i])%>);
+        <%_ } _%>
+        <%_ } _%>
+        <%_ } else if (typeof(param) === 'object') { _%>
+        <%_ for (var i in param) { 
+            var fname = '';
+            var names = i.split('.');
+            if(names.length > 1) {
+                if(locals.jtables && locals.jtables[names[0]]) {
+                    fname = locals.jtables[names[0]] + '.' + names[1];
+                } else {
+                    fname = names[0] + '_' + names[1] + '.' + names[1];
+                }
+            } else {
+                fname = table.$.name + '.' + i;
+            }
+        _%>
+        <%_ if (Array.isArray(param[i])) { _%>
+        if ($request->has('<%=param[i][1]%>'))
+            $query->orWhere('<%=fname%>', '<%=sign(param[i][0])%>', <%-prefix(param[i][0])%>$request->input('<%=param[i][1]%>')<%-postfix(param[i][0])%>);
+        <%_ } else { 
+            if(isTk(param[i])) {_%>
+        $query->orWhere('<%=fname%>', '=', <%-tcvt(param[i])%>);
+            <%_} else {_%>
+        if ($request->has('<%=param[i]%>'))
+            $query->orWhere('<%=fname%>', '=', <%-tcvt(param[i])%>);
+            <%_ }  _%>
+        <%_ } _%>
+        <%_ } _%>
+        <%_ } _%>
+        });

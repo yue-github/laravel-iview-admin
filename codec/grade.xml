@@ -1,0 +1,21 @@
+<?xml version="1.0" encode="UTF-8" standalone="yes"?>
+<model>
+    <entity name="company" time="true" label="订单管理">
+        <attr name="name" type="name" required="true" label="公司名"/>
+        <attr name="score1" type="float" label="分数"/>
+        <attr name="score2" type="float" label="分数"/>
+        <attr name="score3" type="float" label="分数"/>
+        <attr name="score4" type="float" label="分数"/>
+        <attr name="score5" type="float" label="分数"/>
+        <oper name="search" type="search">
+            data: {
+                name: name,
+                score1: score1,
+                score2: score2,
+                score3: score3,
+                score4: score4,
+                score5: score5
+            }
+        </oper>
+    </entity>
+</model>

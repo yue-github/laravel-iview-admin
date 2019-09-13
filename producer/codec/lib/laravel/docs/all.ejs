@@ -1,0 +1,16 @@
+<%_ if (locals.mode === 'input') { _%>
+<%- include("object", {doc: locals.with}) %>
+<%_ } else if (locals.mode === 'output') { 
+    var output = {};
+    for(var i in locals.data) {
+        var names = i.split('.');
+        if(names.length === 1 && typeof(locals.data[i]) !== "object") {
+            output[i] = locals.data[i];
+        } 
+    }
+
+    echo ("{<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）"
+            +"<br>&nbsp;&nbsp;errorMsg: 错误信息"
+            +"<br>&nbsp;&nbsp;result: ["+include("object", {doc: output})+"]<br>}");
+_%>
+<%_ } _%>

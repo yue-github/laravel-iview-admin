@@ -1,0 +1,19 @@
+    public function <%=oper.$.name%>(Request $request) {
+    <%- include('validate', {val: {params: locals.with}}) %>
+        $data = DB::table('<%=table.$.name%>')->where('id', $request->input('id'))->first();
+        if(!$data) {
+            return $this->fails('订单不存在');
+        }
+        $body = '购物订单';
+        $total_fee = $data->total;
+        $out_trade_no = $data->code;
+        $protocol = ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
+        $notify_url = $protocol . $_SERVER["HTTP_HOST"] . '/<%=table.$.name%>/wxpay_callback';
+        $result = \App\Utils\WxpayUtil::execute(['body'=>$body, 'time_start' => date('Y-m-d H:i:s'), 'total_fee'=>$total_fee, 'out_trade_no'=>$out_trade_no, 'notify_url'=>$notify_url]);
+        if($result) {
+            DB::table('<%=table.$.name%>')->where('id', $data->id)->update(['out_trade_no'=>$out_trade_no]);
+            return $this->success($result);
+        } else {
+            return $this->fails();
+        }
+    }

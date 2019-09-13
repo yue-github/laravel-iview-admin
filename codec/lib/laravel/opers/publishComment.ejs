@@ -1,0 +1,38 @@
+    //<%=oper.$.label%>
+    public function <%=oper.$.name%>(Request $request)
+    {
+        <%- include('validate', {val: {params: locals.with}}) %>
+        $member = $this->getMember($request->input('token'));
+        $data = [
+        <%_ for (var i in locals.data) { _%>
+            '<%=i%>'=> <%-tcvt(locals.data[i])%>,
+        <%_ } _%>
+            'reply_id' => $member->id,
+            'created_at' => date('Y-m-d H:i:s')
+        ];
+        
+        <%_ for (var i in locals.where) { _%>
+        if ($request->has('<%=i%>')) {
+            $replied = DB::table('members')
+                ->select([
+                    'id as replied_id',
+                    'name as replied_name',
+                    'head_image as replied_head_image',
+                    'hospital as replied_hospital'
+                ])
+                ->where('id', $request->input('replied_id'))
+                ->first();
+            if ($replied) {
+                <%_ for (var i in locals.info) { _%>
+                $data['<%=i%>'] = $replied-><%=i%>;
+                <%_ } _%>
+            }
+        }
+        <%_ } _%>
+
+        $result = DB::table('<%=table.$.name%>')->insert($data);
+        if ($result) {
+            return $this->noContent();
+        }
+        return $this->fails();
+    }

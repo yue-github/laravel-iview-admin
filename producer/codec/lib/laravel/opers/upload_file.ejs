@@ -1,0 +1,33 @@
+    public function <%=oper.$.name%>(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'file' => 'required'
+        ]);
+        if ($validator->fails()) {
+            return $this->fails($validator->errors()->all());
+        }
+        <%_ for (var i in locals.data) { -%>
+            <%_ if (i == "path") { -%>
+        $fileName = "";
+        $fileCharater = $request->file('file');
+        if ($fileCharater->isValid()) { //判断文件是否有效
+            //获取文件的扩展名
+            $ext = $fileCharater->getClientOriginalExtension();
+            //把扩展名改为小写
+            $ext = strtolower($ext);
+            //获取文件的绝对路径
+            $path = $fileCharater->getRealPath();
+            //定义文件名
+            $fileName = date('Y-m-d-h-i-s') . '.' . $ext;
+            //存储文件。disk里面的local。总的来说，就是调用disk模块里的local配置
+            try{
+                \Illuminate\Support\Facades\Storage::disk('public_' . '<%=locals.data[i]%>')->put($fileName, file_get_contents($path));
+                return $this->success($fileName);
+            }catch(\Exception $e){
+                return $this->fails("文件上传失败！！");
+            }
+        }
+        return $this->fails();
+            <%_ } -%>
+        <%_ } -%>
+    }

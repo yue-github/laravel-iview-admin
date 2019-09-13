@@ -1,0 +1,7 @@
+    public function <%=oper.$.name%>(Request $request) {
+<%- include('validate', {val: {hasId: true}}) %>
+        $result = DB::table('<%=table.$.name%>');
+<%- include('where', {param: locals.with, autoid: true}); _%>
+        $result->delete();
+        return $this->success();
+    }

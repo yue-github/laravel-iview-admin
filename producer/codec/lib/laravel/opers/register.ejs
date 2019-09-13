@@ -1,0 +1,48 @@
+<%_  
+    var i = 0;
+    var user = "";
+    var duser = "";
+    for(var d in locals.data) {
+        if(i === 0) {
+            user = d;
+            duser = locals.data[d];
+        }
+        i++;
+    }
+_%>
+    public function <%=oper.$.name%>(Request $request) {
+<%- include('validate', {val: {params: locals.data}}) %>
+        $phone = $request->input('phone');
+        if (DB::table('<%=table.$.name%>')->where('<%=user%>', "=", $<%=duser%>)->count() > 0) {
+            return $this->fails('该用户已注册');
+        }
+        
+        if(!\App\Utils\SMSUtil::check($request)){
+            return $this->fails('验证码错误');
+        }
+
+        DB::table('<%=table.$.name%>')->insert([
+            <%_ if (Array.isArray(locals.data)) { _%>
+            <%_ for (var i = 0; i < locals.data.length; i++) { _%>
+            <%_ if (locals.data[i] == 'password') { _%>
+            '<%=locals.data[i]%>' => md5($request->input('<%=locals.data[i]%>')),
+            <%_ } else {_%>
+            '<%=locals.data[i]%>' => $request->input('<%=locals.data[i]%>'),
+            <%_ } _%>
+            <%_ } _%>
+            <%_ } else if (typeof(locals.data) === 'object') { _%>
+            <%_ for (var i in locals.data) { 
+                if(locals.data[i] === 'password') {_%>
+            '<%=i%>' => md5(<%-tcvt(locals.data[i])%>),
+            <%_} else {_%>
+            '<%=i%>' => <%-tcvt(locals.data[i])%>,
+            <%_ } _%>
+            <%_ } _%>
+            <%_ } _%>
+            <%_ if (table.$.time === 'true') { _%>
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s')
+            <%_ } _%>
+        ]);
+        return $this->success();
+    }

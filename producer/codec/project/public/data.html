@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>数据字典参考文档</title>
+    <style>
+        body {padding: 0; margin: 0; font-family: "Microsoft Yahei"}
+    </style>
+  </head>
+  <body>
+    <div style="width: 1200px; margin: 0 auto">
+        <h1>数据字典参考文档</h1>
+        <h3 style="text-decoration: underline"><small>数据表：</small> users</h3>
+        <div style="margin-left: 20px;">
+            1 <strong>open_id</strong> 微信open_id
+        </div>
+        <div style="margin-left: 20px;">
+            2 <strong>shop_id</strong> 店铺id
+        </div>
+        <div style="margin-left: 20px;">
+            3 <strong>name</strong> 姓名
+        </div>
+        <div style="margin-left: 20px;">
+            4 <strong>idcard</strong> 身份证号
+        </div>
+        <div style="margin-left: 20px;">
+            5 <strong>company</strong> 单位名称
+        </div>
+        <div style="margin-left: 20px;">
+            6 <strong>phone</strong> 手机号码
+        </div>
+        <div style="margin-left: 20px;">
+            7 <strong>email</strong> 邮箱地址
+        </div>
+        <div style="margin-left: 20px;">
+            8 <strong>enabled</strong> 是否可用
+        </div>
+        <div style="margin-left: 20px;">
+            9 <strong>isLookVideo</strong> 是否在看视频
+        </div>
+        <div style="margin-left: 20px;">
+            10 <strong>password</strong> 登录密码
+        </div>
+        <div style="margin-left: 20px;">
+            11 <strong>balance</strong> 账户余额
+        </div>
+        <h3 style="text-decoration: underline"><small>数据表：</small> labels</h3>
+        <div style="margin-left: 20px;">
+            1 <strong>name</strong> 名称
+        </div>
+        <div style="margin-left: 20px;">
+            2 <strong>sort</strong> 排序
+        </div>
+        <div style="margin-left: 20px;">
+            3 <strong>parent_id</strong> 父标签ID
+        </div>
+        <div style="margin-left: 20px;">
+            4 <strong>onsale</strong> 是否上架
+        </div>
+        <div style="margin-left: 20px;">
+            5 <strong>shop_id</strong> 店铺id
+        </div>
+        <div style="margin-left: 20px;">
+            6 <strong>id</strong> 产品-标签id
+        </div>
+        <h3 style="text-decoration: underline"><small>数据表：</small> shop_labels</h3>
+        <div style="margin-left: 20px;">
+            1 <strong>name</strong> 名称
+        </div>
+        <div style="margin-left: 20px;">
+            2 <strong>sort</strong> 排序
+        </div>
+        <div style="margin-left: 20px;">
+            3 <strong>parent_id</strong> 父标签ID
+        </div>
+        <div style="margin-left: 20px;">
+            4 <strong>shop_id</strong> 店铺ID
+        </div>
+        <div style="margin-left: 20px;">
+            5 <strong>onsale</strong> 是否上架
+        </div>
+        <h3 style="text-decoration: underline"><small>数据表：</small> resources</h3>
+        <div style="margin-left: 20px;">
+            1 <strong>shop_id</strong> 所属店铺ID
+        </div>
+        <div style="margin-left: 20px;">
+            2 <strong>name</strong> 名称
+        </div>
+        <div style="margin-left: 20px;">
+            3 <strong>data</strong> 数据
+        </div>
+        <div style="margin-left: 20px;">
+            4 <strong>type</strong> 类型
+        </div>
+        <h3 style="text-decoration: underline"><small>数据表：</small> activities</h3>
+        <div style="margin-left: 20px;">
+            1 <strong>shop_id</strong> 所属店铺ID
+        </div>
+        <div style="margin-left: 20px;">
+            2 <strong>name</strong> 名称
+        </div>
+        <div style="margin-left: 20px;">
+            3 <strong>desc</strong> 详情
+        </div>
+        <div style="margin-left: 20px;">
+            4 <strong>resources</strong> 资源集合
+        </div>
+        <div style="margin-left: 20px;">
+            5 <strong>sort</strong> 排序
+        </div>
+        <div style="margin-left: 20px;">
+            6 <strong>icon_type_id</strong> 图标类型
+        </div>
+        <div style="margin-left: 20px;">
+            7 <strong>id_delete</strong> state
+        </div>
+        <h3 style="text-decoration: underline"><small>数据表：</small> task_activities</h3>
+        <div style="margin-left: 20px;">
+            1 <strong>task_id</strong> 任务ID
+        </div>
+        <div style="margin-left: 20px;">
+            2 <strong>activity_id</strong> 活动ID
+        </div>
+        <div style="margin-left: 20px;">
+            3 <strong>sort</strong> 排序
+        </div>
+        <h3 style="text-decoration: underline"><small>数据表：</small> tasks</h3>
+        <div style="margin-left: 20px;">
+            1 <strong>shop_id</strong> 所属店铺ID
+        </div>
+        <div style="margin-left: 20px;">
+            2 <strong>name</strong> 名称
+        </div>
+        <div style="margin-left: 20px;">
+            3 <strong>desc</strong> 详情
+        </div>
+        <div style="margin-left: 20px;">
+            4 <strong>start_date_time</strong> 开始时间
+        </div>
+        <div style="margin-left: 20px;">
+            5 <strong>end_date_time</strong> 结束时间
+        </div>
+        <div style="margin-left: 20px;">
+            6 <strong>id_delete</strong> state
+        </div>
+        <h3 style="text-decoration: underline"><small>数据表：</small> project_tasks</h3>
+        <div style="margin-left: 20px;">
+            1 <strong>project_id</strong> 项目ID
+        </div>
+        <div style="margin-left: 20px;">
+            2 <strong>task_id</strong> 任务ID
+        </div>
+        <div style="margin-left: 20px;">
+            3 <strong>sort</strong> 排序
+        </div>
+        <h3 style="text-decoration: underline"><small>数据表：</small> projects</h3>
+        <div style="margin-left: 20px;">
+            1 <strong>shop_id</strong> 所属店铺ID
+        </div>
+        <div style="margin-left: 20px;">
+            2 <strong>name</strong> 名称
+        </div>
+        <div style="margin-left: 20px;">
+            3 <strong>desc</strong> 描述
+        </div>
+        <div style="margin-left: 20px;">
+            4 <strong>start_time</strong> 项目开始时间
+        </div>
+        <div style="margin-left: 20px;">
+            5 <strong>end_time</strong> 项目结束时间
+        </div>
+        <div style="margin-left: 20px;">
+            6 <strong>label_id</strong> 标签id
+        </div>
+        <div style="margin-left: 20px;">
+            7 <strong>onsale</strong> 是否上架
+        </div>
+        <div style="margin-left: 20px;">
+            8 <strong>sponsor</strong> 主办单位
+        </div>
+        <div style="margin-left: 20px;">
+            9 <strong>organizer</strong> 协办单位
+        </div>
+        <div style="margin-left: 20px;">
+            10 <strong>period</strong> 学时
+        </div>
+        <div style="margin-left: 20px;">
+            11 <strong>start_stydy_time</strong> 开始培训时间
+        </div>
+        <div style="margin-left: 20px;">
+            12 <strong>end_study_time</strong> 结束培训时间
+        </div>
+        <div style="margin-left: 20px;">
+            13 <strong>prportion</strong> 辅导员评分比例
+        </div>
+        <h3 style="text-decoration: underline"><small>数据表：</small> shopping_cart</h3>
+        <div style="margin-left: 20px;">
+            1 <strong>product_id</strong> 产品ID
+        </div>
+        <div style="margin-left: 20px;">
+            2 <strong>shop_id</strong> 店铺id
+        </div>
+        <div style="margin-left: 20px;">
+            3 <strong>selected</strong> 是否选中
+        </div>
+        <div style="margin-left: 20px;">
+            4 <strong>user_id</strong> 所有者ID
+        </div>
+        <h3 style="text-decoration: underline"><small>数据表：</small> product_labels</h3>
+        <div style="margin-left: 20px;">
+            1 <strong>product_id</strong> 产品ID
+        </div>
+        <div style="margin-left: 20px;">
+            2 <strong>label_id</strong> 标签ID
+        </div>
+        <h3 style="text-decoration: underline"><small>数据表：</small> products</h3>
+        <div style="margin-left: 20px;">
+            1 <strong>shop_id</strong> 店铺ID
+        </div>
+        <div style="margin-left: 20px;">
+            2 <strong>project_id</strong> 对应的项目ID
+        </div>
+        <div style="margin-left: 20px;">
+            3 <strong>name</strong> 名称
+        </div>
+        <div style="margin-left: 20px;">
+            4 <strong>desc</strong> 介绍
+        </div>
+        <div style="margin-left: 20px;">
+            5 <strong>period</strong> 学时
+        </div>
+        <div style="margin-left: 20px;">
+            6 <strong>teacher</strong> 教师
+        </div>
+        <div style="margin-left: 20px;">
+            7 <strong>teacher_intro</strong> 教师介绍
+        </div>
+        <div style="margin-left: 20px;">
+            8 <strong>image</strong> 封面
+        </div>
+        <div style="margin-left: 20px;">
+            9 <strong>price</strong> 价格
+        </div>
+        <div style="margin-left: 20px;">
+            10 <strong>onsale</strong> 是否上架
+        </div>
+        <div style="margin-left: 20px;">
+            11 <strong>is_auth</strong> 是否认证
+        </div>
+        <div style="margin-left: 20px;">
+            12 <strong>attr</strong> 课程属性
+        </div>
+        <div style="margin-left: 20px;">
+            13 <strong>cer_year</strong> 认证年度
+        </div>
+        <div style="margin-left: 20px;">
+            14 <strong>cer_industry</strong> 认证行业
+        </div>
+        <div style="margin-left: 20px;">
+            15 <strong>is_project</strong> 是否是项目式
+        </div>
+        <div style="margin-left: 20px;">
+            16 <strong>year</strong> 年度
+        </div>
+        <div style="margin-left: 20px;">
+            17 <strong>created_at</strong> 创建时间
+        </div>
+        <h3 style="text-decoration: underline"><small>数据表：</small> shops</h3>
+        <div style="margin-left: 20px;">
+            1 <strong>name</strong> 名称
+        </div>
+        <div style="margin-left: 20px;">
+            2 <strong>owner_id</strong> 所有者ID
+        </div>
+        <div style="margin-left: 20px;">
+            3 <strong>state</strong> 状态
+        </div>
+        <div style="margin-left: 20px;">
+            4 <strong>is_project</strong> 
+        </div>
+        <div style="margin-left: 20px;">
+            5 <strong>url</strong> 
+        </div>
+        <div style="margin-left: 20px;">
+            6 <strong>platform_name</strong> 平台名称
+        </div>
+        <div style="margin-left: 20px;">
+            7 <strong>mechanism_name</strong> 机构名称
+        </div>
+        <div style="margin-left: 20px;">
+            8 <strong>region</strong> 平台所属区域
+        </div>
+        <div style="margin-left: 20px;">
+            9 <strong>is_invoice</strong> 是否有网上开发票功能,0是无，1是有
+        </div>
+        <div style="margin-left: 20px;">
+            10 <strong>agreement</strong> 注册协议
+        </div>
+        <div style="margin-left: 20px;">
+            11 <strong>is_cer</strong> 是否可生成学时证明
+        </div>
+        <div style="margin-left: 20px;">
+            12 <strong>logo_header_file_name</strong> 平台上方logo
+        </div>
+        <div style="margin-left: 20px;">
+            13 <strong>logo_footer_file_name</strong> 平台下方logo
+        </div>
+        <div style="margin-left: 20px;">
+            14 <strong>customer</strong> 客服信息
+        </div>
+        <div style="margin-left: 20px;">
+            15 <strong>customer2</strong> 客服信息-支付页面
+        </div>
+        <div style="margin-left: 20px;">
+            16 <strong>footer</strong> 页脚信息
+        </div>
+        <div style="margin-left: 20px;">
+            17 <strong>alipay</strong> 支付宝支付信息
+        </div>
+        <div style="margin-left: 20px;">
+            18 <strong>wxpay</strong> 微信支付信息
+        </div>
+        <div style="margin-left: 20px;">
+            19 <strong>unionpay</strong> 银行支付信息
+        </div>
+        <div style="margin-left: 20px;">
+            20 <strong>is_auth</strong> 是否认定，0是无，1是有
+        </div>
+        <div style="margin-left: 20px;">
+            21 <strong>marquee</strong> 跑马灯
+        </div>
+        <div style="margin-left: 20px;">
+            22 <strong>title</strong> 店铺标题
+        </div>
+        <div style="margin-left: 20px;">
+            23 <strong>sidebar_type</strong> 店铺侧边栏风格，0典型课程云风格，1项目式风格
+        </div>
+        <div style="margin-left: 20px;">
+            24 <strong>is_order</strong> 是否需要我的订单：0是不需要，1是需要
+        </div>
+        <div style="margin-left: 20px;">
+            25 <strong>is_shoppingcart</strong> 是否需要购物车 0是不需要，1是需要
+        </div>
+        <h3 style="text-decoration: underline"><small>数据表：</small> orders</h3>
+        <div style="margin-left: 20px;">
+            1 <strong>owner_id</strong> 买家ID
+        </div>
+        <div style="margin-left: 20px;">
+            2 <strong>pay_type</strong> 支付方式,1:支付宝,2:微信,3:批量开课,4:银联,5:账号余额
+        </div>
+        <div style="margin-left: 20px;">
+            3 <strong>state</strong> 状态
+        </div>
+        <div style="margin-left: 20px;">
+            4 <strong>total</strong> 付款总额
+        </div>
+        <div style="margin-left: 20px;">
+            5 <strong>invoice_title</strong> 发票抬头
+        </div>
+        <div style="margin-left: 20px;">
+            6 <strong>tax_no</strong> 税号
+        </div>
+        <div style="margin-left: 20px;">
+            7 <strong>invoice_type</strong> 发票类型
+        </div>
+        <div style="margin-left: 20px;">
+            8 <strong>invoice_email</strong> 邮箱
+        </div>
+        <div style="margin-left: 20px;">
+            9 <strong>invoice_address</strong> 地址
+        </div>
+        <div style="margin-left: 20px;">
+            10 <strong>out_trade_no</strong> 交易号
+        </div>
+        <div style="margin-left: 20px;">
+            11 <strong>code</strong> 订单号
+        </div>
+        <div style="margin-left: 20px;">
+            12 <strong>pay_date</strong> 支付时间
+        </div>
+        <div style="margin-left: 20px;">
+            13 <strong>cancel_date</strong> 取消时间
+        </div>
+        <div style="margin-left: 20px;">
+            14 <strong>shop_id</strong> 店铺id
+        </div>
+        <div style="margin-left: 20px;">
+            15 <strong>invoice_state</strong> 开票状态 0：未开票 1：开票中 2：已开票
+        </div>
+        <h3 style="text-decoration: underline"><small>数据表：</small> purchased</h3>
+        <div style="margin-left: 20px;">
+            1 <strong>order_id</strong> 订单ID
+        </div>
+        <div style="margin-left: 20px;">
+            2 <strong>owner_id</strong> 买家ID
+        </div>
+        <div style="margin-left: 20px;">
+            3 <strong>product_id</strong> 产品ID
+        </div>
+        <div style="margin-left: 20px;">
+            4 <strong>product_name</strong> 产品名称
+        </div>
+        <div style="margin-left: 20px;">
+            5 <strong>price</strong> 成交价格
+        </div>
+        <div style="margin-left: 20px;">
+            6 <strong>score</strong> 得分
+        </div>
+        <div style="margin-left: 20px;">
+            7 <strong>progress</strong> 学习进度
+        </div>
+        <div style="margin-left: 20px;">
+            8 <strong>rate</strong> 进度
+        </div>
+        <div style="margin-left: 20px;">
+            9 <strong>private</strong> 私有数据
+        </div>
+        <div style="margin-left: 20px;">
+            10 <strong>cer_year</strong> 第一次进入证书页面
+        </div>
+        <div style="margin-left: 20px;">
+            11 <strong>is_first</strong> 预设的认证年度
+        </div>
+        <h3 style="text-decoration: underline"><small>数据表：</small> cers</h3>
+        <div style="margin-left: 20px;">
+            1 <strong>purchased_id</strong> 订单项id集合
+        </div>
+        <div style="margin-left: 20px;">
+            2 <strong>cer_year</strong> 认证年度
+        </div>
+        <div style="margin-left: 20px;">
+            3 <strong>pay_date</strong> 购买时间
+        </div>
+        <div style="margin-left: 20px;">
+            4 <strong>end_date</strong> 订单项最晚时间
+        </div>
+        <div style="margin-left: 20px;">
+            5 <strong>owner_id</strong> 用户id
+        </div>
+        <h3 style="text-decoration: underline"><small>数据表：</small> sections</h3>
+        <div style="margin-left: 20px;">
+            1 <strong>shop_id</strong> 店铺ID
+        </div>
+        <div style="margin-left: 20px;">
+            2 <strong>page</strong> 页面
+        </div>
+        <div style="margin-left: 20px;">
+            3 <strong>desc</strong> 板块描述
+        </div>
+        <div style="margin-left: 20px;">
+            4 <strong>template</strong> 模板
+        </div>
+        <div style="margin-left: 20px;">
+            5 <strong>name</strong> 名称
+        </div>
+        <div style="margin-left: 20px;">
+            6 <strong>sort</strong> 排序
+        </div>
+        <h3 style="text-decoration: underline"><small>数据表：</small> section_products</h3>
+        <div style="margin-left: 20px;">
+            1 <strong>section_id</strong> 
+        </div>
+        <div style="margin-left: 20px;">
+            2 <strong>product_id</strong> 
+        </div>
+        <h3 style="text-decoration: underline"><small>数据表：</small> instructor</h3>
+        <div style="margin-left: 20px;">
+            1 <strong>name</strong> 姓名
+        </div>
+        <div style="margin-left: 20px;">
+            2 <strong>idcard</strong> 身份证号
+        </div>
+        <div style="margin-left: 20px;">
+            3 <strong>company</strong> 单位名称
+        </div>
+        <div style="margin-left: 20px;">
+            4 <strong>phone</strong> 手机号码
+        </div>
+        <div style="margin-left: 20px;">
+            5 <strong>email</strong> 邮箱地址
+        </div>
+        <div style="margin-left: 20px;">
+            6 <strong>desc</strong> 
+        </div>
+        <div style="margin-left: 20px;">
+            7 <strong>open_id</strong> 微信open_id
+        </div>
+        <div style="margin-left: 20px;">
+            8 <strong>img</strong> 头像
+        </div>
+        <div style="margin-left: 20px;">
+            9 <strong>shop_id</strong> 店铺id
+        </div>
+        <div style="margin-left: 20px;">
+            10 <strong>enabled</strong> 是否可用
+        </div>
+        <div style="margin-left: 20px;">
+            11 <strong>password</strong> 登录密码
+        </div>
+        <h3 style="text-decoration: underline"><small>数据表：</small> class</h3>
+        <div style="margin-left: 20px;">
+            1 <strong>name</strong> 班级名称
+        </div>
+        <div style="margin-left: 20px;">
+            2 <strong>shop_id</strong> 所属店铺id
+        </div>
+        <div style="margin-left: 20px;">
+            3 <strong>product_id</strong> 所属产品id
+        </div>
+        <div style="margin-left: 20px;">
+            4 <strong>task_id</strong> 任务id
+        </div>
+        <div style="margin-left: 20px;">
+            5 <strong>activitie_id</strong> 活动id
+        </div>
+        <div style="margin-left: 20px;">
+            6 <strong>state</strong> 状态,0是未开班，1是开班，2是失效
+        </div>
+        <div style="margin-left: 20px;">
+            7 <strong>start_time</strong> 开班时间
+        </div>
+        <div style="margin-left: 20px;">
+            8 <strong>instructor_id</strong> 辅导员id
+        </div>
+        <div style="margin-left: 20px;">
+            9 <strong>evaluates</strong> 评价id
+        </div>
+        <h3 style="text-decoration: underline"><small>数据表：</small> evaluates</h3>
+        <div style="margin-left: 20px;">
+            1 <strong>user_id</strong> 用户id
+        </div>
+        <div style="margin-left: 20px;">
+            2 <strong>grade</strong> 评分
+        </div>
+        <div style="margin-left: 20px;">
+            3 <strong>class_id</strong> 所属班级id
+        </div>
+        <div style="margin-left: 20px;">
+            4 <strong>content</strong> 评价内容
+        </div>
+        <h3 style="text-decoration: underline"><small>数据表：</small> class_users</h3>
+        <div style="margin-left: 20px;">
+            1 <strong>class_id</strong> 班级id
+        </div>
+        <div style="margin-left: 20px;">
+            2 <strong>user_id</strong> 用户id
+        </div>
+        <div style="margin-left: 20px;">
+            3 <strong>purchased_id</strong> 订单项id
+        </div>
+        <h3 style="text-decoration: underline"><small>数据表：</small> class_bulletin</h3>
+        <div style="margin-left: 20px;">
+            1 <strong>class_id</strong> 班级id
+        </div>
+        <div style="margin-left: 20px;">
+            2 <strong>bulletin</strong> 公告
+        </div>
+        <h3 style="text-decoration: underline"><small>数据表：</small> class_file</h3>
+        <div style="margin-left: 20px;">
+            1 <strong>id</strong> 主键
+        </div>
+        <div style="margin-left: 20px;">
+            2 <strong>class_id</strong> 班级id
+        </div>
+        <div style="margin-left: 20px;">
+            3 <strong>file_name</strong> 用户原文件名
+        </div>
+        <div style="margin-left: 20px;">
+            4 <strong>file_as_name</strong> 存储于服务器的文件名
+        </div>
+        <h3 style="text-decoration: underline"><small>数据表：</small> class_bulletin_class_file</h3>
+        <div style="margin-left: 20px;">
+            1 <strong>class_bulletin_id</strong> 公告
+        </div>
+        <div style="margin-left: 20px;">
+            2 <strong>class_file_id</strong> 文件
+        </div>
+        <h3 style="text-decoration: underline"><small>数据表：</small> file</h3>
+        <div style="margin-left: 20px;">
+            1 <strong>id</strong> 主键
+        </div>
+        <h3 style="text-decoration: underline"><small>数据表：</small> md5</h3>
+        <div style="margin-left: 20px;">
+            1 <strong>id</strong> 主键
+        </div>
+        <h3 style="text-decoration: underline"><small>数据表：</small> polyv</h3>
+        <div style="margin-left: 20px;">
+            1 <strong>id</strong> 主键
+        </div>
+        <h3 style="text-decoration: underline"><small>数据表：</small> selected</h3>
+        <div style="margin-left: 20px;">
+            1 <strong>selected</strong> 是否选中
+        </div>
+        <div style="margin-left: 20px;">
+            2 <strong>user_id</strong> 用户id
+        </div>
+        <div style="margin-left: 20px;">
+            3 <strong>product_id</strong> 产品id
+        </div>
+        <div style="margin-left: 20px;">
+            4 <strong>selected_batch_id</strong> 批次id
+        </div>
+        <h3 style="text-decoration: underline"><small>数据表：</small> search_history</h3>
+        <div style="margin-left: 20px;">
+            1 <strong>user_id</strong> 用户id
+        </div>
+        <div style="margin-left: 20px;">
+            2 <strong>search_content</strong> 搜索内容
+        </div>
+        <h3 style="text-decoration: underline"><small>数据表：</small> selected_batch</h3>
+        <div style="margin-left: 20px;">
+            1 <strong>batch_num</strong> 批号
+        </div>
+        <div style="margin-left: 20px;">
+            2 <strong>remarks</strong> 备注
+        </div>
+        <div style="margin-left: 20px;">
+            3 <strong>state</strong> 状态:0代表无效，1代表有效，2代表已经开课
+        </div>
+        <div style="margin-left: 20px;">
+            4 <strong>created_at</strong> 创建时间
+        </div>
+        <h3 style="text-decoration: underline"><small>数据表：</small> discuss_theme</h3>
+        <div style="margin-left: 20px;">
+            1 <strong>title</strong> 标题
+        </div>
+        <div style="margin-left: 20px;">
+            2 <strong>content</strong> 内容
+        </div>
+        <div style="margin-left: 20px;">
+            3 <strong>sort</strong> 排序
+        </div>
+        <div style="margin-left: 20px;">
+            4 <strong>resource_id</strong> 资源id
+        </div>
+        <h3 style="text-decoration: underline"><small>数据表：</small> comment</h3>
+        <div style="margin-left: 20px;">
+            1 <strong>discuss_theme_id</strong> 主题表id
+        </div>
+        <div style="margin-left: 20px;">
+            2 <strong>user_id</strong> 用户id
+        </div>
+        <div style="margin-left: 20px;">
+            3 <strong>content</strong> 评论内容
+        </div>
+        <div style="margin-left: 20px;">
+            4 <strong>class_id</strong> 班级id
+        </div>
+        <div style="margin-left: 20px;">
+            5 <strong>product_id</strong> 产品id
+        </div>
+        <h3 style="text-decoration: underline"><small>数据表：</small> banner</h3>
+        <div style="margin-left: 20px;">
+            1 <strong>name</strong> 名称
+        </div>
+        <div style="margin-left: 20px;">
+            2 <strong>url</strong> 跳转地址
+        </div>
+        <div style="margin-left: 20px;">
+            3 <strong>file_name</strong> 图片名
+        </div>
+        <div style="margin-left: 20px;">
+            4 <strong>shop_id</strong> 店铺id
+        </div>
+        <div style="margin-left: 20px;">
+            5 <strong>sort</strong> 排序
+        </div>
+        <div style="margin-left: 20px;">
+            6 <strong>color</strong> 颜色
+        </div>
+        <h3 style="text-decoration: underline"><small>数据表：</small> product_news</h3>
+        <div style="margin-left: 20px;">
+            1 <strong>title</strong> 新闻标题
+        </div>
+        <div style="margin-left: 20px;">
+            2 <strong>url</strong> 新闻跳转地址
+        </div>
+        <div style="margin-left: 20px;">
+            3 <strong>content</strong> 新闻内容（html）
+        </div>
+        <div style="margin-left: 20px;">
+            4 <strong>package_id</strong> 项目包
+        </div>
+        <h3 style="text-decoration: underline"><small>数据表：</small> product_notices</h3>
+        <div style="margin-left: 20px;">
+            1 <strong>title</strong> 公告标题
+        </div>
+        <div style="margin-left: 20px;">
+            2 <strong>url</strong> 公告跳转地址
+        </div>
+        <div style="margin-left: 20px;">
+            3 <strong>content</strong> 公告内容（html）
+        </div>
+        <div style="margin-left: 20px;">
+            4 <strong>package_id</strong> 项目包
+        </div>
+        <h3 style="text-decoration: underline"><small>数据表：</small> product_header</h3>
+        <div style="margin-left: 20px;">
+            1 <strong>img_file_name</strong> 图片名字
+        </div>
+        <div style="margin-left: 20px;">
+            2 <strong>url</strong> 图片跳转地址
+        </div>
+        <div style="margin-left: 20px;">
+            3 <strong>content</strong> 图片文字内容（html）
+        </div>
+        <div style="margin-left: 20px;">
+            4 <strong>package_id</strong> 项目包
+        </div>
+        <h3 style="text-decoration: underline"><small>数据表：</small> product_small_banner</h3>
+        <div style="margin-left: 20px;">
+            1 <strong>img_file_name</strong> 图片名字
+        </div>
+        <div style="margin-left: 20px;">
+            2 <strong>url</strong> 图片跳转地址
+        </div>
+        <div style="margin-left: 20px;">
+            3 <strong>package_id</strong> 项目包
+        </div>
+        <h3 style="text-decoration: underline"><small>数据表：</small> product_start_notice</h3>
+        <div style="margin-left: 20px;">
+            1 <strong>title</strong> 开班通知标题
+        </div>
+        <div style="margin-left: 20px;">
+            2 <strong>url</strong> 开班通知跳转地址
+        </div>
+        <div style="margin-left: 20px;">
+            3 <strong>content</strong> 开班通知内容（html）
+        </div>
+        <h3 style="text-decoration: underline"><small>数据表：</small> product_operation_guide</h3>
+        <div style="margin-left: 20px;">
+            1 <strong>title</strong> 操作指南标题
+        </div>
+        <div style="margin-left: 20px;">
+            2 <strong>url</strong> 操作指南跳转地址
+        </div>
+        <div style="margin-left: 20px;">
+            3 <strong>content</strong> 操作指南内容（html）
+        </div>
+        <h3 style="text-decoration: underline"><small>数据表：</small> icon</h3>
+        <div style="margin-left: 20px;">
+            1 <strong>name</strong> 图标名
+        </div>
+        <div style="margin-left: 20px;">
+            2 <strong>file_name</strong> 图标文件名
+        </div>
+        <div style="margin-left: 20px;">
+            3 <strong>icon_type_id</strong> 
+        </div>
+        <div style="margin-left: 20px;">
+            4 <strong>state</strong> 状态:0未开始，1正在进行，2是已经完成
+        </div>
+        <div style="margin-left: 20px;">
+            5 <strong>type</strong> 类型
+        </div>
+        <h3 style="text-decoration: underline"><small>数据表：</small> icon_type</h3>
+        <div style="margin-left: 20px;">
+            1 <strong>type</strong> 图标类型：课程，讨论区，心得体会
+        </div>
+        <h3 style="text-decoration: underline"><small>数据表：</small> private</h3>
+        <div style="margin-left: 20px;">
+            1 <strong>content</strong> 答案json
+        </div>
+        <div style="margin-left: 20px;">
+            2 <strong>purchased_id</strong> 订单项id
+        </div>
+        <div style="margin-left: 20px;">
+            3 <strong>resource_id</strong> 资源id
+        </div>
+        <h3 style="text-decoration: underline"><small>数据表：</small> answ_question</h3>
+        <div style="margin-left: 20px;">
+            1 <strong>title</strong> 标题
+        </div>
+        <div style="margin-left: 20px;">
+            2 <strong>content</strong> 内容
+        </div>
+        <div style="margin-left: 20px;">
+            3 <strong>sort</strong> 排序
+        </div>
+        <div style="margin-left: 20px;">
+            4 <strong>user_id</strong> 用户id
+        </div>
+        <div style="margin-left: 20px;">
+            5 <strong>product_id</strong> 项目id
+        </div>
+        <h3 style="text-decoration: underline"><small>数据表：</small> answ_question_comment</h3>
+        <div style="margin-left: 20px;">
+            1 <strong>answ_question_id</strong> 答疑表id
+        </div>
+        <div style="margin-left: 20px;">
+            2 <strong>user_id</strong> 用户id
+        </div>
+        <div style="margin-left: 20px;">
+            3 <strong>class_id</strong> 班级id
+        </div>
+        <div style="margin-left: 20px;">
+            4 <strong>content</strong> 回复内容
+        </div>
+        <h3 style="text-decoration: underline"><small>数据表：</small> package</h3>
+        <div style="margin-left: 20px;">
+            1 <strong>name</strong> 名称
+        </div>
+        <div style="margin-left: 20px;">
+            2 <strong>shop_id</strong> 店铺id
+        </div>
+        <div style="margin-left: 20px;">
+            3 <strong>title2</strong> 标题1
+        </div>
+        <div style="margin-left: 20px;">
+            4 <strong>img</strong> 图片
+        </div>
+        <div style="margin-left: 20px;">
+            5 <strong>background</strong> 背景图
+        </div>
+        <div style="margin-left: 20px;">
+            6 <strong>title1</strong> 标题2
+        </div>
+        <h3 style="text-decoration: underline"><small>数据表：</small> package_product</h3>
+        <div style="margin-left: 20px;">
+            1 <strong>package_id</strong> 项目包id
+        </div>
+        <div style="margin-left: 20px;">
+            2 <strong>product_id</strong> 项目包里面的产品id
+        </div>
+        <h3 style="text-decoration: underline"><small>数据表：</small> proportion</h3>
+        <div style="margin-left: 20px;">
+            1 <strong>resources</strong> 比例json
+        </div>
+        <div style="margin-left: 20px;">
+            2 <strong>product_id</strong> 产品id
+        </div>
+        <div style="margin-left: 20px;">
+            3 <strong>shop_id</strong> 店铺id
+        </div>
+        <h3 style="text-decoration: underline"><small>数据表：</small> package_section</h3>
+        <div style="margin-left: 20px;">
+            1 <strong>package_id</strong> 
+        </div>
+        <div style="margin-left: 20px;">
+            2 <strong>section_id</strong> 
+        </div>
+        <h3 style="text-decoration: underline"><small>数据表：</small> sms</h3>
+        <div style="margin-left: 20px;">
+            1 <strong>guid</strong> 
+        </div>
+        <div style="margin-left: 20px;">
+            2 <strong>code</strong> 
+        </div>
+        <div style="margin-left: 20px;">
+            3 <strong>create_time</strong> 
+        </div>
+        <h3 style="text-decoration: underline"><small>数据表：</small> attribute_value</h3>
+        <div style="margin-left: 20px;">
+            1 <strong>name</strong> 属性值
+        </div>
+        <div style="margin-left: 20px;">
+            2 <strong>shop_id</strong> 店铺id
+        </div>
+        <div style="margin-left: 20px;">
+            3 <strong>sort</strong> 排序
+        </div>
+        <h3 style="text-decoration: underline"><small>数据表：</small> attribute</h3>
+        <div style="margin-left: 20px;">
+            1 <strong>name</strong> 属性名字
+        </div>
+        <div style="margin-left: 20px;">
+            2 <strong>shop_id</strong> 店铺id
+        </div>
+        <h3 style="text-decoration: underline"><small>数据表：</small> package_attribute_value</h3>
+        <div style="margin-left: 20px;">
+            1 <strong>package_id</strong> 项目包id
+        </div>
+        <div style="margin-left: 20px;">
+            2 <strong>attribute_value_id</strong> 属性值id
+        </div>
+        <h3 style="text-decoration: underline"><small>数据表：</small> attribute_value_type</h3>
+        <div style="margin-left: 20px;">
+            1 <strong>attribute_id</strong> 属性表
+        </div>
+        <div style="margin-left: 20px;">
+            2 <strong>attribute_value_id</strong> 属性值表
+        </div>
+        <h3 style="text-decoration: underline"><small>数据表：</small> navigation_bar</h3>
+        <div style="margin-left: 20px;">
+            1 <strong>name</strong> 导航栏每个值得名字
+        </div>
+        <div style="margin-left: 20px;">
+            2 <strong>url</strong> 导航栏的链接
+        </div>
+        <div style="margin-left: 20px;">
+            3 <strong>shop_id</strong> 
+        </div>
+        <div style="margin-left: 20px;">
+            4 <strong>sort</strong> 排序
+        </div>
+    </div>
+  </body>
+</html>

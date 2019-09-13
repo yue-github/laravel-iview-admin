@@ -1,0 +1,150 @@
+<%_
+var jtables = {};
+function joinField(name, obj, tableName) {
+    var table = '';
+    var ctable = '';
+    var names = name.split('.');
+    if(names.length == 1) {
+        var eid = entityId(model, tableName);
+        var entity = model.entity[eid];
+        var id = attrId(entity, name);
+        var c = entity.attr[id].$ || {};
+        table = c.table + "_" + name;
+        ctable = c.table;
+    } else {
+        table = names[0] + "_" + names[1];
+        ctable = names[0];
+    }
+
+    for(var i in obj) {
+        if(typeof(obj[i]) === 'object') {
+            joinField(i, obj[i], ctable);
+        } else {
+            echo("                '" + table + "." + i + " as " + obj[i] + "',\n");
+        }
+    }
+}
+
+function joinTable(name, obj, ftable, ftable_b, rname = "result") {
+    var fid = '';
+    var tid = '';
+    var ttable_b = '';
+    var ttable = '';
+    var names = name.split('.');
+    if(names.length == 1) {
+        var eid = entityId(model, ftable);
+        var entity = model.entity[eid];
+        var id = attrId(entity, name);
+        var c = entity.attr[id].$ || {};
+        ttable_b = c.table + "_" + name;
+        ttable = c.table;
+        tid = 'id';
+        fid = name;
+    } else {
+        ttable_b = names[0] + "_" + names[1];
+        ttable = names[0];
+        tid = names[1];
+        fid = 'id';
+    }
+
+    echo("        $"+rname+" = $"+rname+"->leftJoin('" + ttable + " as " + ttable_b + "', '"+ttable_b+"."+tid+"', '=', '"+ftable_b+"."+fid+"');\n");
+    jtables[ttable] = ttable_b;
+    for(var i in obj) {
+        if(typeof(obj[i]) === 'object') {
+            joinTable(i, obj[i], ttable, ttable_b, rname);
+        }
+    }
+}
+
+function joinTable2() {
+    for(var i in locals.with) {
+        var names = i.split('.');
+        if(jtables[names[0]]) {
+            continue;
+        }
+        if(names.length > 1) {
+            for(var i = 0; i < locals.table.attr.length; i++) {
+                if(locals.table.attr[i].$.table == names[0]) {
+                    var ttable_b = names[0] + "_" + names[1];
+                    var ftable_b = locals.table.$.name;
+                    var fid = locals.table.attr[i].$.name;
+                    
+                    echo("        $result = $result->leftJoin('" + names[0] + " as " + ttable_b + "', '"+ttable_b+".id', '=', '"+ftable_b+"."+fid+"');\n");
+                    break;
+                }
+            }
+        }
+    }
+}
+
+function addItems(i, d) {
+    var its = i.split('.');
+    var ctable = its[1];
+    var fid = its[2];
+
+    
+
+    echo("        for($i = 0; $i < count($result); $i++) {\n");
+    echo("            $items = DB::table('"+ctable+"')->select([");
+    for (var k in d) { 
+        if(typeof(d[k]) != 'object') {
+            echo("'" + ctable + "." + k + " as " + d[k] + "',\n");
+        } else {
+            joinField(k, d[k], ctable);
+        }
+    }
+    echo("            ]);\n");
+
+    for (var k in d) {
+        if(typeof(d[k]) == 'object') {
+            joinTable(k, d[k], ctable, ctable, "items");
+        }
+    }
+
+    echo("            $items = $items->where('"+fid+"', $result[$i]->id);\n");
+    echo("            $result[$i]->"+ctable+" = $items->get();\n");
+    echo("        }\n");
+}
+_%>  
+    public function <%=oper.$.name%>(Request $request)
+    {
+        <%- include("validate", {val: {mode: "first", params: locals.with}}) %>
+        $result = DB::table('<%=table.$.name%>')
+            ->select([
+            <%_ if (Array.isArray(locals.data)) { _%>
+            <%_ for (var i = 0; i < locals.data.length; i++) { _%>
+                '<%=locals.data[i]%>',
+            <%_ } _%>
+            <%_ } else if(typeof(locals.data) === 'object') { _%>
+            <%_ for (var i in locals.data) { 
+                var its = i.split('.');
+                var isItems = its[0] == "items";
+            _%>
+            <%_ if (typeof(locals.data[i]) === 'object' && !isItems) { _%>
+                <%_joinField(i, locals.data[i], locals.table.$.name)_%>
+            <%_ } else if(!isItems) { _%>
+                '<%=locals.table.$.name%>.<%=i%> as <%=locals.data[i]%>',
+            <%_ } _%>
+            <%_ } _%>
+            <%_ } _%>
+            ]);
+            <%_ if (Array.isArray(locals.data)) { _%>
+            <%_ } else if(typeof(locals.data) === 'object') { _%>
+            <%_ for (var i in locals.data) { 
+                var its = i.split('.');
+                var isItems = its[0] == "items";
+            _%>
+            <%_ if (typeof(locals.data[i]) === 'object' && !isItems) { _%>
+                <%_joinTable(i, locals.data[i], locals.table.$.name, locals.table.$.name)_%>
+            <%_ } _%>
+            <%_ } _%>
+            <%_ } _%>
+            <%_ joinTable2() _%>
+<%- include("where", {param: locals.with, table: table, jtables: jtables}); _%>
+<%- include("filter", {param: locals.filter, table: table, jtables: jtables}); _%>
+        $result = $result->get();
+        if($result){
+            return $this->success(false);
+        } 
+        return $this->success(true);
+    }

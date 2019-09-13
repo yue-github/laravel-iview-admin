@@ -1,0 +1,39 @@
+    //健康档案列表
+    public function <%=oper.$.name%>()
+    {
+        <%- include("validate", {val: {params: locals.with, hasOL: true}}) %>
+        $patient = $this->getPatient($request->input('token'));
+        $result = DB::table('<%=table.$.name%>')
+        ->select([
+            'id',
+            'name',
+            'gender',
+            'birthday'
+        <%_ for (var i in locals.data) { _%>
+            <%_ if (typeof(locals.data[i]) === 'object') { _%>
+            <%_joinField(i, locals.data[i], locals.table.$.name)_%>
+            <%_ } else { _%>
+            '<%=locals.table.$.name%>.<%=i%> as <%=locals.data[i]%>',
+            <%_ } _%>
+        <%_ } _%>
+        ])
+        <%_ for (var i in locals.with) { _%>
+        ->where('<%=locals.with[i]%>', $patient->id);
+        <%_ } _%>
+        $count = $result->count();
+        $result = $result
+            ->offset($request->input('offset'))
+            ->limit($request->input('length'))
+            ->get();
+        foreach ($result as $r) {
+            $birthday = $r->birthday;
+            $carbon = new Carbon($birthday);
+            $age = $carbon->age;
+            $r->age = $age;
+        }
+        $result = [
+            'list' => $result,
+            'total' => $count
+        ];
+        return $this->success($result);
+    }

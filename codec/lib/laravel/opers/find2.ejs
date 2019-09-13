@@ -1,0 +1,29 @@
+public function <%=oper.$.name%>(Request $request) {
+    <%- include("validate", {val: {mode: 'optional', params: locals.with, hasOL: locals.mode === 'range', hasId: locals.mode === 'first'}}) %>
+            $result = DB::table('<%=table.$.name%>')
+                ->select([
+                <%_ if (Array.isArray(locals.data)) { _%>
+                <%_ for (var i = 0; i < locals.data.length; i++) { _%>
+                    '<%=locals.data[i]%>',
+                <%_ } _%>
+                <%_ } else if(typeof(locals.data) === 'object') {_%>
+                <%_ for (var i in locals.data) { _%>
+                    '<%=i%> as <%=locals.data[i]%>',
+                <%_ } _%>
+                ]);
+    <%- include("where", {param: locals.with}); _%>
+            <%_ if (locals.mode === 'range') { _%>
+            $count = $result->count();
+            $result = $result
+                ->offset($request->input('offset'))
+                ->limit($request->input('length'))
+                ->get();
+            $result = [
+                'data' => $result,
+                'total' => $count
+            ];
+            <%_ } else { _%>
+            $result = $result-><% if (locals.mode === "first") { %>first<% } else { %>get<% } %>();
+            <%_ } _%>
+            return $this->success($result);
+        }

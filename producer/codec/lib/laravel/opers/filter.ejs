@@ -1,0 +1,46 @@
+<%_
+function sign(str) {
+    if (str === 'like' || str === 'likea' || str === 'likee') {
+        echo('like');
+    } else if (str === 'le') { 
+        echo('<=');
+    } else if (str === 'lt') {
+        echo('<');
+    } else if (str === 'ge') {
+        echo('>=');
+    } else if (str === 'gt') { 
+        echo('>');
+    } else if (str === 'ne') {
+        echo('!=');
+    }
+}
+function prefix(str) {
+    if (str === 'like' || str === 'likee') {
+        echo("'%'.");
+    }
+}
+function postfix(str) {
+    if (str === 'like' || str === 'likea') { 
+        echo(".'%'");
+    }
+}
+_%>
+        <%_ for (var i in param) {
+            var fname = '';
+            var names = i.split('.');
+            if(names.length > 1) {
+                if(locals.jtables && locals.jtables[names[0]]) {
+                    fname = locals.jtables[names[0]] + '.' + names[1];
+                } else {
+                    fname = names[0] + '_' + names[1] + '.' + names[1];
+                }
+            } else {
+                fname = table.$.name + '.' + i;
+            }
+        _%>
+        <%_ if (Array.isArray(param[i])) { _%>
+        $result = $result->where('<%=fname%>', '<%=sign(param[i][0])%>', <%-prefix(param[i][0])%>'<%=param[i][1]%>'<%-postfix(param[i][0])%>);
+        <%_ } else { _%>
+        $result = $result->where('<%=fname%>', '=', '<%-param[i]%>');
+        <%_ } _%>
+        <%_ } _%>

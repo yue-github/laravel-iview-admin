@@ -1,0 +1,31 @@
+    public function <%=oper.$.name%>(Request $request) {
+        $this->validate($request, [
+            'code' => 'required'
+        ]);
+
+        $code = $request->input('code');
+        $open_id = \App\Utils\WxLoginUtil::getOpenid($code);
+
+        $user = DB::table('<%=table.$.name%>')->where('open_id', $open_id)->first();
+        $user_id = '';
+
+        if (!$user) {
+            $data = [
+                <%_ for (var i in locals.data) { _%>
+                '<%=i%>' => $request->input('<%=locals.data[i]%>'),
+                <%_ } _%>
+                'open_id' => $open_id,
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s')
+            ];
+            
+            $user_id = DB::table('<%=table.$.name%>')->insertGetId($data);
+        } else {
+            $user_id = $user->id;
+        }
+        $data = ["id"=>$user_id];
+        $token = Crypt::encrypt(json_encode($data).'.'.time());
+        
+        $data['token'] = $token;
+        return $this->success($data);
+    }

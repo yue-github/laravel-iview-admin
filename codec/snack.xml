@@ -1,0 +1,674 @@
+<?xml version="1.0" encode="UTF-8" standalone="yes"?>
+<model>
+    <entity name="users" time="true" label="用户管理">
+        <attr name="name" type="name" label="姓名"/>
+        <attr name="idcard" type="idcard" label="身份证号"/>
+        <attr name="company" type="message" label="单位名称"/>
+        <attr name="phone" type="phone" required="true" label="手机号码"/>
+        <attr name="email" type="email" label="邮箱地址"/>
+        <attr name="enabled" type="bool" default="1" label="是否可用"/>
+        <attr name="isLookVideo" type="int" default="0" label="是否在看视频"/>
+        <attr name="password" type="password" required="true" label="登录密码"/>
+        <attr name="balance" type="money" default="0" label="账户余额"/>
+        <oper name="login" page="用户管理" type="wxlogin" label="用户登录">
+            data: {name: name},
+            with: {phone: phone, password: password}
+        </oper>
+        <oper name="userInfo" page="用户管理" type="first" label="用户信息">
+            data: {
+                name:name
+            }
+        </oper>
+    </entity>
+
+    <entity name="shopping_cart" label="购物车">
+		<attr name="product_id" type="key" table="products" required="true" label="产品ID"/>
+		<attr name="selected" type="bool" default="1" label="是否选中"/>
+		<attr name="user_id" type="key" table="users" label="所有者ID"/>
+		<attr name="num" type="int" label="数量"/>
+        <oper page="购物车" role="client" name="updateShoppingCart" type="update_shopping_cart" label="修改购物车">
+            data: {
+                user_id: token.id,
+                product_id: product_id,
+                num: num
+            },
+            with: {
+                user_id: token.id,
+                product_id: product_id
+            }
+        </oper>
+
+        <oper page="购物车" role="client" name="create" type="insert" label="加入购物车">
+            data: {
+                user_id: token.id,
+                product_id: product_id,
+                num: num
+            }
+        </oper>
+		<oper page="购物车" role="client" name="all" type="all" label="购物车列表">
+            data: {
+                id: id,
+				 product_id: {
+                    id: product_id,
+                    name: product_name,
+                    shop_id: shop_id ,
+                    cook_id: cook_id ,
+                    name: name ,
+                    desc: desc ,
+                    image: image ,
+                    price: price ,
+                    onsale: onsale ,
+                    sort: sort ,
+                    sale_num: sale_num
+                },
+				selected: selected,
+				user_id: token.id,
+                num: num
+			},
+            with: {user_id: token.id}
+        </oper>
+		<oper page="购物车" role="client" name="edit" type="update" label="取消选中购物车">
+            data: {selected: selected},
+            with: {id: id}
+        </oper>
+        <oper page="购物车" role="client" name="edit_num" type="update" label="修改数量">
+            data: {selected: selected,num: num},
+            with: {id: id}
+        </oper>
+		<oper page="购物车" role="client" name="delete" type="delete" label="删除购物车">
+            with:{id: id}
+        </oper>
+
+        <oper page="购物车" role="client" name="batchDelete" type="batchDelete" label="删除购物车">
+            with:{id: id, user_id: token.id}
+        </oper>
+        <oper page="购物车" role="client" name="to_empty" type="delete" label="清空购物车">
+            with: {user_id: token.id}
+        </oper>
+
+	</entity>
+
+    <entity name="shops" time="true" label="店铺管理">
+        <attr name="name" required="true" label="名称"/>
+        <attr name="owner_id" type="key" table="users" required="true" label="所有者ID"/>
+        <attr name="state" default="0" required="true" label="状态"/>
+        <oper role="client" name="get" type="first" label="店铺详情">
+            data: {name: name, state: state},
+            with: {id: id}
+		</oper>
+		<oper role="admin" name="search" type="search" label="查询店铺列表">
+			data: {name: name, state: state}
+		</oper>
+		<oper role="admin" name="create" type="insert" label="新增店铺">
+			data: {name: name, state: state}
+		</oper>
+        <oper page="店铺信息管理" role="shop" name="shop_edit" type="update" label="修改店铺信息">
+			data: {name: name},
+			with: {id: id}
+		</oper>
+    </entity>
+
+    <entity name="menu_week" label="周一到周末菜品">
+        <attr name="product_id" type="key" table="products" label="产品id"/>
+        <attr name="week" type="name" label="星期几"/>
+        <attr name="sort" type="int" label="排序"/>
+        <oper name="getProductSlideShow" type="search" label="菜品轮播图">
+            data: {
+                week: week,
+                product_id: {
+                    id: id,
+                    image: image
+                }
+            },
+            order: {sort: asc}
+        </oper>
+    </entity>
+    
+    <entity name="products" time="true" label="产品管理">
+        <attr name="shop_id" type="key" table="shops" required="true" label="店铺ID"/>
+        <attr name="cook_id" type="key" table="cooks" required="true" label="厨师ID"/>
+        <attr name="name"  type="name" required="true" label="名称"/>
+        <attr name="desc" type="article" label="介绍"/>
+        <attr name="image" type="image" label="封面"/>
+        <attr name="price" type="money" default="0" label="价格"/>
+        <attr name="onsale" type="bool" default="0" label="是否上架"/>
+		<attr name="sort" type="int" label="排序"/>
+		<attr name="sale_num" type="int" label="销量"/>
+        <attr name="month_sales_num" type="int" lable="月销量"/>
+        <attr name="side_dish" type="name" label="配菜"/>
+        <attr name="ingredients" type="name" label="食材成分"/>
+        <attr name="food_standards" type="name" label="食材标准"/>
+        <oper page="产品详情" name="get" type="first" label="产品详情">
+            data: {
+                id: id,
+                name: name,
+                desc: desc,
+                image: image,
+                price: price,
+                onsale: onsale,
+                sort: sort,
+                sale_num: sale_num,
+                side_dish: side_dish,
+                ingredients: ingredients,
+                food_standards: food_standards,
+                shop_id: {
+                    name: shop_name
+                },
+                cook_id: {
+                    name: cook_name
+                }
+            },
+            with: { id: id},
+            filter: {onsale: 1}
+        </oper>
+        <oper page="主页" name="getProductSlideShow" type="search" label="产品轮播图">
+            data: {
+                id: id,
+                image: image
+            },
+            order: {sort: desc} 
+        </oper>
+		<oper page="主页" name="productSort" type="search" label="查询产品">
+            data: {
+                id: id,
+                name: name, 
+                desc: desc, 
+                image: image, 
+                price: price, 
+                onsale: onsale,
+                sort: sort,
+                sale_num: sale_num,
+                month_sales_num: month_sales_num,
+                side_dish: side_dish,
+                ingredients: ingredients,
+                food_standards: food_standards,
+                shop_id: {
+                    name: shop_name
+                },
+                cook_id: {
+                    name: cook_name
+                }
+            },
+            with: {shop_id: shop_id, name: [like, name]},
+            filter: {onsale: 1},
+            order: {sale_num: desc}
+        </oper>
+        <oper page="主页" name="search" type="search" label="查询产品">
+            data: {
+                id: id,
+                name: name, 
+                desc: desc, 
+                image: image, 
+                price: price, 
+                onsale: onsale,
+                sort: sort,
+                sale_num: sale_num,
+                shop_id: {
+                    name: shop_name
+                },
+                cook_id: {
+                    name: cook_name
+                }
+            },
+            with: {shop_id: shop_id, name: [like, name]},
+            filter: {onsale: 1}
+        </oper>
+		<oper page="商品管理" role="shop" name="shop_search" type="search" label="查询产品">
+            data: {
+                id: id,
+                name: name, 
+                desc: desc, 
+                image: image, 
+                price: price, 
+                onsale: onsale,
+                sort: sort,
+                sale_num: sale_num,
+                shop_id: {
+                    name: shop_name
+                },
+                cook_id: {
+                    name: cook_name
+                }
+            },
+            with: {shop_id: token.shop_id, name: [like, name], onsale: onsale}
+        </oper>
+		<oper page="商品管理" role="shop" name="create" type="insert" label="增加商品">
+			data:{
+				name: name, 
+                desc: desc, 
+                image: image, 
+                price: price,
+                onsale: onsale,
+                sort: sort,
+                sale_num: sale_num,
+                shop_id: shop_id,
+                cook_id: cook_id
+			}
+		</oper>
+		<oper page="商品管理" role="shop" name="edit" type="update" label="更新商品">
+			data:{
+				name: name, 
+                desc: desc, 
+                image: image, 
+                price: price,
+                onsale: onsale,
+                sort: sort,
+                sale_num: sale_num,
+                shop_id: shop_id,
+                cook_id: cook_id
+			},
+			with:{
+				id: id
+			}
+		</oper>
+        <oper page="商品管理" role="shop" name="shop_get" type="first" label="产品详情">
+            data: {
+                name: name, 
+                desc: desc, 
+                image: image, 
+                price: price, 
+                onsale: onsale,
+                sort: sort,
+                sale_num: sale_num,
+                shop_id: {
+                    name: shop_name
+                },
+                cook_id: {
+                    name: cook_name
+                }
+            },
+            with: { id: id }
+        </oper>
+        <oper page="商品管理" role="shop" name="shop_delete" type="delete" label="删除商品">
+			with:{id: id}
+		</oper>
+    </entity>
+    
+    <entity name="orders" time="true" label="订单管理">
+        <attr name="owner_id" type="key" table="users" required="true" label="买家ID"/>
+        <attr name="pay_type" type="int" required="true" label="支付方式"/>
+        <attr name="delivery_date" type="datetime" required="true" label="配送时间"/>
+        <attr name="state" required="true" default="0" label="状态"/>
+        <attr name="total" type="money" default="0" label="付款总额"/>
+        <attr name="invoice_title" type="name" label="发票抬头"/>
+        <attr name="tax_no" type="name" label="税号"/>
+        <attr name="invoice_type" type="name" label="发票类型"/>
+        <attr name="invoice_email" type="email" label="邮箱"/>
+        <attr name="invoice_address" type="address" label="地址"/>
+        <attr name="out_trade_no" type="url" label="交易号"/>
+        <attr name="code" type="url" label="订单号"/>
+        <attr name="pay_date" type="datetime" label="支付时间"/>
+        <attr name="cancel_date" type="datetime" label="取消时间"/>
+        <attr name="complete_date" type="datetime" label="完成时间"/>
+        <attr name="address_id" type="key" table="addresses" required="true" label="地址ID"/>
+        <attr name="remarks" type="text" label="备注"/>
+        <oper role="client" name="cancelOrder" type="cancelOrder" label="取消订单">
+            data: {
+            },
+            tab: {
+                name: users,
+                must: {id: id},
+                dec: balance
+            },
+            must: {id: id}
+        </oper>
+        <oper page="订单管理" role="client" name="updateOrderState" type="update" label="修改订单状态">
+            data: {
+                state: state
+            },
+            with:{
+                id: order_id
+            }
+        </oper>
+
+        <oper role="client" name="create" type="insert_items2" label="下单">
+			data:{
+				owner_id: owner_id,
+                invoice_title: invoice_title, 
+                tax_no: tax_no, 
+                code: code,
+                address_id: address_id,
+                complete_date: complete_date,
+                remarks: remarks,
+                items.products.purchased.order_id: {
+                    id: product_id,
+                    name: product_name,
+                    price: price,
+                    num: num
+                }
+			}
+		</oper>
+        
+		<oper role="admin" name="searchAdmin" type="first" label="订单详情">
+			data:{
+				owner_id: owner_id, 
+                state: state, 
+                total: total, 
+                invoice_title: invoice_title, 
+                tax_no: tax_no, 
+                code: code,
+                created_at: created_at,
+                pay_date: pay_date,
+                cancel_date: cancel_date,
+                address_id: address_id,
+                complete_date: complete_date,
+                remarks: remarks
+			},
+			with:{
+				
+			}
+		</oper>
+		<oper page="确认订单" role="client" name="wxpay" type="wxpay" label="微信支付">
+             with: {id:id}
+        </oper>
+		<oper name="wxpay_callback" type="wxpay_callback" label="微信支付回调">
+        </oper>
+		<oper page="订单管理" role="client" name="search" type="search" label="订单列表">
+            data: { 
+                id: id, 
+                owner_id: owner_id, 
+                state: state, 
+                total: total, 
+                pay_type: pay_type, 
+                invoice_title: invoice_title, 
+                tax_no: tax_no, 
+                invoice_type: invoice_type,
+                invoice_email: invoice_email,
+                invoice_address: invoice_address,
+                code: code,
+                created_at: created_at,
+                address_id: address_id,
+                remarks: remarks
+            },
+            with: {owner_id: token.id,state: state}
+        </oper>
+		<oper page="订单管理" role="client" name="cancel" type="update" label="取消订单">
+            data: {
+                state: state,
+                cancel_date: GEN_DATE
+            },
+            with: {id: id}
+        </oper>
+		<oper page="订单详情" role="client" name="get" type="first" label="订单详情">
+            data: {
+                owner_id: owner_id, 
+                state: state, 
+                total: total, 
+                pay_type: pay_type, 
+                invoice_title: invoice_title, 
+                tax_no: tax_no, 
+                invoice_type: invoice_type,
+                invoice_email: invoice_email,
+                invoice_address: invoice_address,
+                code: code,
+                created_at: created_at,
+                pay_date: pay_date,
+                cancel_date: cancel_date,
+                address_id: address_id,
+                remarks: remarks
+            },
+            with: {id: id}
+        </oper>
+        <oper page="订单管理" role="shop" name="shop_search" type="search" label="订单列表">
+            data: { 
+                id: id, 
+                owner_id: owner_id, 
+                state: state, 
+                total: total, 
+                pay_type: pay_type, 
+                invoice_title: invoice_title, 
+                tax_no: tax_no, 
+                invoice_type: invoice_type,
+                invoice_email: invoice_email,
+                invoice_address: invoice_address,
+                code: code,
+                created_at: created_at,
+                address_id: address_id,
+                remarks: remarks
+            },
+            with: {owner_id: token.shop_id, code: code}
+        </oper>
+        <oper page="订单管理" role="shop" name="shop_get" type="first" label="订单详情">
+            data: {
+                owner_id: owner_id, 
+                state: state, 
+                total: total, 
+                pay_type: pay_type, 
+                invoice_title: invoice_title, 
+                tax_no: tax_no, 
+                invoice_type: invoice_type,
+                invoice_email: invoice_email,
+                invoice_address: invoice_address,
+                code: code,
+                created_at: created_at,
+                pay_date: pay_date,
+                cancel_date: cancel_date,
+                address_id: address_id,
+                remarks: remarks
+            },
+            with: {id: id}
+        </oper>
+    </entity>
+
+    <entity name="purchased" time="true" label="订单项">
+        <attr name="order_id" type="key" table="orders" label="订单ID"/>
+        <attr name="product_id" type="key" table="products" label="产品ID"/>
+        <attr name="product_name" type="name" label="产品名称"/>
+        <attr name="price" type="money" required="true" label="成交价格"/>
+        <attr name="num" type="int" required="true" label="数量"/>
+        <oper role="client" name="search" type="search" label="订单列表">
+            data: {
+                id:id,
+                product_name: product_name, 
+                price: price, 
+                num: num,
+                updated_at: updated_at,
+                product_id: {
+                    id: product_id,
+                    image: image,
+                    shop_id: {
+                        name: shop_name
+                    }
+                }
+            },
+            with: {order_id: order_id, orders.owner_id: token.id}
+        </oper>
+    </entity>
+
+    <entity name="sections" label="店铺板块">
+        <attr name="shop_id" type="key" table="shops" default="0" label="店铺ID"/>
+		<attr name="page" type="type" label="页面"/>
+		<attr name="template" type="type" label="模板"/>
+		<attr name="name" type="name" label="名称"/>
+		<attr name="sort" type="int" label="排序"/>
+        <oper name="search" type="all" label="板块列表">
+            data: {
+                id: id,
+                shop_id: shop_id,
+                page: page,
+                template: template,
+                name: name,
+                sort: sort
+            },
+            with: {shop_id: shop_id},
+            order: {sort: asc}
+        </oper>
+		<oper role="admin" name="create" type="insert" label="新增店铺板块">
+			data:{
+				shop_id: shop_id,
+				name: name,
+				sort: sort,
+				template: template,
+				page: page
+			}
+		</oper>
+        <oper page="板块管理" role="shop" name="shop_search" type="search" label="查询板块">
+            data: {
+                id: id,
+                shop_id: shop_id,
+                page: page,
+                template: template,
+                name: name,
+                sort: sort
+            },
+            with: {name: [like, name]}
+        </oper>
+		<oper page="板块管理" role="shop" name="shop_create" type="insert" label="新增店铺板块">
+			data:{
+				shop_id: token.shop_id,
+				name: name,
+				sort: sort,
+				template: template,
+				page: page
+			}
+		</oper>
+        <oper page="板块管理" role="shop" name="shop_edit" type="update" label="修改店铺板块">
+			data:{
+				name: name,
+				sort: sort,
+				template: template,
+				page: page
+			},
+            with: {id: id}
+		</oper>
+         <oper page="板块管理" role="shop" name="shop_get" type="first" label="店铺板块详情">
+			data:{
+				name: name,
+				sort: sort,
+				template: template,
+				page: page
+			},
+            with: {id: id}
+		</oper>
+        <oper page="板块管理" role="shop" name="shop_delete" type="delete" label="删除店铺板块">
+			with:{id: id}
+		</oper>
+	</entity>
+
+    <entity name="section_products" label="店铺板块产品">
+        <attr name="section_id" type="key" table="sections" required="true" />
+        <attr name="product_id" type="key" table="products" required="true" />
+        <oper name="search" type="all" label="板块产品">
+            data: {
+                section_id: section_id,
+                product_id: {
+                    id: id,
+                    name: name,
+                    desc: desc,
+                    period: period,
+                    teacher: teacher,
+                    image: image,
+                    price: price,
+                    onsale: onsale,
+                    is_auth: is_auth,
+                    attr: attr,
+                    cer_year: cer_year,
+                    cer_industry: cer_industry
+                }
+            },
+            with: {section_id: section_id}
+        </oper>
+		<oper name="create" type="insert" label="新增板块产品">
+			data:{
+				product_id: product_id
+			},
+			with:{ section_id: section_id}
+		</oper>
+    </entity>
+    
+    <entity name="addresses" label="地址">
+        <attr name="name" type="name" label="名称"/>
+        <attr name="contacts" type="name" label="联系人" required="true"/>
+        <attr name="user_id" type="key" label="用户id"/>
+        <attr name="phone" type="name" label="联系电话" required="true"/>
+        <attr name="province" type="name" required="true" label="省"/>
+        <attr name="city" type="name" required="true" label="市"/>
+        <attr name="district" type="name" required="true" label="区"/>
+        <attr name="detail_address" type="text" required="true" label="详细地址"/>
+        <attr name="zip_code" type="name" label="邮编"/>
+        <attr name="company" type="name" label="收货公司"/>
+        <oper page="收货地址" role="client" name="search" type="all" label="地址列表">
+            data: {
+                id: id,
+                name: name,
+                user_id: user_id,
+                contacts: contacts,
+                phone: phone,
+                province: province,
+                city: city,
+                district: district,
+                detail_address: detail_address,
+                zip_code: zip_code,
+                company: company
+            }
+        </oper>
+        <oper page="收货地址" role="client" name="get" type="first" label="获取地址">
+            data: {
+                id: id,
+                name: name,
+                user_id: user_id,
+                contacts: contacts,
+                phone: phone,
+                province: province,
+                city: city,
+                district: district,
+                detail_address: detail_address,
+                zip_code: zip_code,
+                company: company
+            },
+            with: {id: id}
+        </oper>
+        <oper page="收货地址" role="client" name="create" type="insert" label="新增地址">
+            data: {
+                name: name,
+                user_id: token.id,
+                contacts: contacts,
+                phone: phone,
+                province: province,
+                city: city,
+                district: district,
+                detail_address: detail_address,
+                zip_code: zip_code
+            }
+        </oper>
+         <oper page="收货地址" role="client" name="edit" type="update" label="更新地址">
+            data: {
+                name: name,
+                user_id: token.id,
+                contacts: contacts,
+                phone: phone,
+                province: province,
+                city: city,
+                district: district,
+                detail_address: detail_address,
+                zip_code: zip_code
+            },
+            with: {
+                id: id
+            }
+        </oper>
+        <oper page="收货地址" role="client" name="delete" type="delete" label="删除地址">
+            with: {id: id}
+        </oper>
+    </entity>
+
+    <entity name="cooks" time="true" label="厨师">
+        <attr name="shop_id" type="key" table="shops" required="true" label="店铺"/>
+        <attr name="name" required="true" label="名称"/>
+        <attr name="intro" type="text" label="简介"/>
+        <oper role="client" name="get" type="first" label="厨师详情">
+            data: {name: name, intro: intro},
+            with: {id: id}
+		</oper>
+		<oper role="shop" name="search" type="search" label="厨师列表">
+			data: {name: name, intro: intro}
+		</oper>
+		<oper role="shop" name="create" type="insert" label="新增厨师">
+			data: {name: name, intro: intro}
+		</oper>
+        <oper role="shop" name="shop_edit" type="update" label="修改厨师信息">
+			data: {name: name, intro: intro},
+			with: {id: id}
+		</oper>
+    </entity>
+</model>

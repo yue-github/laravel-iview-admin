@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<model>
+    <entity name="projects">
+        <attr name="name" label="项目名称"/>
+        <oper name="create" type="insert" label="增加项目">
+            data: {name: name}
+        </oper>
+        <oper name="all" type="all" label="获取项目列表">
+            data: {id: id, name: name}
+        </oper>
+        <oper name="remove" type="delete" label="删除项目"/>
+        <oper name="update" type="update" label="更新信息">
+            data: {name: name}
+        </oper>
+        <oper name="functions" type="all" label="获取所有任务功能列表">
+            data: {
+                name: name,
+                models.project_id: {
+                    name: name,
+                    functions.model_id: {
+                        project_id: project_id,
+                        model_id: model_id,
+                        name: name,
+                        plan: plan,
+                        done: done,
+                        state: state,
+                        updated_at: updated_at
+                    }
+                }
+            }
+        </oper>
+    </entity>
+    <entity name="models">
+        <attr name="project_id" type="key" label="项目ID"/>
+        <attr name="name" label="模块名称"/>
+        <oper name="create" type="insert" label="增加模块">
+            data: {project_id: project_id, name: name}
+        </oper>
+        <oper name="all" type="all" label="获取模块列表">
+            data: {id: id, project_id: project_id, name: name}
+        </oper>
+        <oper name="remove" type="delete" label="模块项目"/>
+        <oper name="update" type="update" label="更新信息">
+            data: {name: name}
+        </oper>
+    </entity>
+    <entity name="functions" time="true">
+        <attr name="project_id" type="key" table="projects" label="项目ID"/>
+        <attr name="model_id" type="key" table="models" label="模块ID"/>
+        <attr name="name" label="功能名称"/>
+        <attr name="plan" type="date" label="计划完成日期"/>
+        <attr name="done" type="date" label="实际完成日期"/>
+        <attr name="state" default="0" label="任务状态"/>
+        <oper name="create" type="insert" label="增加功能">
+            data: {project_id: project_id, model_id: model_id, name: name}
+        </oper>
+        <oper name="all" type="all" label="获取功能列表">
+            data: {id: id, project_id: project_id, model_id: model_id, name: name, plan: plan, done: done, state: state, updated_at: updated_at}
+        </oper>
+        <oper name="remove" type="delete" label="模块项目"/>
+        <oper name="update" type="update" label="更新信息">
+            data: {name: name, plan: plan, done: done, state: state}
+        </oper>
+    </entity>
+    <entity name="bugs" time="true" label="缺陷管理">
+        <attr name="name" label="缺陷名称"/>
+        <attr name="desc" type="articale" label="缺陷描述"/>
+        <attr name="weight" type="count" label="紧迫程度"/>
+        <attr name="state" default="0" label="修复状态"/>
+        <oper name="create" type="insert" label="增加缺陷">
+            data: {name: name, desc: desc, weight: weight}
+        </oper>
+        <oper name="search" type="search" label="获取模块列表">
+            data: {id: id, name: name, desc: desc, weight: weight, state: state},
+            with: {name: name, weight: weight, state: state}
+        </oper>
+        <oper name="remove" type="delete" label="删除缺陷"/>
+        <oper name="update" type="update" label="更新信息">
+            data: {desc: desc, weight: weight, state: state}
+        </oper>
+    </entity>
+</model>

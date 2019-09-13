@@ -1,0 +1,24 @@
+    public function <%=oper.$.name%>(Request $request) {
+
+        $validator = Validator::make($request->all(), [
+            'task_id' => 'required|integer|min:0',
+            'activity_arrs' => 'required',
+        ]);
+        if($validator->fails()) {
+            return $this->fails( $validator->errors()->all());
+        }
+        DB::table('task_activities')->where('task_id', '=', $request->input('task_id'))->delete();
+        try{
+            $activity_arrs = json_decode($request->input('activity_arrs'));
+            foreach($activity_arrs as $activity){
+                DB::table('task_activities')->insert([
+                    'task_id' => $request->input('task_id'),
+                    'activity_id' => $activity->activity_id,
+                    'sort' => $activity->sort
+                    ]);
+            }
+        }catch(\Exception $e){
+            return $this->fails('activity_arrs不正确');
+        }
+        return $this->success();
+    }

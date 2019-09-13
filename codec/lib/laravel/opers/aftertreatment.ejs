@@ -1,0 +1,10 @@
+    public function <%=oper.$.name%>(Request $request) 
+    {
+        <%_ for (var i in locals.data) { -%>
+            <%_ if (i == "util") { 
+                var names = data[i].split('.')-%>
+        $result = \App\Utils\<%=names[0]%>::<%=names[1]%>($request);
+            <%_ } -%>
+        <%_ } -%>
+        return $this->success($result);
+    }

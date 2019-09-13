@@ -1,0 +1,49 @@
+    //医院列表
+    public function <%=oper.$.name%>(Request $request)
+    {
+        <%- include("validate", {val: {params: locals.with, hasOL: true}}) %>
+        $result = DB::table('<%=table.$.name%>')
+            ->select([
+               <%_ for (var i in locals.data) { _%>
+                    <%_ if (typeof(locals.data[i]) === 'object') { _%>
+                    <%_joinField(i, locals.data[i], locals.table.$.name)_%>
+                    <%_ } else { _%>
+                    '<%=locals.table.$.name%>.<%=i%> as <%=locals.data[i]%>',
+                <%_ } _%>
+                <%_ } _%>
+            ]);
+        $count = $result->count();
+        $result = $result
+            ->offset($request->input('offset'))
+            ->limit($request->input('length'))
+            ->get();
+           
+        foreach ($result as $r) {
+            $hospital_id = $r->id;
+            $doctor_id = DB::table('members')
+                ->where('hospital_id', $hospital_id)
+                ->select('id')
+                ->get();
+
+            $arr = [];
+            foreach ($doctor_id as $d) {
+                $arr[] = $d->id;
+            }
+
+            $serve_number = DB::table('inquiry_orders')
+                ->whereIn('doctor_id', $arr)
+                ->orwhere('status', '待支付')
+                ->orwhere('status', '待回复')
+                ->orwhere('status', '咨询中')
+                ->orwhere('status', '咨询结束')
+                ->count();
+            $r->serve_number = $serve_number;
+            $r->labels = explode(',',$r->labels);
+        }
+
+        $result = [
+            'list' => $result,
+            'total' => $count
+        ];
+        return $this->success($result);
+    }

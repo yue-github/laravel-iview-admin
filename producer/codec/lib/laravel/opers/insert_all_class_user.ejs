@@ -1,0 +1,43 @@
+    public function <%=oper.$.name%>(Request $request){
+       $validator = Validator::make($request->all(), [
+            'product_id' => 'required|integer|min:0',
+            'class_id' => 'required|integer|min:0'
+        ]);
+        if($validator->fails()) {
+            return $this->fails( $validator->errors()->all());
+        }
+        //班级里已有的成员
+        $class_user_id_arr = DB::table('class_users')
+                ->leftJoin('class', 'class_users.class_id', '=', 'class.id')
+                ->where('class.product_id', $request->input('product_id'))
+                ->lists('class_users.user_id');
+
+        $users = DB::table('purchased')
+            ->select(['purchased.id as purchased_id',
+                      'purchased.product_id as product_id',
+                      'orders.owner_id as user_id'])
+            ->leftJoin('orders', 'orders.id', '=', 'purchased.order_id')
+            ->leftJoin('users', 'users.id', '=', 'orders.owner_id')
+            ->where('purchased.product_id', $request->input('product_id'))
+            ->where('orders.state', '=', 2)
+            ->whereNotIn('orders.owner_id',$class_user_id_arr)
+            ->get();
+
+        if(count($users) == 0){
+            return $this->fails();
+        }
+        
+        $data = array();
+        foreach ($users as $user){
+            $class_user = [
+                'class_id' => $request->input('class_id'),
+                'user_id' => $user->user_id,
+                'purchased_id' => $user->purchased_id
+            ];
+            array_push($data, $class_user);
+        }
+
+        DB::table('class_users')->insert($data);
+
+        return $this->success();
+    }

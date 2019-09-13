@@ -1,0 +1,23 @@
+<%_
+var data = {};
+routes.forEach(function(route) {
+    var role = (route.role && route.mib !== 'false') ? route.role: 'default';
+    if(!data[role]) {
+        data[role] = [];
+    }
+    data[role].push(route);
+});
+_%>
+<?php
+<%_ for(var key in data) {  
+    if(key != 'default') { _%>
+Route::group(["middleware" => "<%=key%>"], function(){
+<%_ } _%>
+<%_ data[key].forEach(function(route) { _%>
+Route::post('/<%=route.ctrl%>/<%=route.func%>', '<%=cap(route.ctrl)%>Controller@<%=route.func%>');
+<%_   
+    }); 
+    if(key != 'default') { _%> 
+});
+<%_ }
+    } _%>

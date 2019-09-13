@@ -1,0 +1,15 @@
+    public function <%=oper.$.name%>(Request $request) {
+    <%- include('validate', {val: {params: locals.with}}) %>
+        $result = \App\Utils\AlipayUtil::callback($request->all(), config('alipay'));
+        if($result) {
+            $out_trade_no = $result['out_trade_no'];
+            $data = DB::table('<%=table.$.name%>')->where('out_trade_no', $out_trade_no)->first();
+            if($data) {
+                DB::table('<%=table.$.name%>')->where('out_trade_no', $out_trade_no)->update(['state'=>2, 'pay_date'=>date('Y-m-d H:i:s')]);
+            }else{
+                \Illuminate\Support\Facades\Log::info('不存在单号： ' . $out_trade_no);
+            }
+        }else{
+            \Illuminate\Support\Facades\Log::info('回调异常' . $result);
+        }
+    }

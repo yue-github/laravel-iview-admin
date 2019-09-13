@@ -1,0 +1,25 @@
+    public function <%=oper.$.name%>(Request $request) {
+<%- include('validate', {val: {params: locals.data}}) %>
+        $id = DB::table('<%=table.$.name%>')->insertGetId([
+            <%_ if (Array.isArray(locals.data)) { _%>
+            <%_ for (var i = 0; i < locals.data.length; i++) { _%>
+            '<%=locals.data[i]%>' => $request->input('<%=locals.data[i]%>'),
+            <%_ } _%>
+            <%_ } else if (typeof(locals.data) === 'object') { _%>
+            <%_ for (var i in locals.data) { _%>
+            <%_ if (locals.data[i].split('.')[0] == "CONSTANT") { 
+                    var constant_value = locals.data[i].split('.')[1]
+                _%>
+            '<%=i%>' => '<%=constant_value%>',
+            <%_ } else {_%>
+            '<%=i%>' => <%-tcvt(locals.data[i])%>,
+            <%_ } _%>
+            <%_ } _%>
+            <%_ } _%>
+            <%_ if (table.$.time === 'true') { _%>
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s')
+            <%_ } _%>
+        ]);
+        return $this->success($id);
+    }

@@ -1,0 +1,63 @@
+    //<%=oper.$.label%>
+    public function <%=oper.$.name%>(Request $request)
+    {
+        <%- include('validate', {val: {params: locals.with}}) %>
+
+        $result = DB::table('<%=table.$.name%>')
+            ->select([
+            <%_ for (var i in locals.data) { _%>
+                '<%=i%>'
+            <%_ } _%>
+            ]);
+        <%_ for(var i in locals.must) { _%>
+            <%_ if (locals.must[i] == 'token.id') { _%>
+        $result = $result->where('<%=i%>', <%-tcvt(param[i])%>);
+            <%_ } _%>
+        $result = $result->where('<%=i%>', $<%=locals.with[i]%>)
+        <%_ } _%>
+        
+        <%_ for (var i in locals.with) { _%>
+        if ($request->has('<%=i%>'))
+            $result = $result->where('<%=i%>', $request->input('<%=locals.with[i]%>'));
+        <%_ } _%>
+        $count = $result->count();
+        $result = $result
+            ->offset($request->input('offset'))
+            ->limit($request->input('length'))
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        $purchased = DB::table('<%=locals.table[table]%>')
+            ->select([
+            <%_ for (var i in locals.table) { _%>
+                'id',
+                'order_id',
+                'product_id',
+                'product_name',
+                'price',
+                'num',
+                'updated_at'
+            ])
+            ->get();
+        $products = DB::table('products')->select(['id', 'shop_id', 'image'])->get();
+        $shops = DB::table('shops')->select(['id', 'shop_image'])->get();
+
+        foreach ($result as $r) {
+            $foodList = CommonService::findItems($purchased, 'order_id', $r->id);
+            $purchase = CommonService::findItem($purchased, 'order_id', $r->id);
+            $shop_product = CommonService::findItem($products, 'id', $purchase->product_id);
+            $shop = CommonService::findItem($shops, 'id', $shop_product->shop_id);
+            foreach ($foodList as $f) {
+                $product = CommonService::findItem($products, 'id', $f->product_id);
+                $f->image = $product->image;
+
+            }
+            $r->shop_image = $shop->shop_image;
+            $r->foodlist = $foodList;
+        }
+        $data = [
+            'total' => $count,
+            'result' => $result
+        ];
+        return $this->success($data);
+    }

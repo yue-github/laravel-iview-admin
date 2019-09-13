@@ -1,0 +1,10 @@
+<%_
+if (locals.mode === "input") {
+    var input = Object.assign(locals.data, locals.with);
+_%>
+<%- include("object", {doc: input}) _%>
+<%_
+} else if (locals.mode === "output") {
+    echo ("{<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}"); 
+}
+_%>

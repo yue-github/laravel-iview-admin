@@ -1,0 +1,838 @@
+<!DOCTYPE html><html><head>
+      <title>help</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      
+      <link rel="stylesheet" href="file:///c:\Users\Administrator\.vscode\extensions\shd101wyy.markdown-preview-enhanced-0.4.2\node_modules\@shd101wyy\mume\dependencies\katex\katex.min.css">
+      
+      
+
+      
+      
+      
+      
+      
+      
+
+      <style>
+      /**
+ * prism.js Github theme based on GitHub's theme.
+ * @author Sam Clarke
+ */
+code[class*="language-"],
+pre[class*="language-"] {
+  color: #333;
+  background: none;
+  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.4;
+
+  -moz-tab-size: 8;
+  -o-tab-size: 8;
+  tab-size: 8;
+
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+  padding: .8em;
+  overflow: auto;
+  /* border: 1px solid #ddd; */
+  border-radius: 3px;
+  /* background: #fff; */
+  background: #f5f5f5;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+  padding: .1em;
+  border-radius: .3em;
+  white-space: normal;
+  background: #f5f5f5;
+}
+
+.token.comment,
+.token.blockquote {
+  color: #969896;
+}
+
+.token.cdata {
+  color: #183691;
+}
+
+.token.doctype,
+.token.punctuation,
+.token.variable,
+.token.macro.property {
+  color: #333;
+}
+
+.token.operator,
+.token.important,
+.token.keyword,
+.token.rule,
+.token.builtin {
+  color: #a71d5d;
+}
+
+.token.string,
+.token.url,
+.token.regex,
+.token.attr-value {
+  color: #183691;
+}
+
+.token.property,
+.token.number,
+.token.boolean,
+.token.entity,
+.token.atrule,
+.token.constant,
+.token.symbol,
+.token.command,
+.token.code {
+  color: #0086b3;
+}
+
+.token.tag,
+.token.selector,
+.token.prolog {
+  color: #63a35c;
+}
+
+.token.function,
+.token.namespace,
+.token.pseudo-element,
+.token.class,
+.token.class-name,
+.token.pseudo-class,
+.token.id,
+.token.url-reference .token.variable,
+.token.attr-name {
+  color: #795da3;
+}
+
+.token.entity {
+  cursor: help;
+}
+
+.token.title,
+.token.title .token.punctuation {
+  font-weight: bold;
+  color: #1d3e81;
+}
+
+.token.list {
+  color: #ed6a43;
+}
+
+.token.inserted {
+  background-color: #eaffea;
+  color: #55a532;
+}
+
+.token.deleted {
+  background-color: #ffecec;
+  color: #bd2c00;
+}
+
+.token.bold {
+  font-weight: bold;
+}
+
+.token.italic {
+  font-style: italic;
+}
+
+
+/* JSON */
+.language-json .token.property {
+  color: #183691;
+}
+
+.language-markup .token.tag .token.punctuation {
+  color: #333;
+}
+
+/* CSS */
+code.language-css,
+.language-css .token.function {
+  color: #0086b3;
+}
+
+/* YAML */
+.language-yaml .token.atrule {
+  color: #63a35c;
+}
+
+code.language-yaml {
+  color: #183691;
+}
+
+/* Ruby */
+.language-ruby .token.function {
+  color: #333;
+}
+
+/* Markdown */
+.language-markdown .token.url {
+  color: #795da3;
+}
+
+/* Makefile */
+.language-makefile .token.symbol {
+  color: #795da3;
+}
+
+.language-makefile .token.variable {
+  color: #183691;
+}
+
+.language-makefile .token.builtin {
+  color: #0086b3;
+}
+
+/* Bash */
+.language-bash .token.keyword {
+  color: #0086b3;
+}
+
+/* highlight */
+pre[data-line] {
+  position: relative;
+  padding: 1em 0 1em 3em;
+}
+pre[data-line] .line-highlight-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: transparent;
+  display: block;
+  width: 100%;
+}
+
+pre[data-line] .line-highlight {
+  position: absolute;
+  left: 0;
+  right: 0;
+  padding: inherit 0;
+  margin-top: 1em;
+  background: hsla(24, 20%, 50%,.08);
+  background: linear-gradient(to right, hsla(24, 20%, 50%,.1) 70%, hsla(24, 20%, 50%,0));
+  pointer-events: none;
+  line-height: inherit;
+  white-space: pre;
+}
+
+pre[data-line] .line-highlight:before, 
+pre[data-line] .line-highlight[data-end]:after {
+  content: attr(data-start);
+  position: absolute;
+  top: .4em;
+  left: .6em;
+  min-width: 1em;
+  padding: 0 .5em;
+  background-color: hsla(24, 20%, 50%,.4);
+  color: hsl(24, 20%, 95%);
+  font: bold 65%/1.5 sans-serif;
+  text-align: center;
+  vertical-align: .3em;
+  border-radius: 999px;
+  text-shadow: none;
+  box-shadow: 0 1px white;
+}
+
+pre[data-line] .line-highlight[data-end]:after {
+  content: attr(data-end);
+  top: auto;
+  bottom: .4em;
+}html body{font-family:"Helvetica Neue",Helvetica,"Segoe UI",Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#333;background-color:#fff;overflow:initial;box-sizing:border-box;word-wrap:break-word}html body>:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#000}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#5c5c5c}html body strong{color:#000}html body del{color:#5c5c5c}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#00a3f5;text-decoration:none}html body img{max-width:100%}html body>p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body>ul,html body>ol{margin-bottom:16px}html body ul,html body ol{padding-left:2em}html body ul.no-list,html body ol.no-list{padding:0;list-style-type:none}html body ul ul,html body ul ol,html body ol ol,html body ol ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li>p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#5c5c5c;border-left:4px solid #d6d6d6}html body blockquote>:first-child{margin-top:0}html body blockquote>:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#d6d6d6;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:bold;color:#000}html body table td,html body table th{border:1px solid #d6d6d6;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:bold}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:.85em !important;color:#000;background-color:#f0f0f0;border-radius:3px;padding:.2em 0}html body code::before,html body code::after{letter-spacing:-0.2em;content:"\00a0"}html body pre>code{padding:0;margin:0;font-size:.85em !important;word-break:normal;white-space:pre;background:transparent;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:1em;overflow:auto;font-size:.85em !important;line-height:1.45;border:#d6d6d6;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:before,html body pre tt:before,html body pre code:after,html body pre tt:after{content:normal}html body p,html body blockquote,html body ul,html body ol,html body dl,html body pre{margin-top:0;margin-bottom:16px}html body kbd{color:#000;border:1px solid #d6d6d6;border-bottom:2px solid #c7c7c7;padding:2px 4px;background-color:#f0f0f0;border-radius:3px}@media print{html body{background-color:#fff}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#000;page-break-after:avoid}html body blockquote{color:#5c5c5c}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body pre,html body code{word-wrap:break-word;white-space:pre}}.markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview .pagebreak,.markdown-preview .newpage{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers>code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows>span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center !important}.markdown-preview:not([for="preview"]) .code-chunk .btn-group{display:none}.markdown-preview:not([for="preview"]) .code-chunk .status{display:none}.markdown-preview:not([for="preview"]) .code-chunk .output-div{margin-bottom:16px}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0}@media screen and (min-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px + 2em)}}@media screen and (max-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{font-size:14px !important;padding:1em}}@media print{html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,0.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{padding:0 1.6em;margin-top:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc li{margin-bottom:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{list-style-type:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% -  300px);padding:2em calc(50% - 457px -  150px);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none}
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+
+      </style>
+    </head>
+    <body for="html-export">
+      <div class="mume markdown-preview  ">
+      <h1>&#x767E;&#x7528;&#x79D1;&#x6280;&#x751F;&#x6210;&#x5668;&#x6587;&#x6863;</h1>
+<ul>
+<li>&#x81EA;&#x52A8;&#x751F;&#x6210;&#x63A5;&#x53E3;&#x4EE3;&#x7801;&#x5230;&#x9879;&#x76EE;&#x76EE;&#x5F55;&#x4E0B;&#xFF0C;&#x53EF;&#x76F4;&#x63A5;&#x8BBF;&#x95EE;&#xFF0C;&#x8BBF;&#x95EE;&#x5730;&#x5740;&#xFF1A;<a href="http://xn--eqrt2g/%E8%A1%A8%E5%90%8D/%E6%8E%A5%E5%8F%A3%E5%90%8D%EF%BC%88%E5%85%A8%E9%83%A8%E6%8E%A5%E5%8F%A3%E5%9D%87%E4%B8%BApost%E8%AF%B7%E6%B1%82%EF%BC%89">http://&#x57DF;&#x540D;/&#x8868;&#x540D;/&#x63A5;&#x53E3;&#x540D;&#xFF08;&#x5168;&#x90E8;&#x63A5;&#x53E3;&#x5747;&#x4E3A;post&#x8BF7;&#x6C42;&#xFF09;</a></li>
+<li>&#x81EA;&#x52A8;&#x5EFA;&#x8868;&#xFF08;&#x81EA;&#x52A8;&#x65B0;&#x589E;&#x3001;&#x5220;&#x9664;&#x8868;&#xFF0C;&#x65B0;&#x589E;&#x3001;&#x5220;&#x9664;&#x5B57;&#x6BB5;&#xFF0C;&#x81EA;&#x52A8;&#x4FEE;&#x6539;&#x5B57;&#x6BB5;&#x5C5E;&#x6027;&#xFF09;</li>
+<li>&#x81EA;&#x52A8;&#x751F;&#x6210;&#x63A5;&#x53E3;&#x6587;&#x6863;&#xFF1A;<a href="http://xn--eqrt2g/api.html">http://&#x57DF;&#x540D;/api.html</a></li>
+<li>&#x81EA;&#x52A8;&#x751F;&#x6210;&#x6570;&#x636E;&#x5B57;&#x5178;&#xFF1A;<a href="http://xn--eqrt2g/data.html">http://&#x57DF;&#x540D;/data.html</a></li>
+</ul>
+<h3 class="mume-header" id="xml%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6">Xml&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#xFF1A;</h3>
+
+<pre data-role="codeBlock" data-info="xml" class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>model</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>entity</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>users<span class="token punctuation">&quot;</span></span> <span class="token attr-name">time</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>true<span class="token punctuation">&quot;</span></span> <span class="token attr-name">label</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>&#x7528;&#x6237;&#x7BA1;&#x7406;<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>attr</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>name<span class="token punctuation">&quot;</span></span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>name<span class="token punctuation">&quot;</span></span> <span class="token attr-name">label</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>&#x7528;&#x6237;&#x540D;<span class="token punctuation">&quot;</span></span><span class="token punctuation">/&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>attr</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>shop_id<span class="token punctuation">&quot;</span></span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>key<span class="token punctuation">&quot;</span></span> <span class="token attr-name">table</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>shops<span class="token punctuation">&quot;</span></span> <span class="token attr-name">label</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>&#x5E97;&#x94FA;id<span class="token punctuation">&quot;</span></span><span class="token punctuation">/&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>oper</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>bind_user<span class="token punctuation">&quot;</span></span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>login<span class="token punctuation">&quot;</span></span> <span class="token attr-name">label</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>&#x767B;&#x9646;<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+            data: {phone: phone, password: password}
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>oper</span><span class="token punctuation">&gt;</span></span>
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>entity</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>model</span><span class="token punctuation">&gt;</span></span>
+</pre><pre data-role="codeBlock" data-info="xml" class="language-xml">----&gt;model&#xFF1A;&#x6839;&#x7ED3;&#x70B9;
+--------&gt;entity&#xFF1A;&#x6570;&#x636E;&#x8868;
+  name&#xFF1A; &#x6570;&#x636E;&#x8868;&#x540D;
+  time&#xFF1A; true|false&#xFF0C;&#x9ED8;&#x8BA4;false,&#x662F;&#x5426;&#x751F;&#x6210;created_at&#x548C;updated_at&#x65F6;&#x95F4;&#x6233;&#x5B57;&#x6BB5;
+  label&#xFF1A;&#x6CE8;&#x91CA;
+-------------&gt;attr&#xFF1A;&#x6570;&#x636E;&#x8868;&#x5B57;&#x6BB5;
+name&#xFF1A;&#x5B57;&#x6BB5;&#x540D;
+type&#xFF1A;&#x5B57;&#x6BB5;&#x7C7B;&#x578B;
+table&#xFF1A;&#x5916;&#x952E;&#x5BF9;&#x5E94;&#x7684;&#x8868;
+default&#xFF1A;&#x5B57;&#x6BB5;&#x9ED8;&#x8BA4;&#x503C;
+label&#xFF1A;&#x6CE8;&#x91CA;
+-------------&gt;oper&#xFF1A;&#x63A5;&#x53E3;
+name&#xFF1A;&#x63A5;&#x53E3;&#x540D;
+type&#xFF1A;&#x6A21;&#x677F;&#x540D;
+page&#xFF1A;&#x63A5;&#x53E3;&#x5BF9;&#x5E94;&#x7684;&#x9875;&#x9762;&#xFF0C;&#x591A;&#x4E2A;&#x53EF;&#x7528;&#x9017;&#x53F7;&#x9694;&#x5F00;
+label&#xFF1A;&#x6CE8;&#x91CA;
+</pre><h3 class="mume-header" id="attr%E6%A0%87%E7%AD%BEtype%E5%B1%9E%E6%80%A7%E5%8F%AF%E9%80%89%E5%80%BC">attr&#x6807;&#x7B7E;type&#x5C5E;&#x6027;&#x53EF;&#x9009;&#x503C;&#xFF1A;</h3>
+
+<pre data-role="codeBlock" data-info="xml" class="language-xml">type&#x540D;&#x79F0;&#xFF1A;mysql&#x5B57;&#x6BB5;&#x7C7B;&#x578B;&#xFF0C;&#x957F;&#x5EA6;
+name: string, 100
+key: bigInteger, null
+phone: string, 11
+idcard: string, 18
+article: text, null
+text: text, null
+json: text, null
+message: string, 500
+file: string, 200
+image: string, 200
+video: string, 200
+audio: string, 200
+url: string, 200
+address: string, 200
+email: string, 200
+int: integer, null
+float: float, null
+count: integer, null
+money: decimal, 13
+gender: enum, null
+date: date, null
+time: time, null
+datetime: dateTime, null
+state: tinyInteger, null
+type: tinyInteger, null
+password: string, 64
+bool: boolean, null 
+</pre><h3 class="mume-header" id="%E5%B8%B8%E7%94%A8%E4%BB%A3%E7%A0%81%E6%A8%A1%E6%9D%BF%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95">&#x5E38;&#x7528;&#x4EE3;&#x7801;&#x6A21;&#x677F;&#x4F7F;&#x7528;&#x65B9;&#x6CD5;&#xFF1A;</h3>
+
+<p><strong>&#x4E00;&#x3001; search:</strong> &#x6700;&#x5E38;&#x7528;&#x7684;&#x641C;&#x7D22;&#x67E5;&#x8BE2;&#x6A21;&#x677F;&#xFF0C;&#x652F;&#x6301;&#x5DE6;&#x8FDE;&#x63A5;&#x591A;&#x91CD;&#x5D4C;&#x5957;&#xFF0C;&#x652F;&#x6301;&#x5BF9;&#x8C61;&#x6210;&#x5458;&#x4E3A;&#x6570;&#x7EC4;&#xFF0C;&#x652F;&#x6301;whereNotNull,whereNotIn,whereIn,orWhere,groupBy,filter&#xFF0C;&#x5B50;&#x8868;&#x52A0;&#x67E5;&#x8BE2;&#x6761;&#x4EF6;&#x7B49;&#xFF08;<strong>&#x8C03;&#x7528;&#x6B64;&#x63A5;&#x53E3;&#x65F6;offset&#x548C;length&#x5FC5;&#x4F20;</strong>&#xFF09;</p>
+<ul>
+<li><strong>&#x57FA;&#x672C;&#x7528;&#x6CD5;</strong></li>
+</ul>
+<pre data-role="codeBlock" data-info="xml" class="language-xml"> <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>oper</span> <span class="token attr-name">role</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>shop<span class="token punctuation">&quot;</span></span> <span class="token attr-name">page</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>&#x7528;&#x6237;&#x7BA1;&#x7406;<span class="token punctuation">&quot;</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>search<span class="token punctuation">&quot;</span></span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>search<span class="token punctuation">&quot;</span></span> <span class="token attr-name">label</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>&#x67E5;&#x8BE2;&#x7528;&#x6237;&#x5217;&#x8868;<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+	data: {
+        id: id,
+        name: name,
+        idcard: idcard
+	},
+    with: {
+        name: name,
+        phone: [like, phone]
+    }
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>oper</span><span class="token punctuation">&gt;</span></span> 
+</pre><p>data&#xFF1A;&#x8FD4;&#x56DE;&#x7684;&#x5B57;&#x6BB5;<br>
+whth&#xFF1A;&#x67E5;&#x8BE2;&#x6761;&#x4EF6;&#xFF0C;name: name&#x4EE3;&#x8868;&#x7CBE;&#x51C6;&#x67E5;&#x8BE2;&#xFF0C;phone: [like, phone]&#x4EE3;&#x8868;&#x6A21;&#x7CCA;&#x67E5;&#x8BE2;</p>
+<hr>
+<ul>
+<li><strong>with&#x7684;&#x7528;&#x6CD5;</strong></li>
+</ul>
+<pre data-role="codeBlock" data-info="xml" class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>oper</span> <span class="token attr-name">role</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>shop<span class="token punctuation">&quot;</span></span> <span class="token attr-name">page</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>&#x7528;&#x6237;&#x7BA1;&#x7406;<span class="token punctuation">&quot;</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>search<span class="token punctuation">&quot;</span></span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>search<span class="token punctuation">&quot;</span></span> <span class="token attr-name">label</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>&#x67E5;&#x8BE2;&#x7528;&#x6237;&#x5217;&#x8868;<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+    data: {
+        id: id,
+	    age: age,
+        name: name,
+        idcard: idcard
+    },
+    with: {age: [le, age]}
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>oper</span><span class="token punctuation">&gt;</span></span>
+</pre><p><strong>with&#xFF1A;le</strong>&#xFF0C;&#x67E5;&#x8BE2;age&#x5C0F;&#x4E8E;&#x7B49;&#x4E8E;&#x67D0;&#x503C;&#x7684;&#x7528;&#x6237;<br>
+&#x751F;&#x6210;sql&#x8BED;&#x53E5;&#xFF1A;</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql"><span class="token keyword">select</span> id<span class="token punctuation">,</span> age<span class="token punctuation">,</span> name<span class="token punctuation">,</span> idcard <span class="token keyword">from</span> users <span class="token keyword">where</span> age <span class="token operator">&lt;=</span> <span class="token string">&quot;&#x524D;&#x7AEF;&#x4F20;&#x503C;&quot;</span>
+</pre><hr>
+<pre data-role="codeBlock" data-info="xml" class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>oper</span> <span class="token attr-name">role</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>shop<span class="token punctuation">&quot;</span></span> <span class="token attr-name">page</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>&#x7528;&#x6237;&#x7BA1;&#x7406;<span class="token punctuation">&quot;</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>search<span class="token punctuation">&quot;</span></span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>search<span class="token punctuation">&quot;</span></span> <span class="token attr-name">label</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>&#x67E5;&#x8BE2;&#x7528;&#x6237;&#x5217;&#x8868;<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+      data: {
+             id: id,
+			 age: age,
+             name: name,
+             idcard: idcard
+      },
+      with: {age: [ge, age]}
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>oper</span><span class="token punctuation">&gt;</span></span>
+</pre><p>with&#xFF1A;<strong>ge</strong>&#xFF0C;&#x67E5;&#x8BE2;age&#x5927;&#x4E8E;&#x7B49;&#x4E8E;&#x67D0;&#x503C;&#x7684;&#x7528;&#x6237;<br>
+&#x751F;&#x6210;sql&#x8BED;&#x53E5;&#xFF1A;</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql"><span class="token keyword">select</span> id<span class="token punctuation">,</span> age<span class="token punctuation">,</span> name<span class="token punctuation">,</span> idcard <span class="token keyword">from</span> users <span class="token keyword">where</span> age <span class="token operator">&gt;=</span> <span class="token string">&quot;&#x524D;&#x7AEF;&#x4F20;&#x503C;&quot;</span>
+</pre><hr>
+<ul>
+<li><strong>&#x66F4;&#x591A;&#x5BF9;&#x5E94;&#x5173;&#x7CFB;</strong><br>
+<strong>lt</strong>&#xFF1A;&#x5C0F;&#x4E8E;&#xFF0C;<strong>gt</strong>&#xFF1A;&#x5927;&#x4E8E;&#xFF0C;<strong>ne</strong>&#xFF1A;&#x4E0D;&#x7B49;&#x4E8E;</li>
+</ul>
+<hr>
+<ul>
+<li><strong>&#x5DE6;&#x8FDE;&#x63A5;1</strong></li>
+</ul>
+<pre data-role="codeBlock" data-info="xml" class="language-xml"> <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>oper</span> <span class="token attr-name">page</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>&#x5546;&#x54C1;&#x7BA1;&#x7406;<span class="token punctuation">&quot;</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>search<span class="token punctuation">&quot;</span></span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>search<span class="token punctuation">&quot;</span></span> <span class="token attr-name">label</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>&#x67E5;&#x8BE2;&#x4EA7;&#x54C1;<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+    data: {
+        id: id,
+        name: name,
+        shop_id: {
+            name: shop_name
+        }
+    },
+    with: {name: [like, name]}
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>oper</span><span class="token punctuation">&gt;</span></span> 
+</pre><p>shop_id&#x4E3A;&#x5916;&#x952E;&#xFF0C;shop_id&#x540E;&#x9762;&#x5927;&#x62EC;&#x53F7;&#x91CC;&#x914D;&#x7F6E;&#x7684;&#x5C5E;&#x6027;&#x4E3A;shops&#x8868;&#x7684;&#x5B57;&#x6BB5;&#xFF0C;&#x503C;&#x4E3A;&#x522B;&#x540D;<br>
+&#x751F;&#x6210;&#x7684;sql&#x8BED;&#x53E5;&#x5982;&#x4E0B;&#xFF1A;</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql"> <span class="token keyword">SELECT</span>
+	products<span class="token punctuation">.</span>id <span class="token keyword">AS</span> id<span class="token punctuation">,</span>
+	products<span class="token punctuation">.</span> NAME <span class="token keyword">AS</span> NAME<span class="token punctuation">,</span>
+	shops<span class="token punctuation">.</span> NAME <span class="token keyword">AS</span> shop_name
+<span class="token keyword">FROM</span>
+	products
+<span class="token keyword">LEFT</span> <span class="token keyword">JOIN</span> shops <span class="token keyword">ON</span> products<span class="token punctuation">.</span>shop_id <span class="token operator">=</span> shops<span class="token punctuation">.</span>id
+<span class="token keyword">WHERE</span>
+	products<span class="token punctuation">.</span>NAME <span class="token operator">LIKE</span> <span class="token string">&quot;%&#x524D;&#x7AEF;&#x4F20;%&quot;</span> 
+</pre><hr>
+<ul>
+<li><strong>&#x5DE6;&#x8FDE;&#x63A5;2</strong><br>
+&#x793A;&#x4F8B;1&#xFF1A;</li>
+</ul>
+<pre data-role="codeBlock" data-info="xml" class="language-xml"> <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>oper</span> <span class="token attr-name">page</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>&#x5546;&#x54C1;&#x7BA1;&#x7406;<span class="token punctuation">&quot;</span></span> <span class="token attr-name">role</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>shop<span class="token punctuation">&quot;</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>search<span class="token punctuation">&quot;</span></span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>search<span class="token punctuation">&quot;</span></span> <span class="token attr-name">label</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>&#x67E5;&#x8BE2;&#x4EA7;&#x54C1;<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+    data: {
+        id: id,
+        name: name,
+        product_labels.product_id: {
+            label_id: label_id,
+			product_id: product_id
+        }
+    },
+    with: {name: [like, name]}
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>oper</span><span class="token punctuation">&gt;</span></span> 
+</pre><p>product_labels&#x4E3A;&#x4EA7;&#x54C1;-&#x6807;&#x7B7E;&#x8FDE;&#x63A5;&#x8868;<br>
+&#x751F;&#x6210;&#x7684;sql&#x8BED;&#x53E5;&#x5982;&#x4E0B;&#xFF1A;</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql"><span class="token keyword">SELECT</span>
+	products<span class="token punctuation">.</span>id <span class="token keyword">AS</span> id<span class="token punctuation">,</span>
+	products<span class="token punctuation">.</span> NAME <span class="token keyword">AS</span> NAME<span class="token punctuation">,</span>
+	product_labels<span class="token punctuation">.</span>label_id <span class="token keyword">AS</span> label_id<span class="token punctuation">,</span>
+	product_labels<span class="token punctuation">.</span>product_id <span class="token keyword">AS</span> product_id
+<span class="token keyword">FROM</span>
+	products
+<span class="token keyword">LEFT</span> <span class="token keyword">JOIN</span> product_labels <span class="token keyword">ON</span> products<span class="token punctuation">.</span>id <span class="token operator">=</span> product_labels<span class="token punctuation">.</span>product_id
+<span class="token keyword">WHERE</span>
+	products<span class="token punctuation">.</span> NAME <span class="token operator">LIKE</span> <span class="token string">&quot;%&#x524D;&#x7AEF;&#x4F20;%&quot;</span> 
+</pre><hr>
+<p>&#x793A;&#x4F8B;2(&#x652F;&#x6301;&#x591A;&#x91CD;&#x5D4C;&#x5957;)&#xFF1A;</p>
+<pre data-role="codeBlock" data-info="xml" class="language-xml"> <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>oper</span> <span class="token attr-name">role</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>client<span class="token punctuation">&quot;</span></span> <span class="token attr-name">page</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>&#x73ED;&#x7EA7;&#x7BA1;&#x7406;<span class="token punctuation">&quot;</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>instructor_search<span class="token punctuation">&quot;</span></span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>search<span class="token punctuation">&quot;</span></span> <span class="token attr-name">label</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>&#x73ED;&#x7EA7;&#x5217;&#x8868;&#x8F85;&#x5BFC;&#x5458;&#x4E13;&#x7528;<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+	data:{
+		id: id,
+		name: name,
+		product_id: {
+            id: product_id,
+            project_id: {
+                id: project_id,
+				project_tasks.project_id: {
+					task_id: {
+						task_activities.task_id: {
+							activity_id: {
+								resources: resources
+							}
+						}
+					}
+				}
+            }
+        }
+	}
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>oper</span><span class="token punctuation">&gt;</span></span> 
+</pre><p>&#x751F;&#x6210;&#x7684;sql&#x8BED;&#x53E5;&#x5982;&#x4E0B;&#xFF1A;</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql"><span class="token keyword">SELECT</span>
+	class<span class="token punctuation">.</span>id <span class="token keyword">AS</span> id<span class="token punctuation">,</span>
+	class<span class="token punctuation">.</span> NAME <span class="token keyword">AS</span> name<span class="token punctuation">,</span>
+	products<span class="token punctuation">.</span>id <span class="token keyword">as</span> product_id<span class="token punctuation">,</span>
+	projects<span class="token punctuation">.</span>id <span class="token keyword">as</span> project_id<span class="token punctuation">,</span>
+	activities<span class="token punctuation">.</span>resources <span class="token keyword">as</span> resources
+<span class="token keyword">FROM</span>
+	class
+<span class="token keyword">LEFT</span> <span class="token keyword">JOIN</span> products <span class="token keyword">ON</span> products<span class="token punctuation">.</span>id <span class="token operator">=</span> class<span class="token punctuation">.</span>product_id
+<span class="token keyword">LEFT</span> <span class="token keyword">JOIN</span> projects <span class="token keyword">on</span> products<span class="token punctuation">.</span>project_id <span class="token operator">=</span> projects<span class="token punctuation">.</span>id
+<span class="token keyword">LEFT</span> <span class="token keyword">JOIN</span> project_tasks <span class="token keyword">on</span> projects<span class="token punctuation">.</span>id <span class="token operator">=</span> project_tasks<span class="token punctuation">.</span>project_id
+<span class="token keyword">LEFT</span> <span class="token keyword">JOIN</span> tasks <span class="token keyword">on</span> project_tasks<span class="token punctuation">.</span>task_id <span class="token operator">=</span> tasks<span class="token punctuation">.</span>id
+<span class="token keyword">LEFT</span> <span class="token keyword">JOIN</span> task_activities <span class="token keyword">on</span> tasks<span class="token punctuation">.</span>id <span class="token operator">=</span> task_activities<span class="token punctuation">.</span>task_id
+<span class="token keyword">LEFT</span> <span class="token keyword">JOIN</span> activities <span class="token keyword">on</span> activities<span class="token punctuation">.</span>id <span class="token operator">=</span> task_activities<span class="token punctuation">.</span>activity_id 
+</pre><hr>
+<h4 class="mume-header" id="%E5%A4%9A%E7%A7%8D%E6%9F%A5%E8%AF%A2%E6%9D%A1%E4%BB%B6%E7%9A%84%E4%BD%BF%E7%94%A8">&#x591A;&#x79CD;&#x67E5;&#x8BE2;&#x6761;&#x4EF6;&#x7684;&#x4F7F;&#x7528;&#xFF1A;</h4>
+
+<pre data-role="codeBlock" data-info="xml" class="language-xml"> <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>oper</span> <span class="token attr-name">page</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>&#x5546;&#x54C1;&#x7BA1;&#x7406;<span class="token punctuation">&quot;</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>search<span class="token punctuation">&quot;</span></span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>search<span class="token punctuation">&quot;</span></span> <span class="token attr-name">label</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>&#x67E5;&#x8BE2;&#x4EA7;&#x54C1;<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+    data: {
+        id: id,
+        name: name
+    },
+    withNotIn: {id: id_arr}
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>oper</span><span class="token punctuation">&gt;</span></span> 
+</pre><p><strong>withNotIn</strong>&#xFF1A;&#x67E5;&#x8BE2;id&#x4E0D;&#x5728;id_arr&#x6570;&#x7EC4;&#x5185;&#x7684;&#x8BB0;&#x5F55;&#xFF0C;id_arr&#x4E3A;&#x6570;&#x7EC4;json&#x5E8F;&#x5217;&#x5316;&#x540E;&#x7684;&#x5B57;&#x7B26;&#x4E32;</p>
+<hr>
+<pre data-role="codeBlock" data-info="xml" class="language-xml"> <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>oper</span> <span class="token attr-name">page</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>&#x5546;&#x54C1;&#x7BA1;&#x7406;<span class="token punctuation">&quot;</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>search<span class="token punctuation">&quot;</span></span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>search<span class="token punctuation">&quot;</span></span> <span class="token attr-name">label</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>&#x67E5;&#x8BE2;&#x4EA7;&#x54C1;<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+    data: {
+        id: id,
+        name: name
+    },
+	withIn: {id: id_arr}
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>oper</span><span class="token punctuation">&gt;</span></span> 
+</pre><p><strong>withIn</strong>&#xFF1A;&#x67E5;&#x8BE2;id&#x5728;id_arr&#x6570;&#x7EC4;&#x5185;&#x7684;&#x7684;&#x8BB0;&#x5F55;&#xFF0C;id_arr&#x4E3A;&#x6570;&#x7EC4;json&#x5E8F;&#x5217;&#x5316;&#x540E;&#x7684;&#x5B57;&#x7B26;&#x4E32;</p>
+<hr>
+<pre data-role="codeBlock" data-info="xml" class="language-xml"> <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>oper</span> <span class="token attr-name">page</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>&#x5546;&#x54C1;&#x7BA1;&#x7406;<span class="token punctuation">&quot;</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>search<span class="token punctuation">&quot;</span></span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>search<span class="token punctuation">&quot;</span></span> <span class="token attr-name">label</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>&#x67E5;&#x8BE2;&#x4EA7;&#x54C1;<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+    data: {
+        id: id,
+        name: name&#xFF0C;
+		desc: desc
+    },
+	withNotNull : {desc: desc}
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>oper</span><span class="token punctuation">&gt;</span></span> 
+</pre><p><strong>withNotNull</strong>&#xFF1A;&#x67E5;&#x8BE2;desc&#x4E0D;&#x4E3A;&#x7A7A;&#x7684;&#x8BB0;&#x5F55;</p>
+<hr>
+<pre data-role="codeBlock" data-info="xml" class="language-xml"> <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>oper</span> <span class="token attr-name">page</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>&#x5546;&#x54C1;&#x7BA1;&#x7406;<span class="token punctuation">&quot;</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>search<span class="token punctuation">&quot;</span></span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>search<span class="token punctuation">&quot;</span></span> <span class="token attr-name">label</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>&#x67E5;&#x8BE2;&#x4EA7;&#x54C1;<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+    data: {
+        id: id,
+        name: name&#xFF0C;
+		price: price
+    },
+	orWith&#xFF1A;{price: price, name: name}
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>oper</span><span class="token punctuation">&gt;</span></span> 
+</pre><p><strong>orWith</strong>&#xFF1A;&#xFF08;price == value || name == value&#xFF09;<br>
+&#x751F;&#x6210;sql&#x8BED;&#x53E5;&#xFF1A;</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql"><span class="token keyword">select</span> id<span class="token punctuation">,</span> name<span class="token punctuation">,</span> price <span class="token keyword">from</span> products <span class="token keyword">where</span> <span class="token punctuation">(</span>price <span class="token operator">=</span> <span class="token string">&quot;value&quot;</span> <span class="token operator">or</span> name <span class="token operator">=</span> <span class="token string">&quot;value&quot;</span><span class="token punctuation">)</span>
+</pre><hr>
+<pre data-role="codeBlock" data-info="xml" class="language-xml"> <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>oper</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>create<span class="token punctuation">&quot;</span></span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>insert<span class="token punctuation">&quot;</span></span> <span class="token attr-name">label</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>&#x67E5;&#x8BE2;&#x4EA7;&#x54C1;<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+    data: {
+        id: id,
+        name: name,
+        desc: desc,
+        image: image,
+	    slabel: label
+    },
+	groupBy: {label: label}
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>oper</span><span class="token punctuation">&gt;</span></span> 
+</pre><p><strong>groupBy</strong>&#xFF1A;&#x5BF9;&#x67E5;&#x8BE2;&#x7684;&#x6570;&#x636E;&#x6309;&#x7167;&#x5B57;&#x6BB5;&#x5206;&#x7EC4;&#xFF0C;&#x53BB;&#x91CD;</p>
+<hr>
+<pre data-role="codeBlock" data-info="xml" class="language-xml"> <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>oper</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>get<span class="token punctuation">&quot;</span></span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>first<span class="token punctuation">&quot;</span></span> <span class="token attr-name">label</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>&#x4EA7;&#x54C1;&#x8BE6;&#x60C5;<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+    data: {
+        id: id,
+        name: name, 
+        desc: desc, 
+        image: image
+    },
+    filter: {onsale: 1}
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>oper</span><span class="token punctuation">&gt;</span></span> 
+</pre><p><strong>filter</strong>&#xFF1A;&#x8FC7;&#x6EE4;&#xFF0C;&#x67E5;&#x8BE2;onsale&#x5B57;&#x6BB5;&#x4E3A;1&#x7684;&#x8BB0;&#x5F55;</p>
+<hr>
+<pre data-role="codeBlock" data-info="xml" class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>oper</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>get<span class="token punctuation">&quot;</span></span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>first<span class="token punctuation">&quot;</span></span> <span class="token attr-name">label</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>&#x4EA7;&#x54C1;&#x8BE6;&#x60C5;<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+    data: {
+        id: id,
+        name: name, 
+        price: price
+    },
+    order: {price: desc}
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>oper</span><span class="token punctuation">&gt;</span></span> 
+</pre><p><strong>order:</strong> &#x6309;&#x6307;&#x5B9A;&#x5B57;&#x6BB5;&#x5BF9;&#x67E5;&#x8BE2;&#x7684;&#x8BB0;&#x5F55;&#x6392;&#x5E8F;&#xFF0C;order&#x7684;&#x5C5E;&#x6027;&#x4EE3;&#x8868;&#x6570;&#x636E;&#x8868;&#x5B57;&#x6BB5;&#x540D;&#xFF0C;&#x503C;&#x4EE3;&#x8868;&#x5347;&#x5E8F;&#x6216;&#x964D;&#x964D;&#x5E8F;(asc,desc)</p>
+<hr>
+<ul>
+<li>&#x5BF9;&#x8C61;&#x6210;&#x5458;&#x4E3A;&#x6570;&#x7EC4;</li>
+</ul>
+<pre data-role="codeBlock" data-info="xml" class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>oper</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>search<span class="token punctuation">&quot;</span></span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>search<span class="token punctuation">&quot;</span></span> <span class="token attr-name">label</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>&#x67E5;&#x8BE2;&#x8BA2;&#x5355;+&#x8BA2;&#x5355;&#x4E0B;&#x7684;&#x591A;&#x4E2A;&#x5546;&#x54C1;<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+    data: {
+        id: id,
+        order_no: order_no,
+        address_id: address_id,
+        items.purchased.order_id: {
+            product_name: product_name,
+            price: price
+        }
+    }
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>oper</span><span class="token punctuation">&gt;</span></span>
+</pre><p><strong>items.purchased.order_id</strong>&#x4EE3;&#x8868;&#x8BA2;&#x5355;&#x4E0B;&#x6709;&#x591A;&#x4E2A;&#x5546;&#x54C1;&#xFF0C;&#x4F7F;&#x7528;<strong>items</strong>.&#x524D;&#x7F00;&#x544A;&#x8BC9;&#x751F;&#x6210;&#x5668;&#xFF0C;&#x8FD9;&#x91CC;&#x5E94;&#x8BE5;&#x751F;&#x6210;&#x4E00;&#x4E2A;&#x6570;&#x7EC4;<br>
+&#x8FD4;&#x56DE;&#x6570;&#x636E;&#x683C;&#x5F0F;&#xFF1A;</p>
+<pre data-role="codeBlock" data-info="json" class="language-json"><span class="token punctuation">[</span>
+    <span class="token punctuation">{</span>
+        <span class="token property">&quot;id&quot;</span><span class="token operator">:</span> <span class="token string">&quot;id&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;order_no&quot;</span><span class="token operator">:</span> <span class="token string">&quot;order_no&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;address_id&quot;</span><span class="token operator">:</span> <span class="token string">&quot;address_id&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;purchased&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+            <span class="token punctuation">{</span>
+                <span class="token property">&quot;product_name&quot;</span><span class="token operator">:</span> <span class="token string">&quot;product_name&quot;</span><span class="token punctuation">,</span>
+                <span class="token property">&quot;price&quot;</span><span class="token operator">:</span> <span class="token string">&quot;price&quot;</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">{</span>
+                <span class="token property">&quot;product_name&quot;</span><span class="token operator">:</span> <span class="token string">&quot;product_name&quot;</span><span class="token punctuation">,</span>
+                <span class="token property">&quot;price&quot;</span><span class="token operator">:</span> <span class="token string">&quot;price&quot;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">]</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span>
+        <span class="token property">&quot;id&quot;</span><span class="token operator">:</span> <span class="token string">&quot;id&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;order_no&quot;</span><span class="token operator">:</span> <span class="token string">&quot;order_no&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;address_id&quot;</span><span class="token operator">:</span> <span class="token string">&quot;address_id&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;purchased&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+            <span class="token punctuation">{</span>
+                <span class="token property">&quot;product_name&quot;</span><span class="token operator">:</span> <span class="token string">&quot;product_name&quot;</span><span class="token punctuation">,</span>
+                <span class="token property">&quot;price&quot;</span><span class="token operator">:</span> <span class="token string">&quot;price&quot;</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">{</span>
+                <span class="token property">&quot;product_name&quot;</span><span class="token operator">:</span> <span class="token string">&quot;product_name&quot;</span><span class="token punctuation">,</span>
+                <span class="token property">&quot;price&quot;</span><span class="token operator">:</span> <span class="token string">&quot;price&quot;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">]</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">]</span>
+</pre><p><strong>&#x5982;&#x679C;&#x4E0D;&#x4F7F;&#x7528;items&#x8FD4;&#x56DE;&#x7684;&#x6570;&#x636E;&#x7ED3;&#x6784;&#xFF1A;</strong></p>
+<pre data-role="codeBlock" data-info="json" class="language-json"><span class="token punctuation">[</span>
+    <span class="token punctuation">{</span>
+        <span class="token property">&quot;id&quot;</span><span class="token operator">:</span> <span class="token string">&quot;id&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;order_no&quot;</span><span class="token operator">:</span> <span class="token string">&quot;order_no&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;address_id&quot;</span><span class="token operator">:</span> <span class="token string">&quot;address_id&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;product_name&quot;</span><span class="token operator">:</span> <span class="token string">&quot;product_name&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;price&quot;</span><span class="token operator">:</span> <span class="token string">&quot;price&quot;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span>
+        <span class="token property">&quot;id&quot;</span><span class="token operator">:</span> <span class="token string">&quot;id&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;order_no&quot;</span><span class="token operator">:</span> <span class="token string">&quot;order_no&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;address_id&quot;</span><span class="token operator">:</span> <span class="token string">&quot;address_id&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;product_name&quot;</span><span class="token operator">:</span> <span class="token string">&quot;product_name&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;price&quot;</span><span class="token operator">:</span> <span class="token string">&quot;price&quot;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span>
+        <span class="token property">&quot;id&quot;</span><span class="token operator">:</span> <span class="token string">&quot;id&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;order_no&quot;</span><span class="token operator">:</span> <span class="token string">&quot;order_no&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;address_id&quot;</span><span class="token operator">:</span> <span class="token string">&quot;address_id&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;product_name&quot;</span><span class="token operator">:</span> <span class="token string">&quot;product_name&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;price&quot;</span><span class="token operator">:</span> <span class="token string">&quot;price&quot;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span>
+        <span class="token property">&quot;id&quot;</span><span class="token operator">:</span> <span class="token string">&quot;id&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;order_no&quot;</span><span class="token operator">:</span> <span class="token string">&quot;order_no&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;address_id&quot;</span><span class="token operator">:</span> <span class="token string">&quot;address_id&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;product_name&quot;</span><span class="token operator">:</span> <span class="token string">&quot;product_name&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;price&quot;</span><span class="token operator">:</span> <span class="token string">&quot;price&quot;</span>
+    <span class="token punctuation">}</span>    
+<span class="token punctuation">]</span>
+</pre><hr>
+<p><strong>&#x4E8C;&#x3001;insert:</strong> &#x63D2;&#x5165;&#x4E00;&#x6761;&#x6570;&#x636E;</p>
+<pre data-role="codeBlock" data-info="xml" class="language-xml"> <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>oper</span> <span class="token attr-name">page</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>&#x5E97;&#x94FA;&#x6807;&#x7B7E;&#x7BA1;&#x7406;<span class="token punctuation">&quot;</span></span> <span class="token attr-name">role</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>shop<span class="token punctuation">&quot;</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>create<span class="token punctuation">&quot;</span></span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>insert<span class="token punctuation">&quot;</span></span> <span class="token attr-name">label</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>&#x65B0;&#x589E;&#x6807;&#x7B7E;<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+	data:{
+		parent_id: parent_id,
+		name: name,
+        onsale: onsale
+	}
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>oper</span><span class="token punctuation">&gt;</span></span> 
+</pre><p>data&#xFF1A;&#x4EE3;&#x8868;&#x8981;&#x63D2;&#x5165;&#x7684;&#x6570;&#x636E;&#xFF0C;&#x5C5E;&#x6027;&#x4E3A;&#x6570;&#x636E;&#x8868;&#x5B57;&#x6BB5;&#x540D;&#xFF0C;&#x503C;&#x4E3A;&#x524D;&#x7AEF;&#x4F20;&#x8F93;&#x7684;&#x5B57;&#x6BB5;&#x540D;</p>
+<hr>
+<p><strong>&#x4E09;&#x3001;union_insert:</strong> &#x8054;&#x5408;&#x63D2;&#x5165;&#xFF0C;&#x540C;&#x65F6;&#x5411;&#x591A;&#x4E2A;&#x8868;&#x63D2;&#x5165;&#x6570;&#x636E;&#xFF0C;&#x5E76;&#x4E14;&#x4F7F;&#x7528;&#x63D2;&#x5165;&#x8FD4;&#x56DE;&#x7684;&#x81EA;&#x589E;id&#x63D2;&#x5165;&#x53E6;&#x4E00;&#x5F20;&#x8868;&#xFF08;&#x4F7F;&#x7528;&#x573A;&#x666F;&#xFF1A;&#x521B;&#x5EFA;&#x4E00;&#x6761;&#x5546;&#x54C1;&#x7684;&#x540C;&#x65F6;&#x5411;&#x5546;&#x54C1;-&#x6807;&#x7B7E;&#x5173;&#x8054;&#x8868;&#x63D2;&#x5165;&#x4E00;&#x6761;&#x8BB0;&#x5F55;&#xFF1B;&#x521B;&#x5EFA;&#x5546;&#x54C1;&#x7684;&#x540C;&#x65F6;&#x521B;&#x5EFA;&#x9ED8;&#x8BA4;&#x9879;&#x76EE;&#xFF0C;&#x4EFB;&#x52A1;&#xFF0C;&#x6D3B;&#x52A8;&#xFF09;<br>
+<strong>&#x793A;&#x4F8B;1&#xFF1A;</strong></p>
+<pre data-role="codeBlock" data-info="xml" class="language-xml"> <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>oper</span> <span class="token attr-name">page</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>&#x5546;&#x54C1;&#x7BA1;&#x7406;<span class="token punctuation">&quot;</span></span> <span class="token attr-name">role</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>shop<span class="token punctuation">&quot;</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>create_product<span class="token punctuation">&quot;</span></span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>union_insert<span class="token punctuation">&quot;</span></span> <span class="token attr-name">label</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>&#x589E;&#x52A0;&#x5546;&#x54C1;<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+	data:{
+            products.product_id: {
+                name: name,
+                desc: desc,
+                image: image,
+                price: price,
+                is_project: CONSTANT.1
+            },
+            product_labels.product_label_id: {
+                product_id: [product_id],
+                label_id: label_id
+            }
+	}
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>oper</span><span class="token punctuation">&gt;</span></span> 
+</pre><p>&#x793A;&#x4F8B;&#x914D;&#x7F6E;&#x5411;products&#x8868;&#x548C;product_labels&#x8868;&#x5404;&#x63D2;&#x5165;&#x4E86;&#x4E00;&#x6761;&#x6570;&#x636E;<br>
+<strong>&#x793A;&#x4F8B;2&#xFF1A;</strong></p>
+<pre data-role="codeBlock" data-info="xml" class="language-xml"> <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>oper</span> <span class="token attr-name">page</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>&#x5546;&#x54C1;&#x7BA1;&#x7406;<span class="token punctuation">&quot;</span></span> <span class="token attr-name">role</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>shop<span class="token punctuation">&quot;</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>create<span class="token punctuation">&quot;</span></span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>union_insert<span class="token punctuation">&quot;</span></span> <span class="token attr-name">label</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>&#x589E;&#x52A0;&#x4EA7;&#x54C1;&#x81EA;&#x52A8;&#x5173;&#x8054;&#x9879;&#x76EE;&#xFF0C;&#x4EFB;&#x52A1;&#xFF0C;&#x6807;&#x7B7E;<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+    data: {
+        projects.project_id: {
+            name: name,
+            shop_id: token.shop_id,
+            desc: desc
+        },
+        products.product_id: {
+            name: name,
+            desc: desc,
+            image: image,
+            price: price,
+            project_id: [project_id],
+            period: period,
+            teacher: teacher,
+            is_project: CONSTANT.0
+        },
+        product_labels.product_labels_id: {
+            product_id: [product_id],
+            label_id: label_id
+        },
+        tasks.task_id: {
+            name: name,
+            shop_id: token.shop_id,
+            desc: desc
+        },
+        project_tasks.project_task_id: {
+            project_id: [project_id],
+            task_id: [task_id]
+        },
+        task_activities.task_activities_id: {
+            task_id: [task_id],
+            activity_id: activity_id
+        }
+    }
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>oper</span><span class="token punctuation">&gt;</span></span> 
+</pre><p>&#x914D;&#x7F6E;&#x65B9;&#x6CD5;&#xFF1A;</p>
+<pre data-role="codeBlock" data-info="xml" class="language-xml">	&#x8868;&#x540D;1.&#x8868;&#x540D;1_id&#xFF1A;{
+		&#x6570;&#x636E;&#x5E93;&#x5B57;&#x6BB5;1&#xFF1A;&#x524D;&#x7AEF;&#x4F20;&#x4F20;&#x5165;&#x5B57;&#x6BB5;1&#xFF0C;
+		&#x6570;&#x636E;&#x5E93;&#x5B57;&#x6BB5;2&#xFF1A;&#x524D;&#x7AEF;&#x4F20;&#x4F20;&#x5165;&#x5B57;&#x6BB5;2&#xFF0C;
+		&#x6570;&#x636E;&#x5E93;&#x5B57;&#x6BB5;3&#xFF1A;&#x524D;&#x7AEF;&#x4F20;&#x4F20;&#x5165;&#x5B57;&#x6BB5;3
+	}&#xFF0C;
+	&#x8868;&#x540D;2.&#x8868;&#x540D;2_id&#xFF1A;{
+		&#x6570;&#x636E;&#x5E93;&#x5B57;&#x6BB5;1&#xFF1A;&#x524D;&#x7AEF;&#x4F20;&#x4F20;&#x5165;&#x5B57;&#x6BB5;1&#xFF0C;
+		&#x6570;&#x636E;&#x5E93;&#x5B57;&#x6BB5;2&#xFF1A;CONSTANT.0&#xFF0C;
+		&#x6570;&#x636E;&#x5E93;&#x5B57;&#x6BB5;3&#xFF1A;[&#x8868;&#x540D;1_id]
+	}&#xFF0C;
+	&#x8868;&#x540D;3.&#x8868;&#x540D;3_id&#xFF1A;{
+		&#x6570;&#x636E;&#x5E93;&#x5B57;&#x6BB5;1&#xFF1A;&#x524D;&#x7AEF;&#x4F20;&#x4F20;&#x5165;&#x5B57;&#x6BB5;1&#xFF0C;
+		&#x6570;&#x636E;&#x5E93;&#x5B57;&#x6BB5;2&#xFF1A;&#x524D;&#x7AEF;&#x4F20;&#x4F20;&#x5165;&#x5B57;&#x6BB5;2&#xFF0C;
+		&#x6570;&#x636E;&#x5E93;&#x5B57;&#x6BB5;3&#xFF1A;[&#x8868;&#x540D;2_id]
+	}&#xFF0C;
+</pre><p>&#x8868;&#x540D;_id &#x4EE3;&#x8868;&#x63D2;&#x5165;&#x4E00;&#x6761;&#x8BB0;&#x5F55;&#x540C;&#x6B65;&#x83B7;&#x53D6;&#x81EA;&#x589E;&#x4E3B;&#x952E;&#xFF0C;&#x53EF;&#x4EE5;&#x63D2;&#x5165;&#x5230;&#x5176;&#x4ED6;&#x8868;&#x4E2D;&#xFF0C;&#x4F7F;&#x7528;[&#x8868;&#x540D;_id]&#x83B7;&#x53D6;<br>
+CONSTANT.value&#x4EE3;&#x8868;&#x8BE5;&#x5B57;&#x6BB5;&#x9ED8;&#x8BA4;&#x63D2;&#x5165;value&#x65E0;&#x9700;&#x524D;&#x7AEF;&#x4F20;&#x503C;</p>
+<hr>
+<p><strong>&#x56DB;&#x3001;update:</strong> &#x66F4;&#x65B0;&#x6570;&#x636E;</p>
+<pre data-role="codeBlock" data-info="xml" class="language-xml"> <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>oper</span> <span class="token attr-name">page</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>&#x5546;&#x54C1;&#x7BA1;&#x7406;<span class="token punctuation">&quot;</span></span> <span class="token attr-name">role</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>shop<span class="token punctuation">&quot;</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>edit<span class="token punctuation">&quot;</span></span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>update<span class="token punctuation">&quot;</span></span> <span class="token attr-name">label</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>&#x66F4;&#x65B0;&#x5546;&#x54C1;<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+    data:{
+    	name: name,
+        desc: desc,
+        image: image,
+        price: price,
+    	project_id: project_id,
+        period: period
+    },
+    with:{
+    	id: id
+    }
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>oper</span><span class="token punctuation">&gt;</span></span> 
+</pre><p>data&#xFF1A;&#x914D;&#x7F6E;&#x8981;&#x66F4;&#x65B0;&#x7684;&#x5B57;&#x6BB5;&#xFF0C;&#x5C5E;&#x6027;&#x540D;&#x5BF9;&#x5E94;&#x6570;&#x636E;&#x8868;&#x5B57;&#x6BB5;&#x540D;&#xFF0C;&#x5C5E;&#x6027;&#x503C;&#x5BF9;&#x5E94;&#x524D;&#x7AEF;&#x4F20;&#x503C;<br>
+with&#xFF1A;&#x66F4;&#x65B0;&#x6761;&#x4EF6;,&#x5C5E;&#x6027;&#x540D;&#x5BF9;&#x5E94;&#x6570;&#x636E;&#x8868;&#x5B57;&#x6BB5;&#x540D;&#xFF0C;&#x5C5E;&#x6027;&#x503C;&#x5BF9;&#x5E94;&#x524D;&#x7AEF;&#x4F20;&#x503C;</p>
+<hr>
+<p><strong>&#x4E94;&#x3001;register:</strong> &#x6CE8;&#x518C;&#x65B0;&#x7528;&#x6237;</p>
+<pre data-role="codeBlock" data-info="xml" class="language-xml"> <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>oper</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>register<span class="token punctuation">&quot;</span></span> <span class="token attr-name">page</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>&#x7528;&#x6237;&#x7BA1;&#x7406;<span class="token punctuation">&quot;</span></span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>register<span class="token punctuation">&quot;</span></span> <span class="token attr-name">label</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>&#x65B0;&#x7528;&#x6237;&#x6CE8;&#x518C;<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+    data: {
+        phone: phone,
+        password: password,
+        idcard: idcard,
+        email: email,
+        company: company,
+        shop_id: shop_id
+    }
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>oper</span><span class="token punctuation">&gt;</span></span> 
+</pre><p>data&#xFF1A;&#x914D;&#x7F6E;&#x6CE8;&#x518C;&#x65B0;&#x7528;&#x6237;&#x8981;&#x8BB0;&#x5F55;&#x7684;&#x4FE1;&#x606F;&#xFF0C;&#x53EA;&#x8981;&#x5B57;&#x6BB5;&#x540D;&#x4E3A;password&#x5219;&#x4F7F;&#x7528;md5&#x52A0;&#x5BC6;</p>
+<hr>
+<p><strong>&#x516D;&#x3001;login:</strong> &#x767B;&#x9646;</p>
+<pre data-role="codeBlock" data-info="xml" class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>oper</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>login<span class="token punctuation">&quot;</span></span> <span class="token attr-name">page</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>&#x7528;&#x6237;&#x7BA1;&#x7406;<span class="token punctuation">&quot;</span></span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>login<span class="token punctuation">&quot;</span></span> <span class="token attr-name">label</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>&#x7528;&#x6237;&#x767B;&#x5F55;<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+	data: {id: id},
+	with: {phone: phone, password: password, shop_id: shop_id}
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>oper</span><span class="token punctuation">&gt;</span></span>
+</pre><p>data&#xFF1A;&#x914D;&#x7F6E;&#x8FD4;&#x56DE;&#x7684;token&#x643A;&#x5E26;&#x7684;&#x4FE1;&#x606F;<br>
+with&#xFF1A;&#x914D;&#x7F6E;&#x767B;&#x9646;&#x7684;&#x9A8C;&#x8BC1;&#x6761;&#x4EF6;&#xFF0C;&#x53EA;&#x8981;&#x5B57;&#x6BB5;&#x540D;&#x4E3A;password&#x5219;&#x4F7F;&#x7528;md5&#x52A0;&#x5BC6;&#x4E4B;&#x540E;&#x518D;&#x8DDF;&#x6570;&#x636E;&#x5E93;&#x6BD4;&#x5BF9;</p>
+<hr>
+<p><strong>&#x4E03;&#x3001;setpwd:</strong> &#x5BC6;&#x7801;&#x91CD;&#x7F6E;</p>
+<pre data-role="codeBlock" data-info="xml" class="language-xml"> <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>oper</span> <span class="token attr-name">role</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>client<span class="token punctuation">&quot;</span></span> <span class="token attr-name">page</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>&#x7528;&#x6237;&#x7BA1;&#x7406;<span class="token punctuation">&quot;</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>setpswd<span class="token punctuation">&quot;</span></span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>setpwd<span class="token punctuation">&quot;</span></span> <span class="token attr-name">label</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>&#x5BC6;&#x7801;&#x91CD;&#x7F6E;<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+    data: {password: password},
+    with: {id: token.id, password: opassword}
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>oper</span><span class="token punctuation">&gt;</span></span>  
+</pre><p>data&#xFF1A;&#x5C5E;&#x6027;&#x4E3A;&#x5BF9;&#x5E94;&#x6570;&#x636E;&#x8868;&#x5B57;&#x6BB5;&#x540D;&#xFF0C;&#x503C;&#x4E3A;&#x524D;&#x7AEF;&#x4F20;&#x7684;&#x53C2;&#x6570;&#xFF0C;&#x81EA;&#x52A8;&#x52A0;&#x5BC6;password<br>
+with&#xFF1A;&#x4FEE;&#x6539;&#x5BC6;&#x7801;&#x9A8C;&#x8BC1;&#x6761;&#x4EF6;token.id&#x4EE3;&#x8868;&#x89E3;&#x5BC6;token&#x4E4B;&#x540E;&#x7684;id&#x5C5E;&#x6027;&#x503C;</p>
+<hr>
+<p><strong>&#x516B;&#x3001;delete:</strong> &#x5220;&#x9664;&#x4E00;&#x6761;&#x8BB0;&#x5F55;</p>
+<pre data-role="codeBlock" data-info="xml" class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>oper</span> <span class="token attr-name">role</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>admin<span class="token punctuation">&quot;</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>delete<span class="token punctuation">&quot;</span></span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>delete<span class="token punctuation">&quot;</span></span> <span class="token attr-name">label</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>&#x5220;&#x9664;&#x6807;&#x7B7E;<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+	with:{id: id}
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>oper</span><span class="token punctuation">&gt;</span></span> 
+</pre><p>with: &#x914D;&#x7F6E;&#x5220;&#x9664;&#x6761;&#x4EF6;</p>
+<hr>
+<p><strong>&#x4E5D;&#xFF1A;first:</strong> &#x67E5;&#x8BE2;&#x4E00;&#x6761;&#x8BB0;&#x5F55;<br>
+&#x914D;&#x7F6E;&#x65B9;&#x6CD5;&#x4E0E;search&#x6A21;&#x677F;&#x4E00;&#x6837;&#xFF0C;&#x4E0E;search&#x6A21;&#x677F;&#x7684;&#x533A;&#x522B;&#x5728;&#x4E8E;&#x53EA;&#x67E5;&#x4E00;&#x6761;&#x8BB0;&#x5F55;&#xFF0C;&#x8FD4;&#x56DE;&#x7684;&#x662F;&#x4E00;&#x4E2A;&#x5BF9;&#x8C61;&#xFF0C;&#x4E0D;&#x662F;&#x6570;&#x7EC4;&#xFF0C;&#x5E38;&#x7528;&#x4E8E;&#x83B7;&#x53D6;&#x7528;&#x6237;&#x4FE1;&#x606F;&#xFF0C;&#x83B7;&#x53D6;&#x5546;&#x54C1;&#x8BE6;&#x60C5;&#x7B49;</p>
+<pre data-role="codeBlock" data-info="xml" class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>oper</span> <span class="token attr-name">role</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>client<span class="token punctuation">&quot;</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>profile<span class="token punctuation">&quot;</span></span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>first<span class="token punctuation">&quot;</span></span> <span class="token attr-name">label</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>&#x83B7;&#x53D6;&#x4E2A;&#x4EBA;&#x4FE1;&#x606F;<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+    data: {
+        id: id,
+        name: name, 
+        idcard: idcard, 
+        company: company, 
+        phone: phone, 
+        email: email, 
+        balance: balance,
+        isLookVideo : isLookVideo
+    },
+    with: {id: token.id}
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>oper</span><span class="token punctuation">&gt;</span></span>
+</pre><hr>
+<p><strong>&#x5341;&#x3001;all:</strong> &#x67E5;&#x8BE2;&#x5168;&#x90E8;&#x8BB0;&#x5F55;<br>
+&#x914D;&#x7F6E;&#x65B9;&#x6CD5;&#x4E0E;search&#x6A21;&#x677F;&#x4E00;&#x6837;&#xFF0C;&#x4E0E;search&#x6A21;&#x677F;&#x7684;&#x533A;&#x522B;&#x5728;&#x4E8E;&#x8BE5;&#x6A21;&#x677F;&#x4F1A;&#x67E5;&#x8BE2;&#x5168;&#x90E8;&#x8BB0;&#x5F55;&#xFF0C;&#x4E0D;&#x9700;&#x4F20;offset&#x548C;length&#xFF0C;&#x5E38;&#x7528;&#x4E8E;&#x83B7;&#x53D6;&#x6807;&#x7B7E;&#x7B49;</p>
+<pre data-role="codeBlock" data-info="xml" class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>oper</span> <span class="token attr-name">role</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>client<span class="token punctuation">&quot;</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>profile<span class="token punctuation">&quot;</span></span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>all<span class="token punctuation">&quot;</span></span> <span class="token attr-name">label</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>&#x83B7;&#x53D6;&#x6807;&#x7B7E;<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+    data: {
+        id: id,
+        name: name,
+        parent_id: parent_id
+    }
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>oper</span><span class="token punctuation">&gt;</span></span>
+</pre><hr>
+<p><strong>&#x5341;&#x4E00;&#x3001;export_excel:</strong> &#x5BFC;&#x51FA;excel&#x8868;&#x683C;</p>
+<pre data-role="codeBlock" data-info="xml" class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>oper</span> <span class="token attr-name">page</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>&#x8BA2;&#x5355;&#x7BA1;&#x7406;<span class="token punctuation">&quot;</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>export_excel<span class="token punctuation">&quot;</span></span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>export_excel<span class="token punctuation">&quot;</span></span> <span class="token attr-name">label</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>&#x5BFC;&#x51FA;&#x8BA2;&#x5355;excel<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+    data: {
+        state: &quot;&#x8BA2;&#x5355;&#x72B6;&#x6001;&quot;, 
+        total: &quot;&#x8BA2;&#x5355;&#x603B;&#x4EF7;&quot;, 
+        pay_type: &quot;&#x652F;&#x4ED8;&#x7C7B;&#x578B;&quot;
+    },
+    with: {total: total}
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>oper</span><span class="token punctuation">&gt;</span></span>
+</pre><p>&#x8C03;&#x7528;&#x6B64;&#x63A5;&#x53E3;&#x9700;&#x8981;&#x524D;&#x7AEF;&#x4F20;&#x4E00;&#x4E2A;&#x968F;&#x673A;&#x6587;&#x4EF6;&#x540D;file_name&#xFF0C;&#x63A5;&#x53E3;&#x8FD4;&#x56DE;&#x6210;&#x529F;&#x540E;excel&#x6587;&#x4EF6;&#x7684;&#x4E0B;&#x8F7D;&#x5730;&#x5740;&#x4E3A;&#xFF0C;<a href="http://xn--eqrt2g/excel/file_name">http://&#x57DF;&#x540D;/excel/file_name</a><br>
+<strong>data:</strong> &#x7684;&#x5C5E;&#x6027;&#x540D;&#x4E3A;&#x6570;&#x636E;&#x8868;&#x7684;&#x5B57;&#x6BB5;&#x540D;&#xFF0C;&#x503C;&#x4E3A;&#x5B57;&#x6BB5;&#x7684;&#x522B;&#x540D;&#xFF0C;&#x652F;&#x6301;&#x4E2D;&#x6587;<br>
+&#x5BFC;&#x51FA;&#x7684;&#x8868;&#x683C;&#x5982;&#x4E0B;&#xFF1A;</p>
+<table>
+<thead>
+<tr>
+<th>&#x8BA2;&#x5355;&#x72B6;&#x6001;</th>
+<th style="text-align:center">&#x8BA2;&#x5355;&#x603B;&#x4EF7;</th>
+<th style="text-align:right">&#x652F;&#x4ED8;&#x7C7B;&#x578B;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&#x5185;&#x5BB9;</td>
+<td style="text-align:center">&#x5185;&#x5BB9;</td>
+<td style="text-align:right">&#x5185;&#x5BB9;</td>
+</tr>
+<tr>
+<td>&#x5185;&#x5BB9;</td>
+<td style="text-align:center">&#x5185;&#x5BB9;</td>
+<td style="text-align:right">&#x5185;&#x5BB9;</td>
+</tr>
+</tbody>
+</table>
+<hr>
+
+      </div>
+      
+      
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    </body></html>

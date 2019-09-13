@@ -1,0 +1,21 @@
+    public function <%=oper.$.name%>(Request $request) {
+
+        $validator = Validator::make($request->all(), [
+            'product_id' => 'integer|min:0',
+            'task_id' => 'integer|min:0',
+            'sort' => 'integer|min:0',
+        ]);
+        if($validator->fails()) {
+            return $this->fails( $validator->errors()->all());
+        }
+        $product = DB::table('products')->select('project_id')->where('id', '=', $request->input('product_id'))->first();
+        if($product == null){
+            return $this->fails("不存在此产品");
+        }
+        DB::table('project_tasks')->insert([
+            'project_id' => $product->project_id,
+            'task_id' => $request->input('task_id'),
+            'sort' => $request->input('sort'),
+        ]);
+        return $this->success();
+    }

@@ -1,0 +1,32 @@
+<%_  
+var i = 0;
+var user = "";
+var dusr = "";
+for(var d in locals.data) {
+    if(i === 0) {
+        user = d;
+        dusr = locals.data[d];
+    }
+    i++;
+}
+_%>
+    public function <%=oper.$.name%>(Request $request) {
+    <%- include('validate', {val: {params: locals.data}}) %>
+        $opwd = $request->input('opassword');
+        $user = DB::table("<%=table.$.name%>")
+            ->where("id", $this->token->id)
+            ->where("<%=user%>", md5($opwd))->first();
+
+        if (!$user) {
+            return $this->fails('旧密码不正确');
+        }
+
+        DB::table("<%=table.$.name%>")->where("id", $this->token->id)->update([
+            '<%=user%>'=>md5($request->input('password')),
+            <%_ if (table.$.time === 'true') { _%>
+            'updated_at' => date('Y-m-d H:i:s')
+            <%_ } _%>
+        ]);
+
+        return $this->success();
+    }

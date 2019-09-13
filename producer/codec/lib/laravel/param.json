@@ -1,0 +1,4 @@
+{
+    "input": "$request->input('?')",
+    "token": "$this->token->?"
+}

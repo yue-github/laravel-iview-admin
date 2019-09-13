@@ -1,0 +1,47 @@
+    public function <%=oper.$.name%>(Request $request) {
+
+        $validator = Validator::make($request->all(), [
+            'offset' => 'required|integer|min:0',
+            'length' => 'required|integer|min:1',
+            'product_id' => 'required|integer|min:1'
+        ]);
+        if($validator->fails()) {
+            return $this->fails( $validator->errors()->all());
+        }
+        //该产品班级里已有的成员
+        $class_user_id_arr = DB::table('class_users')
+                ->leftJoin('class', 'class_users.class_id', '=', 'class.id')
+                ->where('class.product_id', $request->input('product_id'))
+                ->lists('class_users.user_id');
+
+        $result = DB::table('purchased')
+            ->select(['purchased.id as purchased_id',
+                      'purchased.product_id as product_id',
+                      'orders.owner_id as user_id',
+                      'users.id as user_id',
+                      'users.name as user_name',
+                      'users.company as user_company',
+                      'users.phone as user_phone',
+                      'users.email as user_email'])
+            ->leftJoin('orders', 'orders.id', '=', 'purchased.order_id')
+            ->leftJoin('users', 'users.id', '=', 'orders.owner_id')
+            ->where('purchased.product_id', $request->input('product_id'))
+            ->where('orders.state', '=', 2)
+            ->whereNotIn('orders.owner_id',$class_user_id_arr);
+        
+        if ($request->has('user_name'))
+        $result = $result->where('users.name', 'like', '%' . $request->input('user_name') . '%');
+        if ($request->has('user_phone'))
+        $result = $result->where('users.phone', 'like', '%' . $request->input('user_phone') . '%');
+        
+        $count = $result->count();
+        $result = $result
+            ->offset($request->input('offset'))
+            ->limit($request->input('length'))
+            ->get();
+        $result = [
+            'data' => $result,
+            'total' => $count
+        ];
+        return $this->success($result);
+    }

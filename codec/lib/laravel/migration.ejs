@@ -1,0 +1,69 @@
+<?php
+
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Support\Facades\Log;
+
+class Create<%=cap(name)%> extends Migration {
+    public function up() {
+        if (Schema::hasTable('<%=name%>')){
+            Schema::table('<%=name%>', function (Blueprint $table) {
+                $oldColumn = Schema::getColumnListing('<%=name%>');
+                $newColumn = [
+                    'id',
+                    <%_ cols.forEach(function(c) { _%>
+                    '<%=c.name%>',
+                    <%_ }); _%>
+                    <%_ if (time) { _%>
+                    'created_at',
+                    'updated_at'
+                    <%_ } _%>
+                ];
+                $dropColumn = array_diff($oldColumn, $newColumn);
+                foreach ($dropColumn as $column) {
+                    $table->dropColumn($column);
+                }
+                <%_ cols.forEach(function(c) { _%>
+                <%_ if (c.type == null) c.type = c.name; _%>
+                <%_ if (types.hasOwnProperty(c.type)) { _%>
+                <%_ if (c.name != 'id') { _%>
+                if (!Schema::hasColumn('<%=name%>', '<%=c.name%>')){
+                    $table-><%=types[c.type][0]%>('<%=c.name%>'<% if (types[c.type][1] !== null) { %>, <%-types[c.type][1]%><% } %><% if (types[c.type][2] !== null) { %>, <%=types[c.type][2]%><% } %>)<% if (c.default != null) { %>->default('<%=c.default%>')<% } %><% if (c.required == null || c.required === 'false') { %>->nullable()<% } %>;
+                } else {
+                    try {
+                        // $table-><%=types[c.type][0]%>('<%=c.name%>'<% if (types[c.type][1] !== null) { %>, <%-types[c.type][1]%><% } %><% if (types[c.type][2] !== null) { %>, <%=types[c.type][2]%><% } %>)<% if (c.default != null) { %>->default('<%=c.default%>')<% } %><% if (c.required == null || c.required === 'false') { %>->nullable()<% } %>->change();
+                    } catch (\Exception $e) {
+                        Log::info('更新字段出错,table: <%=name%>, column: <%=c.name%>, type: <%=types[c.type][0]%>');
+                    }
+                }
+                <%_ } _%>
+                <%_ } _%> 
+                _%>
+                <%_ }); _%>
+                <%_ if (time) { _%>
+                if (!Schema::hasColumn('<%=name%>', 'created_at'))
+                    $table->timestamps();
+                <%_ } _%>
+                });
+            } else {
+                Schema::create('<%=name%>', function (Blueprint $table) {
+                    $table->bigIncrements('id');
+                    <%_ cols.forEach(function(c) { _%>
+                    <%_ if (c.type == null) c.type = c.name; _%>
+                    <%_ if (types.hasOwnProperty(c.type)) { _%>
+                    <%_ if (c.name != 'id') { _%>
+                    $table-><%=types[c.type][0]%>('<%=c.name%>'<% if (types[c.type][1] !== null) { %>, <%-types[c.type][1]%><% } %><% if (types[c.type][2] !== null) { %>, <%=types[c.type][2]%><% } %>)<% if (c.default != null) { %>->default('<%=c.default%>')<% } %><% if (c.required == null || c.required === 'false') { %>->nullable()<% } %>;
+                    <%_ } _%>
+                    <%_ } _%>
+                    <%_ }); _%>
+                    <%_ if (time) { _%>
+                    $table->timestamps();
+                    <%_ } _%>
+                });
+            }
+        }
+    public function down() {
+        Schema::dropIfExists('<%=name%>');
+    }
+}

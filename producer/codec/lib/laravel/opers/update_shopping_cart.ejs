@@ -1,0 +1,46 @@
+    //修改购物车
+    public function <%=oper.$.name%>(Request $request)
+    {
+        <%- include('validate', {val: {params: locals.data}}) %>
+
+        $result = DB::table('<%=table.$.name%>')
+            ->select([
+                '<%=table.$.name%>.id as id',
+            <%_ for (var i in locals.data) { _%>
+                <%_ if (typeof(locals.data[i]) === 'object') { _%>
+                <%_joinField(i, locals.data[i], locals.table.$.name)_%>
+                <%_ } else { _%>
+                '<%=locals.table.$.name%>.<%=i%> as <%=locals.data[i]%>',
+                <%_ } _%>    
+            <%_ } _%>
+            ])
+            <%_ for (var i in locals.with) { _%>
+            ->where('<%=i%>', <%-tcvt(locals.with[i])%>)
+            <%_ } _%>
+            ->first();
+
+        if ($result) {
+            $num = $result->num + $request->input('num');
+            if ($num > 0) {
+                DB::table('<%=table.$.name%>')
+                    ->where('id', $result->id)
+                    ->update(['num'=> $num]);
+                return $this->success();
+            } else {
+                DB::table('<%=table.$.name%>')
+                    ->where('id', $result->id)
+                    ->delete();
+                return $this->success();
+            }
+        }
+
+        $data = [
+            <%_ for (var i in locals.data) { _%>
+                '<%=i%>'=> <%-tcvt(locals.data[i])%>,
+            <%_ } _%>
+        ];
+        $result = DB::table('<%=table.$.name%>')->insert($data);
+        if ($result) {
+            return $this->success();
+        }
+    }

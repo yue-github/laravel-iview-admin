@@ -1,0 +1,28 @@
+    public function <%=oper.$.name%>(Request $request) {
+        $dataArr = json_decode($request->input('data_arr'));
+        $insertData = array();
+
+        foreach ($dataArr as $item) {
+            $data = array();
+            <%_ if (typeof(locals.data) === 'object') { _%>
+            <%_ for (var i in locals.data) { _%>
+            if (property_exists($item, '<%=i%>'))
+            <%_ if (locals.data[i].split('.')[0] == "CONSTANT") { 
+                    var constant_value = locals.data[i].split('.')[1]
+                _%>
+            $data['<%=i%>'] = '<%=constant_value%>';
+            <%_ } else {_%>
+            $data['<%=i%>'] = $item-><%=i%>;
+            <%_ } _%>
+            <%_ } _%>
+            <%_ } _%>
+            <%_ if (table.$.time === 'true') { _%>
+            $data['created_at'] = date('Y-m-d H:i:s');
+            $data['updated_at'] = date('Y-m-d H:i:s');
+            <%_ } _%>
+            array_push($insertData, $data);
+        }
+
+        DB::table('<%=table.$.name%>')->insert($insertData);
+        return $this->success();
+    }

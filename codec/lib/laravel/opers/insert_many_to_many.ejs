@@ -1,0 +1,34 @@
+    public function <%=oper.$.name%>(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            <%_ for (var i in locals.data) { _%>
+            '<%=locals.data[i]%>' => 'required',
+            <%_ } _%>
+        ]);
+        if ($validator->fails()) {
+            return $this->fails($validator->errors()->all());
+        }
+
+        <%_ for (var i in locals.data) { _%>
+        $<%=locals.data[i]%> = $request->input('<%=locals.data[i]%>');
+        $<%=locals.data[i]%>_json = json_decode($<%=locals.data[i]%>);
+        <%_ } _%>
+        $datas = array();
+        <%_ for (var i in locals.data) { _%>
+        foreach ($<%=locals.data[i]%>_json as $<%=i%>) {
+        <%_ } _%>
+                $data = [
+        <%_ for (var i in locals.data) { _%>
+                    '<%=i%>' => $<%=i%>,
+        <%_ } _%>
+                ];
+                array_push($datas, $data);
+            }
+        }
+        $result = DB::table('<%=table.$.name%>')->insert($datas);
+        if (!$result) {
+            DB::rollBack();
+            return $this->fails();
+        }
+        return $this->success();
+    }

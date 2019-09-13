@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>数据字典参考文档</title>
+    <style>
+        body {padding: 0; margin: 0; font-family: "Microsoft Yahei"}
+    </style>
+  </head>
+  <body>
+    <div style="width: 1200px; margin: 0 auto">
+        <h1>数据字典参考文档</h1>
+        <%_ for (var i = 0; i < locals.model.entity.length; i++) { _%>
+        <h3 style="text-decoration: underline"><small>数据表：</small> <%=locals.model.entity[i].$.name%></h3>
+        <%_ for (var j = 0; j < locals.model.entity[i].attr.length; j++) { _%>
+        <div style="margin-left: 20px;">
+            <%=j+1%> <strong><%=locals.model.entity[i].attr[j].$.name%></strong> <%=locals.model.entity[i].attr[j].$.label%>
+        </div>
+        <%_ } _%>
+        <%_ } _%>
+    </div>
+  </body>
+</html>

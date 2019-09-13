@@ -1,0 +1,135 @@
+<%#
+生成输入数据的验证
+locals.val.hasId: 是否自动添加id的验证
+locals.val.hasOL: 是否自动添加offset和length验证
+locals.val.hasItems: 是否自动添加items字段的验证，items必须为数组
+locals.val.mode: "required" 全部必填模式
+                 "optional" 全部选填模式
+                 默认从attr的required属性决定是否必填
+locals.val.params: 需要验证的参数数组或对象
+                   支持的参数格式如下：
+                   数组方式1：[attr1, attr2, ...]
+                   数组方式2: [[attr1, op], attr2, ...]
+                   对象方式1：{attr1: param1, attr2: param2, ...}
+                   对象方式2: {attr1: [op, param1], attr2: param2, ...}
+locals.table: 当前entity对象
+locals.types: 类型表
+%>
+<%_
+function checkRequired(c) {
+    if (locals.val.mode === 'required')
+        return true;
+    if (locals.val.mode === 'optional')
+        return false;
+    if (!c) return true;
+    return c.required === 'true';
+}
+if (locals.val) {
+_%>
+        $validator = Validator::make($request->all(), [
+<%_
+
+    if (locals.val.hasItems === true) {
+_%>
+            'items' => 'required|array',
+<%_
+    }
+    if (locals.val.hasOL === true) {
+_%>
+            'offset' => 'required|integer|min:0',
+            'length' => 'required|integer|min:1',
+<%_
+    }
+    if (Array.isArray(locals.val.params)) {
+        for (var i = 0; i < locals.val.params.length; i++) {
+            var pn = locals.val.params[i];
+            if (Array.isArray(pn)) pn = pn[0];
+            // 参数不是来自token而是来自参数
+            if (pn !== 'id') {
+                // entity的id是自动添加的，所以不能在这里处理
+                var id = attrId(locals.table, pn);
+                var c = locals.table.attr[id].$ || {};
+                var ct = c.type;
+                if (!ct) ct = c.name;
+                if (locals.types.hasOwnProperty(ct)) {
+                    // 查找类型表的类型定义
+                    var req = checkRequired(c);
+_%>
+        '<%=pn%>' => '<%-req ? 'required|':''%><%=locals.types[ct][4]%>',
+<%_
+                }
+            } else if (!locals.val.hasId) {
+                // 处理id
+                var ct = "key";
+                if (locals.types.hasOwnProperty(ct)) {
+                    var req = checkRequired();
+_%>
+            '<%=pn%>' => '<%-req ? 'required|':''%><%=locals.types[ct][4]%>',
+<%_
+                }
+            }
+        }
+    } else if (typeof(locals.val.params) === 'object') {
+        for (var i in locals.val.params) {
+            if((locals.val.params[i] === "GEN_DATE") || (typeof(locals.val.params[i]) !== "object" && locals.val.params[i].split('.').length > 1)) {
+                continue;
+            }
+            if(i.split('.').length > 1 && i.split('.')[0] === "items") { _%>
+            '<%=i.split('.')[1]%>' => 'required',
+            <%_ continue;
+            }
+
+            if(i.split('.').length > 1) {
+                continue;
+            }
+
+            if (i !== 'id') {
+                var id = attrId(locals.table, i);
+                var c = locals.table.attr[id].$ || {};
+                var ct = c.type;
+                if (!ct) ct = c.name;
+                if (locals.types.hasOwnProperty(ct)) {
+                    var req = checkRequired(c);
+                    if (Array.isArray(locals.val.params[i])) {
+                        if (!isTk(locals.val.params[i][1])) {
+_%>
+            '<%=locals.val.params[i][1]%>' => '<%-req ? 'required|':''%><%=locals.types[ct][4]%>',
+<%_
+                        }
+                    } else {
+                        if (!isTk(locals.val.params[i])) {
+_%>
+            '<%=locals.val.params[i]%>' => '<%-req ? 'required|':''%><%=locals.types[ct][4]%>',
+<%_
+                        }
+                    }
+                }
+            } else if (i === 'id') {
+                var ct = "key";
+                if (locals.types.hasOwnProperty(ct)) {
+                    var req = checkRequired();
+                    if (Array.isArray(locals.val.params[i])) {
+                        if (!isTk(locals.val.params[i][1])) {
+_%>
+            '<%=locals.val.params[i][1]%>' => '<%-req ? 'required|':''%><%=locals.types[ct][4]%>',
+<%_
+                        }
+                    } else {
+                        if (!isTk(locals.val.params[i])) {
+_%>
+            '<%=locals.val.params[i]%>' => '<%-req ? 'required|':''%><%=locals.types[ct][4]%>',
+<%_
+                        }
+                    }
+                }
+            }
+        }
+    }
+_%>
+        ]);
+        if($validator->fails()) {
+            return $this->fails($validator->errors()->all());
+        }
+<%_
+}
+_%>

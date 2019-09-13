@@ -1,0 +1,74 @@
+    //直接开课，传user_id_arr  product_ids
+    public function <%=oper.$.name%>(Request $request){
+        $validator = Validator::make($request->all(), [
+            'user_id_arr' => 'required',
+            'product_ids' => 'required',
+            'invoice_title' => 'string|max:32',
+            'tax_no' => 'string|max:32',
+            'invoice_type' => 'string|max:32',
+            'invoice_email' => 'string|email',
+            'invoice_address' => 'string|max:200',
+            'GEN_CODE' => 'string|max:200',
+            'pay_date' => 'date',
+        ]);
+        if ($validator->fails()) {
+            return $this->fails($validator->errors()->all());
+        }
+        DB::beginTransaction(); //开启事务
+
+        //前端传进来的用户id
+        $user_id_arr = json_decode($request->input('user_id_arr'));
+        //前端传进来的产品id
+        $input_product_ids = json_decode($request->input('product_ids'));
+
+        foreach($user_id_arr as $user_id){
+            //判断是否重复购买
+            $pay_products = DB::table('orders')->select([
+                    'purchased.product_name as proudct_name',
+                    'purchased.product_id as product_id'
+                    ])
+                    ->leftJoin('purchased', 'purchased.order_id', '=', 'orders.id')
+                    ->where('orders.owner_id', '=', $user_id)
+                    ->where('orders.state', '=', 2)
+                    ->whereIn('purchased.product_id', $input_product_ids)
+                    ->get();
+            if($pay_products != null){
+                DB::rollback();
+                return $this->fails($pay_products);
+            }
+            $products = DB::table("products")->whereIn("id", $input_product_ids);
+            $parentId = DB::table('orders')
+                ->insertGetId([
+                    'owner_id' => $user_id,
+                    'pay_type' => 3,
+                    'invoice_title' => $request->input('invoice_title'),
+                    'tax_no' => $request->input('tax_no'),
+                    'invoice_type' => $request->input('invoice_type'),
+                    'invoice_email' => $request->input('invoice_email'),
+                    'invoice_address' => $request->input('invoice_address'),
+                    'total' => $products->sum("price"),
+                    'shop_id' => $this->token->shop_id,
+                    'code' => date('YmdHis') . time() . mt_rand(1000, 9999),
+                    'state' => 2,
+                    'pay_date' => $request->input('pay_date'),
+                    'created_at' => date('Y-m-d H:i:s'),
+                    'updated_at' => date('Y-m-d H:i:s')
+                ]);
+            $products = $products->get();
+    
+            for ($i = 0; $i < count($products); $i++) {
+                DB::table('purchased')
+                    ->insert([
+                        'order_id' => $parentId,
+                        'product_id' => $products[$i]->id,
+                        'product_name' => $products[$i]->name,
+                        'price' => $products[$i]->price,
+                        'is_first' => $request->input('is_first'),
+                        'created_at' => date('Y-m-d H:i:s'),
+                        'updated_at' => date('Y-m-d H:i:s')
+                    ]);
+            }
+        }
+        DB::commit();
+        return $this->success();
+    }

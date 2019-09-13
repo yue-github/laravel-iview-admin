@@ -1,0 +1,59 @@
+    public function <%=oper.$.name%>(Request $request) {
+<%_
+    var params = {};
+    if(typeof(locals.with) === "object") {
+        for(var i in locals.with) {
+            params[i] = locals.with[i];
+        }
+    }
+
+    if(typeof(locals.data) === "object") {
+        for(var i in locals.data) {
+            params[i] = locals.data[i];
+        }
+    }
+    
+ _%>     
+<%- include("validate", {val: {hasId: true, params: params, mode: ""}}) %>
+        $result = DB::table('<%=table.$.name%>');
+        $info = '<%=table.$.name%>Controller-><%=oper.$.name%>: ';
+<%- include('where', {param: locals.with, autoid: true}); _%>
+<%_ 
+    echo ("        $info = $info . 'with: {'; \n")
+    echo ("        if ($request->has('id')) \n")
+    echo ("            $info = $info . 'id => ' . $request->input('id') . ', '; \n")
+    for (var i in locals.with) {
+        echo ("        $info = $info . '" + i + " => ' . $request->input('" + locals.with[i] + "') . ', ';\n")
+    }
+_%>
+<%_ if (locals.withIn != null) { 
+    for (var i in locals.withIn) { _%>
+        if ($request->has('<%=locals.withIn[i]%>')){
+            $result = $result->whereIn('<%=i%>', json_decode($request->input('<%=locals.withIn[i]%>')));
+            $info = $info . "<%=i%> =>" . $request->input('<%=locals.withIn[i]%>');
+        }
+<%_ }
+    } _%>
+        $info = $info . "}, ";
+        $data =[];
+        $info = $info . 'data: {';
+        <%_ for (var i in locals.data) { 
+            if(locals.data[i] === "GEN_DATE") { _%>
+        $data["<%=i%>"] = date('Y-m-d H:i:s');
+            $info = $info . '<%=i%> => ' . date('Y-m-d H:i:s') . ', ';
+        <%_ } else { _%>
+        if ($request->has('<%=i%>')){
+            $data["<%=i%>"] = <%-tcvt(locals.data[i])%>;
+            $info = $info . '<%=i%> => ' . <%-tcvt(locals.data[i])%> . ', ';
+        }
+        <%_ } _%>
+        <%_ } _%>
+        <%_ if (table.$.time === 'true') { _%>
+        $data["updated_at"] = date('Y-m-d H:i:s');
+        $info = $info . 'updated_at => ' . date('Y-m-d H:i:s') . ', ';
+        <%_ } _%>
+        $info = $info . "}";
+        Log::info($info);
+        $result->update($data);
+        return $this->success();
+    }

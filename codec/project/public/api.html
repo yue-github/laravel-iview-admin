@@ -1,0 +1,3379 @@
+<!DOCTYPE html>
+<html style="height: 100%;">
+  <head>
+    <meta charset="UTF-8">
+    <title>后台接口参考文档</title>
+    <style>
+        body {height: 100%;padding: 0; margin: 0; font-family: "Microsoft Yahei"}
+        .code {font-family: "Courier New", "Microsoft Yahei"; margin-top: 10px; margin-bottom: 10px; padding: 10px; background: lightgray}
+        .left {
+          width: 200px;
+          position: fixed;
+          overflow-y: scroll;
+          height: 100%;
+        }
+        .right {
+            margin-left: 200px;
+            width: 980px;
+            padding-left: 20px;
+        }
+    </style>
+  </head>
+  <body>
+    <div style="height: 100%;width: 1200px; margin: 0 auto;display: flex;flex-direction: row;">
+    <div class="left">
+
+      <div style="margin-top: 20px;"><span style="font-weight: bold;">【client】</span>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #666;">用户管理</span>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#client_用户管理_更新个人信息">更新个人信息</a></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#client_用户管理_密码重置">密码重置</a></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#client_用户管理_更新个人余额">更新个人余额</a></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#client_用户管理_根据个人id批量更新余额">根据个人id批量更新余额</a></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#client_用户管理_根据个人身份证批量更新余额">根据个人身份证批量更新余额</a></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#client_用户管理_根据token更新个人余额">根据token更新个人余额</a></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#client_用户管理_根据身份证获取用户">根据身份证获取用户</a></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#client_用户管理_根据身份证数组获取id数组">根据身份证数组获取id数组</a></div>
+      </div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #666;">活动管理</span>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#client_活动管理_活动详情">活动详情</a></div>
+      </div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #666;">项目任务</span>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#client_项目任务_获取项目任务">获取项目任务</a></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#client_项目任务_获取项目任务">获取项目任务</a></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#client_项目任务_获取项目任务不查出活动">获取项目任务不查出活动</a></div>
+      </div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #666;">订单管理</span>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#client_订单管理_订单列表">订单列表</a></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#client_订单管理_取消订单">取消订单</a></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#client_订单管理_更改订单状态">更改订单状态</a></div>
+      </div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #666;">证书管理</span>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#client_证书管理_增加证书">增加证书</a></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#client_证书管理_查询证书">查询证书</a></div>
+      </div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #666;">辅导员管理</span>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#client_辅导员管理_更新辅导员">更新辅导员</a></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#client_辅导员管理_修改密码">修改密码</a></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#client_辅导员管理_获取辅导员">获取辅导员</a></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#client_辅导员管理_辅导员获取自己信息">辅导员获取自己信息</a></div>
+      </div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #666;">班级管理</span>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#client_班级管理_班级列表辅导员专用">班级列表辅导员专用</a></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#client_班级管理_获取班级信息">获取班级信息</a></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#client_班级管理_根据用户id和班级id获取rate">根据用户id和班级id获取rate</a></div>
+      </div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #666;">班级评价</span>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#client_班级评价_新增评价">新增评价</a></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#client_班级评价_修改评价">修改评价</a></div>
+      </div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #666;">班级用户</span>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#client_班级用户_查询班级有所有学生">查询班级有所有学生</a></div>
+      </div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #666;">班级公告</span>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#client_班级公告_新增班级公告">新增班级公告</a></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#client_班级公告_删除班级公告">删除班级公告</a></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#client_班级公告_更新班级公告">更新班级公告</a></div>
+      </div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #666;">班级文件</span>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#client_班级文件_删除班级文件">删除班级文件</a></div>
+      </div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #666;">用户搜索历史</span>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#client_用户搜索历史_查询用户搜索历史">查询用户搜索历史</a></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#client_用户搜索历史_增加用户搜索历史">增加用户搜索历史</a></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#client_用户搜索历史_清空搜索历史">清空搜索历史</a></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#client_用户搜索历史_删除指定用户搜索历史">删除指定用户搜索历史</a></div>
+      </div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #666;">主题讨论区</span>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#client_主题讨论区_获取单个主题资源">获取单个主题资源</a></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#client_主题讨论区_评论主题">评论主题</a></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#client_主题讨论区_获取主题的评论">获取主题的评论</a></div>
+      </div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #666;">用户答题答案记录</span>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#client_用户答题答案记录_提交课后作业">提交课后作业</a></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#client_用户答题答案记录_根据用户token,resources_id查询答案记录">根据用户token,resources_id查询答案记录</a></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#client_用户答题答案记录_根据订单项id和资源id查找答案">根据订单项id和资源id查找答案</a></div>
+      </div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #666;">答疑区</span>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#client_答疑区_新增答疑">新增答疑</a></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#client_答疑区_查询答疑">查询答疑</a></div>
+      </div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #666;">答疑回复</span>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#client_答疑回复_查询回复">查询回复</a></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#client_答疑回复_增加回复">增加回复</a></div>
+      </div>
+      </div>
+      <div style="margin-top: 20px;"><span style="font-weight: bold;">【shop】</span>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #666;">用户管理</span>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#shop_用户管理_店铺更新用户信息">店铺更新用户信息</a></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#shop_用户管理_查询用户列表">查询用户列表</a></div>
+      </div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #666;">店铺标签管理</span>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#shop_店铺标签管理_查询标签列表">查询标签列表</a></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#shop_店铺标签管理_查询标签列表">查询标签列表</a></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#shop_店铺标签管理_修改标签">修改标签</a></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#shop_店铺标签管理_新增标签">新增标签</a></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#shop_店铺标签管理_删除标签">删除标签</a></div>
+      </div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #666;">资源管理</span>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#shop_资源管理_查询资源列表">查询资源列表</a></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#shop_资源管理_查询资源列表不返回data">查询资源列表不返回data</a></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#shop_资源管理_新增资源">新增资源</a></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#shop_资源管理_更新资源">更新资源</a></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#shop_资源管理_资源详情">资源详情</a></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#shop_资源管理_删除资源">删除资源</a></div>
+      </div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #666;">活动管理</span>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#shop_活动管理_undefined"></a></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#shop_活动管理_修改活动">修改活动</a></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#shop_活动管理_删除活动">删除活动</a></div>
+      </div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #666;">章节管理</span>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#shop_章节管理_修改章节">修改章节</a></div>
+      </div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #666;">课程任务</span>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#shop_课程任务_新增课程任务">新增课程任务</a></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#shop_课程任务_更新课程任务">更新课程任务</a></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#shop_课程任务_获取课程任务">获取课程任务</a></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#shop_课程任务_删除课程任务">删除课程任务</a></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#shop_课程任务_查询课程任务">查询课程任务</a></div>
+      </div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #666;">项目任务</span>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#shop_项目任务_删除项目任务">删除项目任务</a></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#shop_项目任务_更新项目任务">更新项目任务</a></div>
+      </div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #666;">项目</span>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#shop_项目_增加项目">增加项目</a></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#shop_项目_更新项目">更新项目</a></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#shop_项目_删除项目">删除项目</a></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#shop_项目_获取店铺项目列表">获取店铺项目列表</a></div>
+      </div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #666;">产品标签</span>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#shop_产品标签_更新产品标签">更新产品标签</a></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#shop_产品标签_删除产品标签">删除产品标签</a></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#shop_产品标签_根据label_id查找对应的id">根据label_id查找对应的id</a></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#shop_产品标签_根据id删除产品标签">根据id删除产品标签</a></div>
+      </div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #666;">商品管理</span>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#shop_商品管理_批量上下架">批量上下架</a></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#shop_商品管理_查询产品">查询产品</a></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#shop_商品管理_更新商品">更新商品</a></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#shop_商品管理_产品详情">产品详情</a></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#shop_商品管理_删除商品">删除商品</a></div>
+      </div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #666;">订单管理</span>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#shop_订单管理_查询用户订单列表">查询用户订单列表</a></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#shop_订单管理_订单列表">订单列表</a></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#shop_订单管理_订单详情">订单详情</a></div>
+      </div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #666;">证书管理</span>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#shop_证书管理_店铺增加证书">店铺增加证书</a></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#shop_证书管理_店铺查询证书">店铺查询证书</a></div>
+      </div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #666;">店铺板块</span>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#shop_店铺板块_新增店铺板块">新增店铺板块</a></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#shop_店铺板块_查询板块">查询板块</a></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#shop_店铺板块_修改店铺板块">修改店铺板块</a></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#shop_店铺板块_店铺板块详情">店铺板块详情</a></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#shop_店铺板块_删除店铺板块">删除店铺板块</a></div>
+      </div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #666;">店铺板块产品</span>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#shop_店铺板块产品_删除板块的产品">删除板块的产品</a></div>
+      </div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #666;">辅导员管理</span>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#shop_辅导员管理_辅导员列表">辅导员列表</a></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#shop_辅导员管理_删除辅导员">删除辅导员</a></div>
+      </div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #666;">班级管理</span>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#shop_班级管理_新增班级">新增班级</a></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#shop_班级管理_更新班级">更新班级</a></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#shop_班级管理_查询所属店铺的班级列表">查询所属店铺的班级列表</a></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#shop_班级管理_班级列表">班级列表</a></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#shop_班级管理_删除班级">删除班级</a></div>
+      </div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #666;">班级用户</span>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#shop_班级用户_班级新增学生">班级新增学生</a></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#shop_班级用户_班级删除学生">班级删除学生</a></div>
+      </div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #666;">批量选课</span>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#shop_批量选课_查询某批次的用户">查询某批次的用户</a></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#shop_批量选课_查询某批次的产品">查询某批次的产品</a></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#shop_批量选课_查询">查询</a></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#shop_批量选课_修改选中状态">修改选中状态</a></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#shop_批量选课_删除">删除</a></div>
+      </div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #666;">选课批次</span>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#shop_选课批次_查询批次">查询批次</a></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#shop_选课批次_更新批次">更新批次</a></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#shop_选课批次_新增批次">新增批次</a></div>
+      </div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #666;">主题讨论区</span>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#shop_主题讨论区_删除主题资源">删除主题资源</a></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#shop_主题讨论区_增加主题资源">增加主题资源</a></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#shop_主题讨论区_查询主题资源">查询主题资源</a></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#shop_主题讨论区_获取单个主题资源">获取单个主题资源</a></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#shop_主题讨论区_修改单个主题资源">修改单个主题资源</a></div>
+      </div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #666;">轮播图</span>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#shop_轮播图_查询不报所传id的轮播图">查询不报所传id的轮播图</a></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#shop_轮播图_增加轮播图">增加轮播图</a></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#shop_轮播图_修改轮播图">修改轮播图</a></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#shop_轮播图_删除轮播图">删除轮播图</a></div>
+      </div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #666;">项目店铺新闻</span>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#shop_项目店铺新闻_获取项目包下的新闻">获取项目包下的新闻</a></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#shop_项目店铺新闻_在项目包下增加一则新闻">在项目包下增加一则新闻</a></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#shop_项目店铺新闻_在项目包下删除一则新闻">在项目包下删除一则新闻</a></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#shop_项目店铺新闻_更新一则新闻">更新一则新闻</a></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#shop_项目店铺新闻_获取一则新闻">获取一则新闻</a></div>
+      </div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #666;">项目店铺公告</span>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#shop_项目店铺公告_获取项目包下的公告">获取项目包下的公告</a></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#shop_项目店铺公告_在项目包下增加一条公告">在项目包下增加一条公告</a></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#shop_项目店铺公告_在项目包下删除一条公告">在项目包下删除一条公告</a></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#shop_项目店铺公告_更新一条公告">更新一条公告</a></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#shop_项目店铺公告_获取一条公告">获取一条公告</a></div>
+      </div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #666;">图标</span>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#shop_图标_获取对应图标">获取对应图标</a></div>
+      </div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #666;">图标类型</span>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#shop_图标类型_获取对应图标类型">获取对应图标类型</a></div>
+      </div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #666;">店铺的项目包管理</span>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#shop_店铺的项目包管理_店铺搜索项目包">店铺搜索项目包</a></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#shop_店铺的项目包管理_店铺修改项目包">店铺修改项目包</a></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#shop_店铺的项目包管理_店铺增加项目包">店铺增加项目包</a></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#shop_店铺的项目包管理_店铺删除项目包">店铺删除项目包</a></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#shop_店铺的项目包管理_查询项目包包含的产品">查询项目包包含的产品</a></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#shop_店铺的项目包管理_删除项目包包含的产品">删除项目包包含的产品</a></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#shop_店铺的项目包管理_增加项目包包含的产品">增加项目包包含的产品</a></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#shop_店铺的项目包管理_搜索出项目包的属性和对应属性值">搜索出项目包的属性和对应属性值</a></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#shop_店铺的项目包管理_删除项目包和属性的关联关系">删除项目包和属性的关联关系</a></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#shop_店铺的项目包管理_增加项目包和属性的关联关系">增加项目包和属性的关联关系</a></div>
+      </div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #666;">板块管理</span>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#shop_板块管理_增加项目包">增加项目包</a></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#shop_板块管理_删除项目包">删除项目包</a></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#shop_板块管理_查询项目包">查询项目包</a></div>
+      </div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #666;">店铺项目包属性管理</span>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#shop_店铺项目包属性管理_修改项目包属性的属性值">修改项目包属性的属性值</a></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#shop_店铺项目包属性管理_删除项目包属性的属性值">删除项目包属性的属性值</a></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#shop_店铺项目包属性管理_查看店铺项目包属性">查看店铺项目包属性</a></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#shop_店铺项目包属性管理_更改店铺项目包属性">更改店铺项目包属性</a></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#shop_店铺项目包属性管理_删除项目包属性">删除项目包属性</a></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#shop_店铺项目包属性管理_增加项目包属性">增加项目包属性</a></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#shop_店铺项目包属性管理_获取项目包属性的属性值">获取项目包属性的属性值</a></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#shop_店铺项目包属性管理_删除项目包关联属性">删除项目包关联属性</a></div>
+      </div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #666;">店铺导航栏管理</span>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#shop_店铺导航栏管理_获取店铺对应导航栏">获取店铺对应导航栏</a></div>
+      </div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #666;">店铺导航管理</span>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#shop_店铺导航管理_增加导航">增加导航</a></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#shop_店铺导航管理_修改导航">修改导航</a></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#shop_店铺导航管理_删除导航">删除导航</a></div>
+      </div>
+      </div>
+      <div style="margin-top: 20px;"><span style="font-weight: bold;">【admin】</span>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #666;">班级评价</span>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<a style="color: blue;" href="#admin_班级评价_删除评价">删除评价</a></div>
+      </div>
+      </div>
+     
+    </div>
+      <div class="right">
+        <h1>后台接口参考文档</h1>
+          <h3 style="text-decoration: underline"><small>模块：</small> users</h3>
+          <div style="margin-left: 20px;">
+            <a  name="无角色_用户管理_用户登录"></a>
+              (1) 用户登录：users/<strong>login</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;phone: 手机号码<br>&nbsp;&nbsp;password: 登录密码<br>&nbsp;&nbsp;shop_id: 店铺id<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result:{id:用户id, token:登录凭证}}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="无角色_用户管理_用户登录身份证"></a>
+              (2) 用户登录身份证：users/<strong>login_by_idcard</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;idcard: 身份证号<br>&nbsp;&nbsp;password: 登录密码<br>&nbsp;&nbsp;shop_id: 店铺id<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result:{id:用户id, token:登录凭证}}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="无角色_用户管理_发送验证码"></a>
+              (3) 发送验证码：users/<strong>sms_send</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;phone: 手机号<br>}1
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result: 验证码<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="client_无页面_获取个人信息"></a>
+              (4) 获取个人信息：users/<strong>profile</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result: {<br>&nbsp;&nbsp;id: ID号<br>&nbsp;&nbsp;name: 姓名<br>&nbsp;&nbsp;idcard: 身份证号<br>&nbsp;&nbsp;company: 单位名称<br>&nbsp;&nbsp;phone: 手机号码<br>&nbsp;&nbsp;email: 邮箱地址<br>&nbsp;&nbsp;balance: 账户余额<br>&nbsp;&nbsp;isLookVideo: 是否在看视频<br>&nbsp;&nbsp;open_id: 微信open_id<br>}<br>}
+
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="client_用户管理_更新个人信息"></a>
+              (5) 更新个人信息：users/<strong>edit</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;name: 姓名<br>&nbsp;&nbsp;idcard: 身份证号<br>&nbsp;&nbsp;company: 单位名称<br>&nbsp;&nbsp;email: 邮箱地址<br>&nbsp;&nbsp;open_id: 微信open_id<br>}
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="shop_用户管理_店铺更新用户信息"></a>
+              (6) 店铺更新用户信息：users/<strong>shop_edit</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;name: 姓名<br>&nbsp;&nbsp;phone: 手机号码<br>&nbsp;&nbsp;idcard: 身份证号<br>&nbsp;&nbsp;company: 单位名称<br>&nbsp;&nbsp;email: 邮箱地址<br>&nbsp;&nbsp;id: ID号<br>}
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="client_用户管理_密码重置"></a>
+              (7) 密码重置：users/<strong>setpswd</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;opassword: 旧密码<br>&nbsp;&nbsp;password: 新密码<br>}1
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="shop_用户管理_查询用户列表"></a>
+              (8) 查询用户列表：users/<strong>search</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;offset: 起始位置<br>&nbsp;&nbsp;length: 返回条数<br>&nbsp;&nbsp;name: 姓名<br>&nbsp;&nbsp;phone: 手机号码<br>&nbsp;&nbsp;company: 单位名称<br>&nbsp;&nbsp;idcard: 身份证号<br>&nbsp;&nbsp;id: ID号<br>&nbsp;&nbsp;shop_id: 店铺id<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result: [{<br>&nbsp;&nbsp;id: ID号<br>&nbsp;&nbsp;name: 姓名<br>&nbsp;&nbsp;idcard: 身份证号<br>&nbsp;&nbsp;email: 邮箱地址<br>&nbsp;&nbsp;company: 单位名称<br>&nbsp;&nbsp;phone: 手机号码<br>&nbsp;&nbsp;balance: 账户余额<br>}]<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="client_用户管理_更新个人余额"></a>
+              (9) 更新个人余额：users/<strong>balance</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;balance: 账户余额<br>&nbsp;&nbsp;id: ID号<br>}
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="client_用户管理_根据个人id批量更新余额"></a>
+              (10) 根据个人id批量更新余额：users/<strong>id_arr_balance</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;balance: 账户余额<br>}
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="client_用户管理_根据个人身份证批量更新余额"></a>
+              (11) 根据个人身份证批量更新余额：users/<strong>idcard_arr_balance</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;balance: 账户余额<br>}
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="client_用户管理_根据token更新个人余额"></a>
+              (12) 根据token更新个人余额：users/<strong>balance_token</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;balance: 账户余额<br>}
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="client_用户管理_根据身份证获取用户"></a>
+              (13) 根据身份证获取用户：users/<strong>user_by_idcard</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;offset: 起始位置<br>&nbsp;&nbsp;length: 返回条数<br>&nbsp;&nbsp;idcard: 身份证号<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result: [{<br>&nbsp;&nbsp;id: ID号<br>&nbsp;&nbsp;name: 姓名<br>}]<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="client_用户管理_根据身份证数组获取id数组"></a>
+              (14) 根据身份证数组获取id数组：users/<strong>idcard_arr_id</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;offset: 起始位置<br>&nbsp;&nbsp;length: 返回条数<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result: [{<br>&nbsp;&nbsp;id: ID号<br>}]<br>}
+              </div>
+          </div>
+          <h3 style="text-decoration: underline"><small>模块：</small> labels</h3>
+          <div style="margin-left: 20px;">
+            <a  name="无角色_无页面_查询标签列表"></a>
+              (1) 查询标签列表：labels/<strong>search</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;offset: 起始位置<br>&nbsp;&nbsp;length: 返回条数<br>&nbsp;&nbsp;name: 名称<br>&nbsp;&nbsp;parent_id: 父标签ID<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result: [{<br>&nbsp;&nbsp;id: ID号<br>&nbsp;&nbsp;parent_id: 父标签ID<br>&nbsp;&nbsp;name: 名称<br>}]<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="无角色_无页面_查询标签列表"></a>
+              (2) 查询标签列表：labels/<strong>all</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;name: 名称<br>&nbsp;&nbsp;shop_id: 店铺id<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result: [{<br>&nbsp;&nbsp;id: ID号<br>&nbsp;&nbsp;parent_id: 父标签ID<br>&nbsp;&nbsp;name: 名称<br>}]<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="shop_无页面_修改标签"></a>
+              (3) 修改标签：labels/<strong>edit</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;parent_id: 父标签ID<br>&nbsp;&nbsp;name: 名称<br>&nbsp;&nbsp;id: ID号<br>}
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="shop_无页面_新增标签"></a>
+              (4) 新增标签：labels/<strong>create</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;parent_id: 父标签ID<br>&nbsp;&nbsp;name: 名称<br>&nbsp;&nbsp;sort: 排序<br>&nbsp;&nbsp;onsale: 是否上架<br>&nbsp;&nbsp;shop_id: 店铺id<br>}
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="shop_无页面_删除标签"></a>
+              (5) 删除标签：labels/<strong>delete</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;onsale: 是否上架<br>&nbsp;&nbsp;id: ID号<br>}
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <h3 style="text-decoration: underline"><small>模块：</small> shop_labels</h3>
+          <div style="margin-left: 20px;">
+            <a  name="shop_店铺标签管理_查询标签列表"></a>
+              (1) 查询标签列表：shop_labels/<strong>search</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;offset: 起始位置<br>&nbsp;&nbsp;length: 返回条数<br>&nbsp;&nbsp;name: 名称<br>&nbsp;&nbsp;parent_id: 父标签ID<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result: [{<br>&nbsp;&nbsp;id: ID号<br>&nbsp;&nbsp;parent_id: 父标签ID<br>&nbsp;&nbsp;name: 名称<br>}]<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="shop_店铺标签管理_查询标签列表"></a>
+              (2) 查询标签列表：shop_labels/<strong>all</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;name: 名称<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result: [{<br>&nbsp;&nbsp;id: ID号<br>&nbsp;&nbsp;parent_id: 父标签ID<br>&nbsp;&nbsp;name: 名称<br>}]<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="shop_店铺标签管理_修改标签"></a>
+              (3) 修改标签：shop_labels/<strong>edit</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;parent_id: 父标签ID<br>&nbsp;&nbsp;name: 名称<br>&nbsp;&nbsp;onsale: 是否上架<br>&nbsp;&nbsp;id: ID号<br>}
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="shop_店铺标签管理_新增标签"></a>
+              (4) 新增标签：shop_labels/<strong>create</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;parent_id: 父标签ID<br>&nbsp;&nbsp;name: 名称<br>&nbsp;&nbsp;onsale: 是否上架<br>}
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="shop_店铺标签管理_删除标签"></a>
+              (5) 删除标签：shop_labels/<strong>delete</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;id: ID号<br>}
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <h3 style="text-decoration: underline"><small>模块：</small> resources</h3>
+          <div style="margin-left: 20px;">
+            <a  name="client_无页面_资源详情"></a>
+              (1) 资源详情：resources/<strong>get</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;id: ID号<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result: {<br>&nbsp;&nbsp;id: ID号<br>&nbsp;&nbsp;shop_id: 所属店铺ID<br>&nbsp;&nbsp;name: 名称<br>&nbsp;&nbsp;data: 数据<br>&nbsp;&nbsp;type: 类型<br>}<br>}
+
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="shop_资源管理_查询资源列表"></a>
+              (2) 查询资源列表：resources/<strong>shop_search</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;offset: 起始位置<br>&nbsp;&nbsp;length: 返回条数<br>&nbsp;&nbsp;name: 名称<br>&nbsp;&nbsp;id: ID号<br>&nbsp;&nbsp;type: 类型<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result: [{<br>&nbsp;&nbsp;id: ID号<br>&nbsp;&nbsp;shop_id: 所属店铺ID<br>&nbsp;&nbsp;name: 名称<br>&nbsp;&nbsp;data: 数据<br>&nbsp;&nbsp;type: 类型<br>}]<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="shop_资源管理_查询资源列表不返回data"></a>
+              (3) 查询资源列表不返回data：resources/<strong>shop_search_not_data</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;offset: 起始位置<br>&nbsp;&nbsp;length: 返回条数<br>&nbsp;&nbsp;name: 名称<br>&nbsp;&nbsp;id: ID号<br>&nbsp;&nbsp;type: 类型<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result: [{<br>&nbsp;&nbsp;id: ID号<br>&nbsp;&nbsp;shop_id: 所属店铺ID<br>&nbsp;&nbsp;name: 名称<br>&nbsp;&nbsp;type: 类型<br>}]<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="shop_资源管理_新增资源"></a>
+              (4) 新增资源：resources/<strong>shop_create</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;name: 名称<br>&nbsp;&nbsp;data: 数据<br>&nbsp;&nbsp;type: 类型<br>}
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="shop_资源管理_更新资源"></a>
+              (5) 更新资源：resources/<strong>shop_edit</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;name: 名称<br>&nbsp;&nbsp;data: 数据<br>&nbsp;&nbsp;type: 类型<br>&nbsp;&nbsp;id: ID号<br>}
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="shop_资源管理_资源详情"></a>
+              (6) 资源详情：resources/<strong>shop_get</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;id: ID号<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result: {<br>&nbsp;&nbsp;shop_id: 所属店铺ID<br>&nbsp;&nbsp;name: 名称<br>&nbsp;&nbsp;data: 数据<br>&nbsp;&nbsp;type: 类型<br>}<br>}
+
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="shop_资源管理_删除资源"></a>
+              (7) 删除资源：resources/<strong>delete</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;id: ID号<br>}
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <h3 style="text-decoration: underline"><small>模块：</small> activities</h3>
+          <div style="margin-left: 20px;">
+            <a  name="client_活动管理_活动详情"></a>
+              (1) 活动详情：activities/<strong>get</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;id: ID号<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result: {<br>&nbsp;&nbsp;shop_id: 所属店铺ID<br>&nbsp;&nbsp;name: 名称<br>&nbsp;&nbsp;desc: 详情<br>&nbsp;&nbsp;resources: 资源集合<br>}<br>}
+
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="shop_无页面_查询活动列表"></a>
+              (2) 查询活动列表：activities/<strong>search</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;offset: 起始位置<br>&nbsp;&nbsp;length: 返回条数<br>&nbsp;&nbsp;name: 名称<br>&nbsp;&nbsp;shop_id: 所属店铺ID<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result: [{<br>&nbsp;&nbsp;id: ID号<br>&nbsp;&nbsp;shop_id: 所属店铺ID<br>&nbsp;&nbsp;name: 名称<br>&nbsp;&nbsp;desc: 详情<br>&nbsp;&nbsp;resources: 资源集合<br>}]<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="shop_活动管理_undefined"></a>
+              (3) ：activities/<strong>create</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;name: 名称<br>&nbsp;&nbsp;desc: 详情<br>&nbsp;&nbsp;resources: 资源集合<br>&nbsp;&nbsp;sort: 排序<br>&nbsp;&nbsp;icon_type_id: 图标类型<br>}
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="shop_活动管理_修改活动"></a>
+              (4) 修改活动：activities/<strong>edit</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;shop_id: 所属店铺ID<br>&nbsp;&nbsp;name: 名称<br>&nbsp;&nbsp;desc: 详情<br>&nbsp;&nbsp;resources: 资源集合<br>&nbsp;&nbsp;sort: 排序<br>&nbsp;&nbsp;icon_type_id: 图标类型<br>&nbsp;&nbsp;id: ID号<br>}
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="shop_活动管理_删除活动"></a>
+              (5) 删除活动：activities/<strong>delete</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;id: ID号<br>}
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="shop_章节管理_修改章节"></a>
+              (6) 修改章节：activities/<strong>shop_edit</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;resources: 资源集合<br>&nbsp;&nbsp;id: ID号<br>}
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <h3 style="text-decoration: underline"><small>模块：</small> task_activities</h3>
+          <div style="margin-left: 20px;">
+            <a  name="shop_无页面_任务活动关联"></a>
+              (1) 任务活动关联：task_activities/<strong>delete</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;id: ID号<br>}
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="shop_无页面_任务活动关联"></a>
+              (2) 任务活动关联：task_activities/<strong>update</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;activity_id: 活动ID<br>&nbsp;&nbsp;task_id: 任务ID<br>}
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="shop_无页面_任务活动关联"></a>
+              (3) 任务活动关联：task_activities/<strong>create_one</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;task_id: 任务ID<br>&nbsp;&nbsp;activity_id: 活动ID<br>&nbsp;&nbsp;sort: 排序<br>}
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="shop_无页面_任务活动关联"></a>
+              (4) 任务活动关联：task_activities/<strong>search</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;offset: 起始位置<br>&nbsp;&nbsp;length: 返回条数<br>&nbsp;&nbsp;id: ID号<br>&nbsp;&nbsp;task_id: 任务ID<br>&nbsp;&nbsp;activity_id: 活动ID<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result: [{<br>&nbsp;&nbsp;id: ID号<br>&nbsp;&nbsp;sort: 排序<br>}]<br>}
+              </div>
+          </div>
+          <h3 style="text-decoration: underline"><small>模块：</small> tasks</h3>
+          <div style="margin-left: 20px;">
+            <a  name="shop_课程任务_新增课程任务"></a>
+              (1) 新增课程任务：tasks/<strong>create</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;shop_id: 所属店铺ID<br>&nbsp;&nbsp;name: 名称<br>&nbsp;&nbsp;desc: 详情<br>}
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="shop_课程任务_更新课程任务"></a>
+              (2) 更新课程任务：tasks/<strong>edit</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;name: 名称<br>&nbsp;&nbsp;desc: 详情<br>&nbsp;&nbsp;start_date_time: 开始时间<br>&nbsp;&nbsp;end_date_time: 结束时间<br>&nbsp;&nbsp;id: ID号<br>}
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="shop_课程任务_获取课程任务"></a>
+              (3) 获取课程任务：tasks/<strong>get</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;id: ID号<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result: {<br>&nbsp;&nbsp;name: 名称<br>&nbsp;&nbsp;desc: 详情<br>}<br>}
+
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="shop_课程任务_删除课程任务"></a>
+              (4) 删除课程任务：tasks/<strong>delete</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;id: ID号<br>}
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="shop_课程任务_查询课程任务"></a>
+              (5) 查询课程任务：tasks/<strong>shop_search</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;offset: 起始位置<br>&nbsp;&nbsp;length: 返回条数<br>&nbsp;&nbsp;name: 名称<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result: [{<br>&nbsp;&nbsp;id: ID号<br>&nbsp;&nbsp;shop_id: 所属店铺ID<br>&nbsp;&nbsp;name: 名称<br>&nbsp;&nbsp;desc: 详情<br>}]<br>}
+              </div>
+          </div>
+          <h3 style="text-decoration: underline"><small>模块：</small> project_tasks</h3>
+          <div style="margin-left: 20px;">
+            <a  name="client_项目任务_获取项目任务"></a>
+              (1) 获取项目任务：project_tasks/<strong>search_group_by_task</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;offset: 起始位置<br>&nbsp;&nbsp;length: 返回条数<br>&nbsp;&nbsp;project_id: 项目ID<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result: [{<br>&nbsp;&nbsp;sort: 排序<br>}]<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="client_项目任务_获取项目任务"></a>
+              (2) 获取项目任务：project_tasks/<strong>search</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;offset: 起始位置<br>&nbsp;&nbsp;length: 返回条数<br>&nbsp;&nbsp;project_id: 项目ID<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result: [{<br>&nbsp;&nbsp;id: ID号<br>&nbsp;&nbsp;sort: 排序<br>}]<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="client_项目任务_获取项目任务不查出活动"></a>
+              (3) 获取项目任务不查出活动：project_tasks/<strong>search_no_activity</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;offset: 起始位置<br>&nbsp;&nbsp;length: 返回条数<br>&nbsp;&nbsp;project_id: 项目ID<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result: [{<br>&nbsp;&nbsp;id: ID号<br>&nbsp;&nbsp;sort: 排序<br>}]<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="shop_项目任务_删除项目任务"></a>
+              (4) 删除项目任务：project_tasks/<strong>delete</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;id: ID号<br>}
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="shop_项目任务_更新项目任务"></a>
+              (5) 更新项目任务：project_tasks/<strong>edit</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;task_id: 任务ID<br>&nbsp;&nbsp;sort: 排序<br>&nbsp;&nbsp;id: ID号<br>}
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <h3 style="text-decoration: underline"><small>模块：</small> projects</h3>
+          <div style="margin-left: 20px;">
+            <a  name="无角色_项目_获取资源列表"></a>
+              (1) 获取资源列表：projects/<strong>search</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;id: ID号<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result: {<br>&nbsp;&nbsp;id: ID号<br>&nbsp;&nbsp;name: 名称<br>&nbsp;&nbsp;start_time: 项目开始时间<br>&nbsp;&nbsp;end_time: 项目结束时间<br>&nbsp;&nbsp;onsale: 是否上架<br>&nbsp;&nbsp;desc: 描述<br>&nbsp;&nbsp;sponsor: 主办单位<br>&nbsp;&nbsp;organizer: 协办单位<br>&nbsp;&nbsp;period: 学时<br>&nbsp;&nbsp;start_stydy_time: 开始培训时间<br>&nbsp;&nbsp;end_study_time: 结束培训时间<br>}<br>}
+
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="shop_项目_增加项目"></a>
+              (2) 增加项目：projects/<strong>create</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;name: 名称<br>&nbsp;&nbsp;desc: 描述<br>&nbsp;&nbsp;start_time: 项目开始时间<br>&nbsp;&nbsp;end_time: 项目结束时间<br>&nbsp;&nbsp;onsale: 是否上架<br>&nbsp;&nbsp;label_id: 标签id<br>&nbsp;&nbsp;sponsor: 主办单位<br>&nbsp;&nbsp;organizer: 协办单位<br>&nbsp;&nbsp;period: 学时<br>&nbsp;&nbsp;start_stydy_time: 开始培训时间<br>&nbsp;&nbsp;end_study_time: 结束培训时间<br>&nbsp;&nbsp;prportion: 辅导员评分比例<br>}
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="shop_项目_更新项目"></a>
+              (3) 更新项目：projects/<strong>edit</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;name: 名称<br>&nbsp;&nbsp;desc: 描述<br>&nbsp;&nbsp;start_time: 项目开始时间<br>&nbsp;&nbsp;end_time: 项目结束时间<br>&nbsp;&nbsp;onsale: 是否上架<br>&nbsp;&nbsp;sponsor: 主办单位<br>&nbsp;&nbsp;label_id: 标签id<br>&nbsp;&nbsp;organizer: 协办单位<br>&nbsp;&nbsp;period: 学时<br>&nbsp;&nbsp;start_stydy_time: 开始培训时间<br>&nbsp;&nbsp;end_study_time: 结束培训时间<br>&nbsp;&nbsp;prportion: 辅导员评分比例<br>&nbsp;&nbsp;id: ID号<br>}
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="shop_项目_删除项目"></a>
+              (4) 删除项目：projects/<strong>delete</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;id: ID号<br>}
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="shop_项目_获取店铺项目列表"></a>
+              (5) 获取店铺项目列表：projects/<strong>shop_search</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;offset: 起始位置<br>&nbsp;&nbsp;length: 返回条数<br>&nbsp;&nbsp;name: 名称<br>&nbsp;&nbsp;label_id: 标签id<br>&nbsp;&nbsp;sponsor: 主办单位<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result: [{<br>&nbsp;&nbsp;id: ID号<br>&nbsp;&nbsp;name: 名称<br>&nbsp;&nbsp;desc: 描述<br>&nbsp;&nbsp;start_time: 项目开始时间<br>&nbsp;&nbsp;end_time: 项目结束时间<br>&nbsp;&nbsp;onsale: 是否上架<br>&nbsp;&nbsp;prportion: 辅导员评分比例<br>&nbsp;&nbsp;sponsor: 主办单位<br>&nbsp;&nbsp;organizer: 协办单位<br>&nbsp;&nbsp;period: 学时<br>&nbsp;&nbsp;start_stydy_time: 开始培训时间<br>&nbsp;&nbsp;end_study_time: 结束培训时间<br>}]<br>}
+              </div>
+          </div>
+          <h3 style="text-decoration: underline"><small>模块：</small> shopping_cart</h3>
+          <div style="margin-left: 20px;">
+            <a  name="client_无页面_加入购物车"></a>
+              (1) 加入购物车：shopping_cart/<strong>create</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;product_id: 产品ID<br>&nbsp;&nbsp;CONSTANT.0: 是否选中<br>&nbsp;&nbsp;shop_id: 店铺id<br>}
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="client_无页面_购物车列表"></a>
+              (2) 购物车列表：shopping_cart/<strong>search</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;offset: 起始位置<br>&nbsp;&nbsp;length: 返回条数<br>&nbsp;&nbsp;shop_id: 店铺id<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result: [{<br>&nbsp;&nbsp;id: ID号<br>&nbsp;&nbsp;selected: 是否选中<br>&nbsp;&nbsp;user_id: 所有者ID<br>}]<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="client_无页面_取消选中购物车"></a>
+              (3) 取消选中购物车：shopping_cart/<strong>edit</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;selected: 是否选中<br>&nbsp;&nbsp;id: ID号<br>}
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="client_无页面_删除购物车"></a>
+              (4) 删除购物车：shopping_cart/<strong>delete</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;id: ID号<br>}
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <h3 style="text-decoration: underline"><small>模块：</small> product_labels</h3>
+          <div style="margin-left: 20px;">
+            <a  name="无角色_产品标签_产品对应的标签"></a>
+              (1) 产品对应的标签：product_labels/<strong>listLabels</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;offset: 起始位置<br>&nbsp;&nbsp;length: 返回条数<br>&nbsp;&nbsp;product_id: 产品ID<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result: [{<br>&nbsp;&nbsp;id: ID号<br>&nbsp;&nbsp;product_id: 产品ID<br>&nbsp;&nbsp;label_id: 标签ID<br>}]<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="无角色_产品标签_标签下的产品列表"></a>
+              (2) 标签下的产品列表：product_labels/<strong>listProducts</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;offset: 起始位置<br>&nbsp;&nbsp;length: 返回条数<br>&nbsp;&nbsp;label_id: 标签ID<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result: [{<br>&nbsp;&nbsp;id: ID号<br>&nbsp;&nbsp;label_id: 标签ID<br>}]<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="shop_产品标签_更新产品标签"></a>
+              (3) 更新产品标签：product_labels/<strong>edit</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;label_id: 标签ID<br>&nbsp;&nbsp;id: ID号<br>}
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="shop_产品标签_删除产品标签"></a>
+              (4) 删除产品标签：product_labels/<strong>delete</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;id: ID号<br>}
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="shop_产品标签_根据label_id查找对应的id"></a>
+              (5) 根据label_id查找对应的id：product_labels/<strong>id_list</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;offset: 起始位置<br>&nbsp;&nbsp;length: 返回条数<br>&nbsp;&nbsp;label_id: 标签ID<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result: [{<br>&nbsp;&nbsp;id: ID号<br>}]<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="shop_产品标签_根据id删除产品标签"></a>
+              (6) 根据id删除产品标签：product_labels/<strong>delete_id</strong><br><br>
+              输入参数：
+              <div class="code">
+              
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <h3 style="text-decoration: underline"><small>模块：</small> products</h3>
+          <div style="margin-left: 20px;">
+            <a  name="无角色_无页面_根据产品id获取活动"></a>
+              (1) 根据产品id获取活动：products/<strong>get_activities_by_product_id</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;id: ID号<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result: {<br>}<br>}
+
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="shop_商品管理_批量上下架"></a>
+              (2) 批量上下架：products/<strong>set_many_onsale</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;onsale: 是否上架<br>}
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="无角色_无页面_获取产品任务,任务里面有活动"></a>
+              (3) 获取产品任务,任务里面有活动：products/<strong>get_task_by_product_id</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;offset: 起始位置<br>&nbsp;&nbsp;length: 返回条数<br>&nbsp;&nbsp;id: ID号<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result: [{<br>}]<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="无角色_无页面_产品详情"></a>
+              (4) 产品详情：products/<strong>get</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;id: ID号<br>&nbsp;&nbsp;onsale: 是否上架<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result: {<br>&nbsp;&nbsp;id: ID号<br>&nbsp;&nbsp;name: 名称<br>&nbsp;&nbsp;desc: 介绍<br>&nbsp;&nbsp;image: 封面<br>&nbsp;&nbsp;price: 价格<br>&nbsp;&nbsp;period: 学时<br>&nbsp;&nbsp;project_id: 对应的项目ID<br>&nbsp;&nbsp;teacher: 教师<br>&nbsp;&nbsp;teacher_intro: 教师介绍<br>&nbsp;&nbsp;onsale: 是否上架<br>&nbsp;&nbsp;is_auth: 是否认证<br>&nbsp;&nbsp;attr: 课程属性<br>&nbsp;&nbsp;cer_year: 认证年度<br>&nbsp;&nbsp;cer_industry: 认证行业<br>&nbsp;&nbsp;is_project: 是否是项目式<br>}<br>}
+
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="无角色_无页面_产品详情"></a>
+              (5) 产品详情：products/<strong>get_pay</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;id: ID号<br>&nbsp;&nbsp;onsale: 是否上架<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result: {<br>&nbsp;&nbsp;id: ID号<br>&nbsp;&nbsp;name: 名称<br>&nbsp;&nbsp;desc: 介绍<br>&nbsp;&nbsp;image: 封面<br>&nbsp;&nbsp;price: 价格<br>&nbsp;&nbsp;period: 学时<br>&nbsp;&nbsp;project_id: 对应的项目ID<br>&nbsp;&nbsp;teacher: 教师<br>&nbsp;&nbsp;teacher_intro: 教师介绍<br>&nbsp;&nbsp;onsale: 是否上架<br>&nbsp;&nbsp;is_auth: 是否认证<br>&nbsp;&nbsp;attr: 课程属性<br>&nbsp;&nbsp;cer_year: 认证年度<br>&nbsp;&nbsp;cer_industry: 认证行业<br>}<br>}
+
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="无角色_无页面_查询产品"></a>
+              (6) 查询产品：products/<strong>search</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;offset: 起始位置<br>&nbsp;&nbsp;length: 返回条数<br>&nbsp;&nbsp;shop_id: 店铺ID<br>&nbsp;&nbsp;name: 名称<br>&nbsp;&nbsp;onsale: 是否上架<br>&nbsp;&nbsp;is_auth: 是否认证<br>&nbsp;&nbsp;cer_year: 认证年度<br>&nbsp;&nbsp;attr: 课程属性<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result: [{<br>&nbsp;&nbsp;id: ID号<br>&nbsp;&nbsp;name: 名称<br>&nbsp;&nbsp;desc: 介绍<br>&nbsp;&nbsp;image: 封面<br>&nbsp;&nbsp;price: 价格<br>&nbsp;&nbsp;period: 学时<br>&nbsp;&nbsp;project_id: 对应的项目ID<br>&nbsp;&nbsp;teacher: 教师<br>&nbsp;&nbsp;teacher_intro: 教师介绍<br>&nbsp;&nbsp;onsale: 是否上架<br>&nbsp;&nbsp;is_auth: 是否认证<br>&nbsp;&nbsp;attr: 课程属性<br>&nbsp;&nbsp;cer_year: 认证年度<br>&nbsp;&nbsp;cer_industry: 认证行业<br>&nbsp;&nbsp;is_project: 是否是项目式<br>}]<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="shop_商品管理_查询产品"></a>
+              (7) 查询产品：products/<strong>shop_search</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;offset: 起始位置<br>&nbsp;&nbsp;length: 返回条数<br>&nbsp;&nbsp;is_project: 是否是项目式<br>&nbsp;&nbsp;name: 名称<br>&nbsp;&nbsp;teacher: 教师<br>&nbsp;&nbsp;onsale: 是否上架<br>&nbsp;&nbsp;is_auth: 是否认证<br>&nbsp;&nbsp;cer_year: 认证年度<br>&nbsp;&nbsp;attr: 课程属性<br>&nbsp;&nbsp;created_at: 创建时间<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result: [{<br>&nbsp;&nbsp;id: ID号<br>&nbsp;&nbsp;name: 名称<br>&nbsp;&nbsp;desc: 介绍<br>&nbsp;&nbsp;image: 封面<br>&nbsp;&nbsp;price: 价格<br>&nbsp;&nbsp;period: 学时<br>&nbsp;&nbsp;project_id: 对应的项目ID<br>&nbsp;&nbsp;is_project: 是否是项目式<br>&nbsp;&nbsp;teacher: 教师<br>&nbsp;&nbsp;teacher_intro: 教师介绍<br>&nbsp;&nbsp;onsale: 是否上架<br>&nbsp;&nbsp;is_auth: 是否认证<br>&nbsp;&nbsp;attr: 课程属性<br>&nbsp;&nbsp;cer_year: 认证年度<br>&nbsp;&nbsp;cer_industry: 认证行业<br>&nbsp;&nbsp;created_at: 创建时间<br>}]<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="shop_商品管理_更新商品"></a>
+              (8) 更新商品：products/<strong>edit</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;name: 名称<br>&nbsp;&nbsp;desc: 介绍<br>&nbsp;&nbsp;image: 封面<br>&nbsp;&nbsp;price: 价格<br>&nbsp;&nbsp;project_id: 对应的项目ID<br>&nbsp;&nbsp;period: 学时<br>&nbsp;&nbsp;teacher: 教师<br>&nbsp;&nbsp;teacher_intro: 教师介绍<br>&nbsp;&nbsp;onsale: 是否上架<br>&nbsp;&nbsp;is_auth: 是否认证<br>&nbsp;&nbsp;attr: 课程属性<br>&nbsp;&nbsp;cer_year: 认证年度<br>&nbsp;&nbsp;cer_industry: 认证行业<br>&nbsp;&nbsp;id: ID号<br>}
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="shop_商品管理_产品详情"></a>
+              (9) 产品详情：products/<strong>shop_get</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;id: ID号<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result: {<br>&nbsp;&nbsp;name: 名称<br>&nbsp;&nbsp;desc: 介绍<br>&nbsp;&nbsp;image: 封面<br>&nbsp;&nbsp;price: 价格<br>&nbsp;&nbsp;period: 学时<br>&nbsp;&nbsp;teacher: 教师<br>&nbsp;&nbsp;teacher_intro: 教师介绍<br>&nbsp;&nbsp;onsale: 是否上架<br>&nbsp;&nbsp;is_auth: 是否认证<br>&nbsp;&nbsp;attr: 课程属性<br>&nbsp;&nbsp;cer_year: 认证年度<br>&nbsp;&nbsp;cer_industry: 认证行业<br>}<br>}
+
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="shop_商品管理_删除商品"></a>
+              (10) 删除商品：products/<strong>shop_delete</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;id: ID号<br>}
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <h3 style="text-decoration: underline"><small>模块：</small> shops</h3>
+          <div style="margin-left: 20px;">
+            <a  name="无角色_无页面_店铺详情"></a>
+              (1) 店铺详情：shops/<strong>get</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;url<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result: {<br>&nbsp;&nbsp;id: ID号<br>&nbsp;&nbsp;name: 名称<br>&nbsp;&nbsp;owner_id: 所有者ID<br>&nbsp;&nbsp;state: 状态<br>&nbsp;&nbsp;is_project<br>&nbsp;&nbsp;platform_name: 平台名称<br>&nbsp;&nbsp;mechanism_name: 机构名称<br>&nbsp;&nbsp;region: 平台所属区域<br>&nbsp;&nbsp;is_invoice: 是否有网上开发票功能,0是无，1是有<br>&nbsp;&nbsp;agreement: 注册协议<br>&nbsp;&nbsp;is_cer: 是否可生成学时证明<br>&nbsp;&nbsp;logo_header_file_name: 平台上方logo<br>&nbsp;&nbsp;logo_footer_file_name: 平台下方logo<br>&nbsp;&nbsp;customer2: 客服信息-支付页面<br>&nbsp;&nbsp;customer: 客服信息<br>&nbsp;&nbsp;footer: 页脚信息<br>&nbsp;&nbsp;alipay: 支付宝支付信息<br>&nbsp;&nbsp;wxpay: 微信支付信息<br>&nbsp;&nbsp;unionpay: 银行支付信息<br>&nbsp;&nbsp;is_auth: 是否认定，0是无，1是有<br>&nbsp;&nbsp;marquee: 跑马灯<br>&nbsp;&nbsp;title: 店铺标题<br>&nbsp;&nbsp;sidebar_type: 店铺侧边栏风格，0典型课程云风格，1项目式风格<br>&nbsp;&nbsp;is_order: 是否需要我的订单：0是不需要，1是需要<br>&nbsp;&nbsp;is_shoppingcart: 是否需要购物车 0是不需要，1是需要<br>}<br>}
+
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="admin_无页面_查询店铺列表"></a>
+              (2) 查询店铺列表：shops/<strong>search</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;offset: 起始位置<br>&nbsp;&nbsp;length: 返回条数<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result: [{<br>&nbsp;&nbsp;name: 名称<br>&nbsp;&nbsp;state: 状态<br>}]<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="admin_无页面_新增店铺"></a>
+              (3) 新增店铺：shops/<strong>create</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;name: 名称<br>&nbsp;&nbsp;state: 状态<br>}
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="无角色_店铺信息管理_新增一个店铺"></a>
+              (4) 新增一个店铺：shops/<strong>shop_create</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;name: 名称<br>&nbsp;&nbsp;owner_id: 所有者ID<br>&nbsp;&nbsp;state: 状态<br>&nbsp;&nbsp;is_project<br>&nbsp;&nbsp;platform_name: 平台名称<br>&nbsp;&nbsp;mechanism_name: 机构名称<br>&nbsp;&nbsp;region: 平台所属区域<br>&nbsp;&nbsp;is_invoice: 是否有网上开发票功能,0是无，1是有<br>&nbsp;&nbsp;agreement: 注册协议<br>&nbsp;&nbsp;is_cer: 是否可生成学时证明<br>&nbsp;&nbsp;logo_header_file_name: 平台上方logo<br>&nbsp;&nbsp;logo_footer_file_name: 平台下方logo<br>&nbsp;&nbsp;customer2: 客服信息-支付页面<br>&nbsp;&nbsp;customer: 客服信息<br>&nbsp;&nbsp;footer: 页脚信息<br>&nbsp;&nbsp;alipay: 支付宝支付信息<br>&nbsp;&nbsp;wxpay: 微信支付信息<br>&nbsp;&nbsp;unionpay: 银行支付信息<br>&nbsp;&nbsp;is_auth: 是否认定，0是无，1是有<br>&nbsp;&nbsp;marquee: 跑马灯<br>&nbsp;&nbsp;title: 店铺标题<br>&nbsp;&nbsp;sidebar_type: 店铺侧边栏风格，0典型课程云风格，1项目式风格<br>&nbsp;&nbsp;is_order: 是否需要我的订单：0是不需要，1是需要<br>&nbsp;&nbsp;is_shoppingcart: 是否需要购物车 0是不需要，1是需要<br>}
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="无角色_店铺信息管理_查询所有店铺列表"></a>
+              (5) 查询所有店铺列表：shops/<strong>shop_search</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;offset: 起始位置<br>&nbsp;&nbsp;length: 返回条数<br>&nbsp;&nbsp;name: 名称<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result: [{<br>&nbsp;&nbsp;id: ID号<br>&nbsp;&nbsp;name: 名称<br>&nbsp;&nbsp;is_project<br>&nbsp;&nbsp;url<br>&nbsp;&nbsp;platform_name: 平台名称<br>&nbsp;&nbsp;mechanism_name: 机构名称<br>&nbsp;&nbsp;region: 平台所属区域<br>&nbsp;&nbsp;is_invoice: 是否有网上开发票功能,0是无，1是有<br>&nbsp;&nbsp;agreement: 注册协议<br>&nbsp;&nbsp;is_cer: 是否可生成学时证明<br>&nbsp;&nbsp;logo_header_file_name: 平台上方logo<br>&nbsp;&nbsp;logo_footer_file_name: 平台下方logo<br>&nbsp;&nbsp;customer2: 客服信息-支付页面<br>&nbsp;&nbsp;customer: 客服信息<br>&nbsp;&nbsp;footer: 页脚信息<br>&nbsp;&nbsp;alipay: 支付宝支付信息<br>&nbsp;&nbsp;wxpay: 微信支付信息<br>&nbsp;&nbsp;unionpay: 银行支付信息<br>&nbsp;&nbsp;is_auth: 是否认定，0是无，1是有<br>&nbsp;&nbsp;marquee: 跑马灯<br>&nbsp;&nbsp;title: 店铺标题<br>&nbsp;&nbsp;sidebar_type: 店铺侧边栏风格，0典型课程云风格，1项目式风格<br>&nbsp;&nbsp;is_order: 是否需要我的订单：0是不需要，1是需要<br>&nbsp;&nbsp;is_shoppingcart: 是否需要购物车 0是不需要，1是需要<br>}]<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="无角色_店铺信息管理_修改店铺信息"></a>
+              (6) 修改店铺信息：shops/<strong>shop_edit</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;name: 名称<br>&nbsp;&nbsp;owner_id: 所有者ID<br>&nbsp;&nbsp;state: 状态<br>&nbsp;&nbsp;is_project<br>&nbsp;&nbsp;platform_name: 平台名称<br>&nbsp;&nbsp;mechanism_name: 机构名称<br>&nbsp;&nbsp;region: 平台所属区域<br>&nbsp;&nbsp;is_invoice: 是否有网上开发票功能,0是无，1是有<br>&nbsp;&nbsp;agreement: 注册协议<br>&nbsp;&nbsp;is_cer: 是否可生成学时证明<br>&nbsp;&nbsp;logo_header_file_name: 平台上方logo<br>&nbsp;&nbsp;logo_footer_file_name: 平台下方logo<br>&nbsp;&nbsp;customer2: 客服信息-支付页面<br>&nbsp;&nbsp;customer: 客服信息<br>&nbsp;&nbsp;footer: 页脚信息<br>&nbsp;&nbsp;alipay: 支付宝支付信息<br>&nbsp;&nbsp;wxpay: 微信支付信息<br>&nbsp;&nbsp;unionpay: 银行支付信息<br>&nbsp;&nbsp;is_auth: 是否认定，0是无，1是有<br>&nbsp;&nbsp;marquee: 跑马灯<br>&nbsp;&nbsp;title: 店铺标题<br>&nbsp;&nbsp;sidebar_type: 店铺侧边栏风格，0典型课程云风格，1项目式风格<br>&nbsp;&nbsp;is_order: 是否需要我的订单：0是不需要，1是需要<br>&nbsp;&nbsp;is_shoppingcart: 是否需要购物车 0是不需要，1是需要<br>&nbsp;&nbsp;id: ID号<br>}
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="无角色_店铺信息管理_删除一个店铺"></a>
+              (7) 删除一个店铺：shops/<strong>shop_delete</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;id: ID号<br>}
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="无角色_无页面_查询店铺信息"></a>
+              (8) 查询店铺信息：shops/<strong>get_url</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;url<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result: {<br>&nbsp;&nbsp;id: ID号<br>&nbsp;&nbsp;name: 名称<br>&nbsp;&nbsp;is_shoppingcart: 是否需要购物车 0是不需要，1是需要<br>}<br>}
+
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="无角色_无页面_查询店铺信息"></a>
+              (9) 查询店铺信息：shops/<strong>get_shopid</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;id: ID号<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result: {<br>&nbsp;&nbsp;owner_id: 所有者ID<br>&nbsp;&nbsp;name: 名称<br>&nbsp;&nbsp;platform_name: 平台名称<br>&nbsp;&nbsp;is_shoppingcart: 是否需要购物车 0是不需要，1是需要<br>}<br>}
+
+              </div>
+          </div>
+          <h3 style="text-decoration: underline"><small>模块：</small> orders</h3>
+          <div style="margin-left: 20px;">
+            <a  name="admin_无页面_管理"></a>
+              (1) 管理：orders/<strong>searchAdmin</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result: {<br>&nbsp;&nbsp;owner_id: 买家ID<br>&nbsp;&nbsp;state: 状态<br>&nbsp;&nbsp;total: 付款总额<br>&nbsp;&nbsp;invoice_title: 发票抬头<br>&nbsp;&nbsp;tax_no: 税号<br>&nbsp;&nbsp;code: 订单号<br>&nbsp;&nbsp;created_at: 创建时间<br>&nbsp;&nbsp;pay_date: 支付时间<br>&nbsp;&nbsp;cancel_date: 取消时间<br>}<br>}
+
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="client_无页面_提交订单"></a>
+              (2) 提交订单：orders/<strong>create</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;pay_type: 支付方式,1:支付宝,2:微信,3:批量开课,4:银联,5:账号余额<br>&nbsp;&nbsp;invoice_title: 发票抬头<br>&nbsp;&nbsp;tax_no: 税号<br>&nbsp;&nbsp;invoice_type: 发票类型<br>&nbsp;&nbsp;invoice_email: 邮箱<br>&nbsp;&nbsp;invoice_address: 地址<br>&nbsp;&nbsp;STA_SUM.products.price: 付款总额<br>&nbsp;&nbsp;shop_id: 店铺id<br>}
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="shop_无页面_更改开票状态"></a>
+              (3) 更改开票状态：orders/<strong>edit</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;invoice_state: 开票状态 0：未开票 1：开票中 2：已开票<br>}
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="client_无页面_支付宝支付"></a>
+              (4) 支付宝支付：orders/<strong>alipay</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;id: ID号<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result: 支付宝签名等信息<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="client_无页面_微信支付"></a>
+              (5) 微信支付：orders/<strong>wxpay</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;id: ID号<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result: 微信支付签名等信息<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="client_订单管理_订单列表"></a>
+              (6) 订单列表：orders/<strong>search</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;offset: 起始位置<br>&nbsp;&nbsp;length: 返回条数<br>&nbsp;&nbsp;state: 状态<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result: [{<br>&nbsp;&nbsp;id: ID号<br>&nbsp;&nbsp;owner_id: 买家ID<br>&nbsp;&nbsp;state: 状态<br>&nbsp;&nbsp;total: 付款总额<br>&nbsp;&nbsp;pay_type: 支付方式,1:支付宝,2:微信,3:批量开课,4:银联,5:账号余额<br>&nbsp;&nbsp;pay_date: 支付时间<br>&nbsp;&nbsp;invoice_title: 发票抬头<br>&nbsp;&nbsp;tax_no: 税号<br>&nbsp;&nbsp;invoice_type: 发票类型<br>&nbsp;&nbsp;invoice_email: 邮箱<br>&nbsp;&nbsp;invoice_address: 地址<br>&nbsp;&nbsp;code: 订单号<br>&nbsp;&nbsp;created_at: 创建时间<br>}]<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="shop_订单管理_查询用户订单列表"></a>
+              (7) 查询用户订单列表：orders/<strong>searchByUserId</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;offset: 起始位置<br>&nbsp;&nbsp;length: 返回条数<br>&nbsp;&nbsp;user_id: 买家ID<br>&nbsp;&nbsp;state: 状态<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result: [{<br>&nbsp;&nbsp;id: ID号<br>&nbsp;&nbsp;owner_id: 买家ID<br>&nbsp;&nbsp;state: 状态<br>&nbsp;&nbsp;total: 付款总额<br>&nbsp;&nbsp;pay_type: 支付方式,1:支付宝,2:微信,3:批量开课,4:银联,5:账号余额<br>&nbsp;&nbsp;invoice_title: 发票抬头<br>&nbsp;&nbsp;tax_no: 税号<br>&nbsp;&nbsp;invoice_type: 发票类型<br>&nbsp;&nbsp;invoice_email: 邮箱<br>&nbsp;&nbsp;invoice_address: 地址<br>&nbsp;&nbsp;code: 订单号<br>&nbsp;&nbsp;created_at: 创建时间<br>}]<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="client_无页面_我的课程列表"></a>
+              (8) 我的课程列表：orders/<strong>searchCourses</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;offset: 起始位置<br>&nbsp;&nbsp;length: 返回条数<br>&nbsp;&nbsp;state: 状态<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result: [{<br>}]<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="client_订单管理_取消订单"></a>
+              (9) 取消订单：orders/<strong>cancel</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;state: 状态<br>&nbsp;&nbsp;GEN_DATE: 取消时间<br>&nbsp;&nbsp;pay_date: 支付时间<br>&nbsp;&nbsp;id: ID号<br>}
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="client_无页面_订单详情"></a>
+              (10) 订单详情：orders/<strong>get</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;id: ID号<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result: {<br>&nbsp;&nbsp;id: ID号<br>&nbsp;&nbsp;state: 状态<br>&nbsp;&nbsp;total: 付款总额<br>&nbsp;&nbsp;pay_type: 支付方式,1:支付宝,2:微信,3:批量开课,4:银联,5:账号余额<br>&nbsp;&nbsp;invoice_title: 发票抬头<br>&nbsp;&nbsp;tax_no: 税号<br>&nbsp;&nbsp;invoice_type: 发票类型<br>&nbsp;&nbsp;invoice_email: 邮箱<br>&nbsp;&nbsp;invoice_address: 地址<br>&nbsp;&nbsp;code: 订单号<br>&nbsp;&nbsp;created_at: 创建时间<br>&nbsp;&nbsp;pay_date: 支付时间<br>&nbsp;&nbsp;cancel_date: 取消时间<br>}<br>}
+
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="shop_订单管理_订单列表"></a>
+              (11) 订单列表：orders/<strong>shop_search</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;offset: 起始位置<br>&nbsp;&nbsp;length: 返回条数<br>&nbsp;&nbsp;state: 状态<br>&nbsp;&nbsp;pay_type: 支付方式,1:支付宝,2:微信,3:批量开课,4:银联,5:账号余额<br>&nbsp;&nbsp;invoice_type: 发票类型<br>&nbsp;&nbsp;code: 订单号<br>&nbsp;&nbsp;invoice_state: 开票状态 0：未开票 1：开票中 2：已开票<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result: [{<br>&nbsp;&nbsp;id: ID号<br>&nbsp;&nbsp;state: 状态<br>&nbsp;&nbsp;total: 付款总额<br>&nbsp;&nbsp;pay_date: 支付时间<br>&nbsp;&nbsp;pay_type: 支付方式,1:支付宝,2:微信,3:批量开课,4:银联,5:账号余额<br>&nbsp;&nbsp;invoice_title: 发票抬头<br>&nbsp;&nbsp;invoice_state: 开票状态 0：未开票 1：开票中 2：已开票<br>&nbsp;&nbsp;tax_no: 税号<br>&nbsp;&nbsp;invoice_type: 发票类型<br>&nbsp;&nbsp;invoice_email: 邮箱<br>&nbsp;&nbsp;invoice_address: 地址<br>&nbsp;&nbsp;code: 订单号<br>&nbsp;&nbsp;created_at: 创建时间<br>}]<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="shop_订单管理_订单详情"></a>
+              (12) 订单详情：orders/<strong>shop_get</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;id: ID号<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result: {<br>&nbsp;&nbsp;owner_id: 买家ID<br>&nbsp;&nbsp;state: 状态<br>&nbsp;&nbsp;total: 付款总额<br>&nbsp;&nbsp;pay_type: 支付方式,1:支付宝,2:微信,3:批量开课,4:银联,5:账号余额<br>&nbsp;&nbsp;invoice_title: 发票抬头<br>&nbsp;&nbsp;tax_no: 税号<br>&nbsp;&nbsp;invoice_type: 发票类型<br>&nbsp;&nbsp;invoice_email: 邮箱<br>&nbsp;&nbsp;invoice_address: 地址<br>&nbsp;&nbsp;code: 订单号<br>&nbsp;&nbsp;created_at: 创建时间<br>&nbsp;&nbsp;pay_date: 支付时间<br>&nbsp;&nbsp;cancel_date: 取消时间<br>}<br>}
+
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="无角色_订单管理_根据订单号调取订单金额"></a>
+              (13) 根据订单号调取订单金额：orders/<strong>get_money</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;code: 订单号<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result: {<br>&nbsp;&nbsp;total: 付款总额<br>}<br>}
+
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="无角色_订单管理_根据本人token调取本人金额"></a>
+              (14) 根据本人token调取本人金额：orders/<strong>get_money_token</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result: {<br>&nbsp;&nbsp;total: 付款总额<br>}<br>}
+
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="client_订单管理_更改订单状态"></a>
+              (15) 更改订单状态：orders/<strong>edit_state</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;state: 状态<br>&nbsp;&nbsp;pay_type: 支付方式,1:支付宝,2:微信,3:批量开课,4:银联,5:账号余额<br>&nbsp;&nbsp;id: ID号<br>}
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <h3 style="text-decoration: underline"><small>模块：</small> purchased</h3>
+          <div style="margin-left: 20px;">
+            <a  name="client_无页面_根据用户id和项目包id获取该用户购买该项目包的项目"></a>
+              (1) 根据用户id和项目包id获取该用户购买该项目包的项目：purchased/<strong>search_by_userId_and_packageId</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;offset: 起始位置<br>&nbsp;&nbsp;length: 返回条数<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result: [{<br>}]<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="client_无页面_辅导员根据用户id来拿订单项"></a>
+              (2) 辅导员根据用户id来拿订单项：purchased/<strong>get_rate_by_userid</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;offset: 起始位置<br>&nbsp;&nbsp;length: 返回条数<br>&nbsp;&nbsp;id: ID号<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result: [{<br>&nbsp;&nbsp;progress: 学习进度<br>&nbsp;&nbsp;rate: 进度<br>}]<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="client_无页面_订单列表"></a>
+              (3) 订单列表：purchased/<strong>search</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;offset: 起始位置<br>&nbsp;&nbsp;length: 返回条数<br>&nbsp;&nbsp;order_id: 订单ID<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result: [{<br>&nbsp;&nbsp;id: ID号<br>&nbsp;&nbsp;product_name: 产品名称<br>&nbsp;&nbsp;price: 成交价格<br>&nbsp;&nbsp;private: 私有数据<br>&nbsp;&nbsp;score: 得分<br>&nbsp;&nbsp;rate: 进度<br>&nbsp;&nbsp;updated_at: 修改时间<br>&nbsp;&nbsp;created_at: 创建时间<br>&nbsp;&nbsp;is_first: 预设的认证年度<br>&nbsp;&nbsp;purchased_cer_year: 第一次进入证书页面<br>}]<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="client_无页面_我的所有已经购买订单项可查分数大于60和进度完成的"></a>
+              (4) 我的所有已经购买订单项可查分数大于60和进度完成的：purchased/<strong>search_pay_all</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;offset: 起始位置<br>&nbsp;&nbsp;length: 返回条数<br>&nbsp;&nbsp;purchased_cer_year: 第一次进入证书页面<br>&nbsp;&nbsp;score_ge: 得分<br>&nbsp;&nbsp;progress: 学习进度<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result: [{<br>&nbsp;&nbsp;id: ID号<br>&nbsp;&nbsp;price: 成交价格<br>&nbsp;&nbsp;private: 私有数据<br>&nbsp;&nbsp;score: 得分<br>&nbsp;&nbsp;rate: 进度<br>&nbsp;&nbsp;updated_at: 修改时间<br>&nbsp;&nbsp;created_at: 创建时间<br>&nbsp;&nbsp;is_first: 预设的认证年度<br>&nbsp;&nbsp;purchased_cer_year: 第一次进入证书页面<br>&nbsp;&nbsp;progress: 学习进度<br>}]<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="shop_无页面_店铺查看已经购买订单项可查分数大于60和进度完成的"></a>
+              (5) 店铺查看已经购买订单项可查分数大于60和进度完成的：purchased/<strong>shop_search_pay_all</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;offset: 起始位置<br>&nbsp;&nbsp;length: 返回条数<br>&nbsp;&nbsp;purchased_cer_year: 第一次进入证书页面<br>&nbsp;&nbsp;score_ge: 得分<br>&nbsp;&nbsp;progress: 学习进度<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result: [{<br>&nbsp;&nbsp;id: ID号<br>&nbsp;&nbsp;price: 成交价格<br>&nbsp;&nbsp;private: 私有数据<br>&nbsp;&nbsp;score: 得分<br>&nbsp;&nbsp;rate: 进度<br>&nbsp;&nbsp;updated_at: 修改时间<br>&nbsp;&nbsp;created_at: 创建时间<br>&nbsp;&nbsp;is_first: 预设的认证年度<br>&nbsp;&nbsp;purchased_cer_year: 第一次进入证书页面<br>&nbsp;&nbsp;progress: 学习进度<br>}]<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="client_无页面_我的所有已经购买订单项可查分数小于60和进度未完成的"></a>
+              (6) 我的所有已经购买订单项可查分数小于60和进度未完成的：purchased/<strong>search_pay_all_type_two</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;offset: 起始位置<br>&nbsp;&nbsp;length: 返回条数<br>&nbsp;&nbsp;purchased_cer_year: 第一次进入证书页面<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result: [{<br>&nbsp;&nbsp;id: ID号<br>&nbsp;&nbsp;price: 成交价格<br>&nbsp;&nbsp;private: 私有数据<br>&nbsp;&nbsp;score: 得分<br>&nbsp;&nbsp;rate: 进度<br>&nbsp;&nbsp;progress: 学习进度<br>&nbsp;&nbsp;updated_at: 修改时间<br>&nbsp;&nbsp;created_at: 创建时间<br>&nbsp;&nbsp;is_first: 预设的认证年度<br>&nbsp;&nbsp;purchased_cer_year: 第一次进入证书页面<br>}]<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="shop_无页面_查询订单项"></a>
+              (7) 查询订单项：purchased/<strong>shop_search</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;offset: 起始位置<br>&nbsp;&nbsp;length: 返回条数<br>&nbsp;&nbsp;order_id: 订单ID<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result: [{<br>&nbsp;&nbsp;id: ID号<br>&nbsp;&nbsp;product_name: 产品名称<br>&nbsp;&nbsp;price: 成交价格<br>&nbsp;&nbsp;private: 私有数据<br>&nbsp;&nbsp;score: 得分<br>&nbsp;&nbsp;rate: 进度<br>&nbsp;&nbsp;updated_at: 修改时间<br>&nbsp;&nbsp;is_first: 预设的认证年度<br>}]<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="client_无页面_提交答案"></a>
+              (8) 提交答案：purchased/<strong>sumbitResult</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;private: 私有数据<br>&nbsp;&nbsp;score: 得分<br>&nbsp;&nbsp;id: ID号<br>}
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="client_无页面_提交进度"></a>
+              (9) 提交进度：purchased/<strong>sumbitRate</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;rate: 进度<br>&nbsp;&nbsp;progress: 学习进度<br>&nbsp;&nbsp;id: ID号<br>}
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="client_无页面_修改认证年度"></a>
+              (10) 修改认证年度：purchased/<strong>updateCerYear</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;is_first: 预设的认证年度<br>&nbsp;&nbsp;cer_year: 第一次进入证书页面<br>&nbsp;&nbsp;id: ID号<br>}
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="shop_无页面_修改认证年度"></a>
+              (11) 修改认证年度：purchased/<strong>updateCerYears</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;is_first: 预设的认证年度<br>&nbsp;&nbsp;cer_year: 第一次进入证书页面<br>}
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="client_无页面_根据id数组查询订单项"></a>
+              (12) 根据id数组查询订单项：purchased/<strong>get_more</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;offset: 起始位置<br>&nbsp;&nbsp;length: 返回条数<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result: [{<br>&nbsp;&nbsp;id: ID号<br>&nbsp;&nbsp;product_name: 产品名称<br>&nbsp;&nbsp;updated_at: 修改时间<br>&nbsp;&nbsp;is_first: 预设的认证年度<br>}]<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="client_无页面_根据id查询订单项"></a>
+              (13) 根据id查询订单项：purchased/<strong>get</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;id: ID号<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result: {<br>&nbsp;&nbsp;id: ID号<br>&nbsp;&nbsp;product_name: 产品名称<br>&nbsp;&nbsp;price: 成交价格<br>&nbsp;&nbsp;private: 私有数据<br>&nbsp;&nbsp;score: 得分<br>&nbsp;&nbsp;rate: 进度<br>&nbsp;&nbsp;updated_at: 修改时间<br>&nbsp;&nbsp;is_first: 预设的认证年度<br>&nbsp;&nbsp;progress: 学习进度<br>}<br>}
+
+              </div>
+          </div>
+          <h3 style="text-decoration: underline"><small>模块：</small> cers</h3>
+          <div style="margin-left: 20px;">
+            <a  name="client_证书管理_增加证书"></a>
+              (1) 增加证书：cers/<strong>create</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;purchased_id: 订单项id集合<br>&nbsp;&nbsp;cer_year: 认证年度<br>&nbsp;&nbsp;pay_date: 购买时间<br>&nbsp;&nbsp;end_date: 订单项最晚时间<br>}
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="shop_证书管理_店铺增加证书"></a>
+              (2) 店铺增加证书：cers/<strong>shop_create</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;purchased_id: 订单项id集合<br>&nbsp;&nbsp;cer_year: 认证年度<br>&nbsp;&nbsp;pay_date: 购买时间<br>&nbsp;&nbsp;end_date: 订单项最晚时间<br>&nbsp;&nbsp;owner_id: 用户id<br>}
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="client_证书管理_查询证书"></a>
+              (3) 查询证书：cers/<strong>search</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;offset: 起始位置<br>&nbsp;&nbsp;length: 返回条数<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result: [{<br>&nbsp;&nbsp;purchased_id: 订单项id集合<br>&nbsp;&nbsp;cer_year: 认证年度<br>&nbsp;&nbsp;pay_date: 购买时间<br>&nbsp;&nbsp;end_date: 订单项最晚时间<br>}]<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="shop_证书管理_店铺查询证书"></a>
+              (4) 店铺查询证书：cers/<strong>shop_search</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;offset: 起始位置<br>&nbsp;&nbsp;length: 返回条数<br>&nbsp;&nbsp;owner_id: 用户id<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result: [{<br>&nbsp;&nbsp;purchased_id: 订单项id集合<br>&nbsp;&nbsp;cer_year: 认证年度<br>&nbsp;&nbsp;pay_date: 购买时间<br>}]<br>}
+              </div>
+          </div>
+          <h3 style="text-decoration: underline"><small>模块：</small> sections</h3>
+          <div style="margin-left: 20px;">
+            <a  name="无角色_店铺板块_板块列表"></a>
+              (1) 板块列表：sections/<strong>search</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;offset: 起始位置<br>&nbsp;&nbsp;length: 返回条数<br>&nbsp;&nbsp;shop_id: 店铺ID<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result: [{<br>&nbsp;&nbsp;id: ID号<br>&nbsp;&nbsp;shop_id: 店铺ID<br>&nbsp;&nbsp;page: 页面<br>&nbsp;&nbsp;template: 模板<br>&nbsp;&nbsp;name: 名称<br>&nbsp;&nbsp;sort: 排序<br>}]<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="无角色_店铺板块_板块列表"></a>
+              (2) 板块列表：sections/<strong>search_package</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;offset: 起始位置<br>&nbsp;&nbsp;length: 返回条数<br>&nbsp;&nbsp;shop_id: 店铺ID<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result: [{<br>&nbsp;&nbsp;id: ID号<br>}]<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="shop_店铺板块_新增店铺板块"></a>
+              (3) 新增店铺板块：sections/<strong>create</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;shop_id: 店铺ID<br>&nbsp;&nbsp;name: 名称<br>&nbsp;&nbsp;desc: 板块描述<br>&nbsp;&nbsp;sort: 排序<br>&nbsp;&nbsp;template: 模板<br>&nbsp;&nbsp;page: 页面<br>}
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="shop_店铺板块_查询板块"></a>
+              (4) 查询板块：sections/<strong>shop_search</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;offset: 起始位置<br>&nbsp;&nbsp;length: 返回条数<br>&nbsp;&nbsp;name: 名称<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result: [{<br>&nbsp;&nbsp;id: ID号<br>&nbsp;&nbsp;shop_id: 店铺ID<br>&nbsp;&nbsp;page: 页面<br>&nbsp;&nbsp;desc: 板块描述<br>&nbsp;&nbsp;template: 模板<br>&nbsp;&nbsp;name: 名称<br>&nbsp;&nbsp;sort: 排序<br>}]<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="shop_店铺板块_修改店铺板块"></a>
+              (5) 修改店铺板块：sections/<strong>shop_edit</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;name: 名称<br>&nbsp;&nbsp;desc: 板块描述<br>&nbsp;&nbsp;sort: 排序<br>&nbsp;&nbsp;template: 模板<br>&nbsp;&nbsp;id: ID号<br>}
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="shop_店铺板块_店铺板块详情"></a>
+              (6) 店铺板块详情：sections/<strong>shop_get</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;id: ID号<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result: {<br>&nbsp;&nbsp;name: 名称<br>&nbsp;&nbsp;sort: 排序<br>&nbsp;&nbsp;template: 模板<br>&nbsp;&nbsp;page: 页面<br>}<br>}
+
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="shop_店铺板块_删除店铺板块"></a>
+              (7) 删除店铺板块：sections/<strong>shop_delete</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;id: ID号<br>}
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <h3 style="text-decoration: underline"><small>模块：</small> section_products</h3>
+          <div style="margin-left: 20px;">
+            <a  name="无角色_店铺板块产品_板块产品"></a>
+              (1) 板块产品：section_products/<strong>search</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;section_id<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result: [{<br>&nbsp;&nbsp;section_id<br>}]<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="shop_店铺板块产品_删除板块的产品"></a>
+              (2) 删除板块的产品：section_products/<strong>delete</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;id: ID号<br>&nbsp;&nbsp;product_id<br>&nbsp;&nbsp;section_id<br>}
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <h3 style="text-decoration: underline"><small>模块：</small> instructor</h3>
+          <div style="margin-left: 20px;">
+            <a  name="无角色_辅导员管理_辅导员登录"></a>
+              (1) 辅导员登录：instructor/<strong>login</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;phone: 手机号码<br>&nbsp;&nbsp;password: 登录密码<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result:{id:用户id, token:登录凭证}}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="client_辅导员管理_更新辅导员"></a>
+              (2) 更新辅导员：instructor/<strong>edit</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;name: 姓名<br>&nbsp;&nbsp;idcard: 身份证号<br>&nbsp;&nbsp;company: 单位名称<br>&nbsp;&nbsp;phone: 手机号码<br>&nbsp;&nbsp;email: 邮箱地址<br>&nbsp;&nbsp;desc<br>&nbsp;&nbsp;img: 头像<br>&nbsp;&nbsp;enabled: 是否可用<br>&nbsp;&nbsp;password: 登录密码<br>&nbsp;&nbsp;id: ID号<br>}
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="client_辅导员管理_修改密码"></a>
+              (3) 修改密码：instructor/<strong>setpswd</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;opassword: 旧密码<br>&nbsp;&nbsp;password: 新密码<br>}1
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="shop_辅导员管理_辅导员列表"></a>
+              (4) 辅导员列表：instructor/<strong>search</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;offset: 起始位置<br>&nbsp;&nbsp;length: 返回条数<br>&nbsp;&nbsp;name: 姓名<br>&nbsp;&nbsp;phone: 手机号码<br>&nbsp;&nbsp;shop_id: 店铺id<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result: [{<br>&nbsp;&nbsp;id: ID号<br>&nbsp;&nbsp;name: 姓名<br>&nbsp;&nbsp;idcard: 身份证号<br>&nbsp;&nbsp;company: 单位名称<br>&nbsp;&nbsp;phone: 手机号码<br>&nbsp;&nbsp;email: 邮箱地址<br>&nbsp;&nbsp;desc<br>&nbsp;&nbsp;img: 头像<br>&nbsp;&nbsp;enabled: 是否可用<br>&nbsp;&nbsp;password: 登录密码<br>}]<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="client_辅导员管理_获取辅导员"></a>
+              (5) 获取辅导员：instructor/<strong>get</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;id: ID号<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result: {<br>&nbsp;&nbsp;id: ID号<br>&nbsp;&nbsp;name: 姓名<br>&nbsp;&nbsp;idcard: 身份证号<br>&nbsp;&nbsp;company: 单位名称<br>&nbsp;&nbsp;phone: 手机号码<br>&nbsp;&nbsp;email: 邮箱地址<br>&nbsp;&nbsp;desc<br>&nbsp;&nbsp;img: 头像<br>&nbsp;&nbsp;enabled: 是否可用<br>&nbsp;&nbsp;password: 登录密码<br>}<br>}
+
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="client_辅导员管理_辅导员获取自己信息"></a>
+              (6) 辅导员获取自己信息：instructor/<strong>profile</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result: {<br>&nbsp;&nbsp;id: ID号<br>&nbsp;&nbsp;name: 姓名<br>&nbsp;&nbsp;idcard: 身份证号<br>&nbsp;&nbsp;company: 单位名称<br>&nbsp;&nbsp;phone: 手机号码<br>&nbsp;&nbsp;email: 邮箱地址<br>&nbsp;&nbsp;desc<br>&nbsp;&nbsp;img: 头像<br>&nbsp;&nbsp;password: 登录密码<br>}<br>}
+
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="shop_辅导员管理_删除辅导员"></a>
+              (7) 删除辅导员：instructor/<strong>delete</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;id: ID号<br>}
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <h3 style="text-decoration: underline"><small>模块：</small> class</h3>
+          <div style="margin-left: 20px;">
+            <a  name="shop_班级管理_新增班级"></a>
+              (1) 新增班级：class/<strong>create</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;name: 班级名称<br>&nbsp;&nbsp;product_id: 所属产品id<br>&nbsp;&nbsp;task_id: 任务id<br>&nbsp;&nbsp;activitie_id: 活动id<br>&nbsp;&nbsp;start_time: 开班时间<br>&nbsp;&nbsp;instructor_id: 辅导员id<br>&nbsp;&nbsp;state: 状态,0是未开班，1是开班，2是失效<br>}
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="shop_班级管理_更新班级"></a>
+              (2) 更新班级：class/<strong>edit</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;name: 班级名称<br>&nbsp;&nbsp;product_id: 所属产品id<br>&nbsp;&nbsp;task_id: 任务id<br>&nbsp;&nbsp;start_time: 开班时间<br>&nbsp;&nbsp;activitie_id: 活动id<br>&nbsp;&nbsp;instructor_id: 辅导员id<br>&nbsp;&nbsp;state: 状态,0是未开班，1是开班，2是失效<br>&nbsp;&nbsp;id: ID号<br>}
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="shop_班级管理_查询所属店铺的班级列表"></a>
+              (3) 查询所属店铺的班级列表：class/<strong>search_shop</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;offset: 起始位置<br>&nbsp;&nbsp;length: 返回条数<br>&nbsp;&nbsp;name: 班级名称<br>&nbsp;&nbsp;state: 状态,0是未开班，1是开班，2是失效<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result: [{<br>&nbsp;&nbsp;id: ID号<br>&nbsp;&nbsp;name: 班级名称<br>&nbsp;&nbsp;start_time: 开班时间<br>&nbsp;&nbsp;activitie_id: 活动id<br>&nbsp;&nbsp;state: 状态,0是未开班，1是开班，2是失效<br>}]<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="shop_班级管理_班级列表"></a>
+              (4) 班级列表：class/<strong>search</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;offset: 起始位置<br>&nbsp;&nbsp;length: 返回条数<br>&nbsp;&nbsp;name: 班级名称<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result: [{<br>&nbsp;&nbsp;id: ID号<br>&nbsp;&nbsp;name: 班级名称<br>&nbsp;&nbsp;start_time: 开班时间<br>&nbsp;&nbsp;activitie_id: 活动id<br>&nbsp;&nbsp;state: 状态,0是未开班，1是开班，2是失效<br>}]<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="client_班级管理_班级列表辅导员专用"></a>
+              (5) 班级列表辅导员专用：class/<strong>instructor_search</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;offset: 起始位置<br>&nbsp;&nbsp;length: 返回条数<br>&nbsp;&nbsp;name: 班级名称<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result: [{<br>&nbsp;&nbsp;id: ID号<br>&nbsp;&nbsp;name: 班级名称<br>&nbsp;&nbsp;activitie_id: 活动id<br>&nbsp;&nbsp;state: 状态,0是未开班，1是开班，2是失效<br>}]<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="client_班级管理_获取班级信息"></a>
+              (6) 获取班级信息：class/<strong>get</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;id: ID号<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result: {<br>&nbsp;&nbsp;id: ID号<br>&nbsp;&nbsp;name: 班级名称<br>&nbsp;&nbsp;start_time: 开班时间<br>&nbsp;&nbsp;activitie_id: 活动id<br>&nbsp;&nbsp;state: 状态,0是未开班，1是开班，2是失效<br>}<br>}
+
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="shop_班级管理_删除班级"></a>
+              (7) 删除班级：class/<strong>delete</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;id: ID号<br>}
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="client_班级管理_根据用户id和班级id获取rate"></a>
+              (8) 根据用户id和班级id获取rate：class/<strong>get_rate_by_user_id_and_class_id</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;offset: 起始位置<br>&nbsp;&nbsp;length: 返回条数<br>&nbsp;&nbsp;id: ID号<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result: [{<br>}]<br>}
+              </div>
+          </div>
+          <h3 style="text-decoration: underline"><small>模块：</small> evaluates</h3>
+          <div style="margin-left: 20px;">
+            <a  name="client_班级评价_新增评价"></a>
+              (1) 新增评价：evaluates/<strong>create</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;user_id: 用户id<br>&nbsp;&nbsp;grade: 评分<br>&nbsp;&nbsp;class_id: 所属班级id<br>&nbsp;&nbsp;content: 评价内容<br>}
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="client_班级评价_修改评价"></a>
+              (2) 修改评价：evaluates/<strong>edit</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;grade: 评分<br>&nbsp;&nbsp;content: 评价内容<br>&nbsp;&nbsp;user_id: 用户id<br>&nbsp;&nbsp;class_id: 所属班级id<br>}
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="admin_班级评价_删除评价"></a>
+              (3) 删除评价：evaluates/<strong>delete</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;id: ID号<br>}
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="无角色_班级评价_查询班级评价"></a>
+              (4) 查询班级评价：evaluates/<strong>search</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;offset: 起始位置<br>&nbsp;&nbsp;length: 返回条数<br>&nbsp;&nbsp;class_id: 所属班级id<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result: [{<br>&nbsp;&nbsp;grade: 评分<br>&nbsp;&nbsp;content: 评价内容<br>}]<br>}
+              </div>
+          </div>
+          <h3 style="text-decoration: underline"><small>模块：</small> class_users</h3>
+          <div style="margin-left: 20px;">
+            <a  name="shop_班级用户_班级新增学生"></a>
+              (1) 班级新增学生：class_users/<strong>create</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;class_id: 班级id<br>&nbsp;&nbsp;user_id: 用户id<br>&nbsp;&nbsp;purchased_id: 订单项id<br>}
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="shop_班级用户_班级删除学生"></a>
+              (2) 班级删除学生：class_users/<strong>delete</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;id: ID号<br>&nbsp;&nbsp;class_id: 班级id<br>&nbsp;&nbsp;user_id: 用户id<br>}
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="client_班级用户_查询班级有所有学生"></a>
+              (3) 查询班级有所有学生：class_users/<strong>search</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;offset: 起始位置<br>&nbsp;&nbsp;length: 返回条数<br>&nbsp;&nbsp;class_id: 班级id<br>&nbsp;&nbsp;user_id: 用户id<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result: [{<br>}]<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="client_无页面_根据订单项ID获取班级信息"></a>
+              (4) 根据订单项ID获取班级信息：class_users/<strong>get_class_by_purchased_id</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;purchased_id: 订单项id<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result: {<br>}<br>}
+
+              </div>
+          </div>
+          <h3 style="text-decoration: underline"><small>模块：</small> class_bulletin</h3>
+          <div style="margin-left: 20px;">
+            <a  name="client_班级公告_新增班级公告"></a>
+              (1) 新增班级公告：class_bulletin/<strong>create</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;class_id: 班级id<br>&nbsp;&nbsp;bulletin: 公告<br>}
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="client_班级公告_删除班级公告"></a>
+              (2) 删除班级公告：class_bulletin/<strong>delete</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;id: ID号<br>}
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="client_班级公告_更新班级公告"></a>
+              (3) 更新班级公告：class_bulletin/<strong>edit</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;class_id: 班级id<br>&nbsp;&nbsp;bulletin: 公告<br>&nbsp;&nbsp;id: ID号<br>}
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="无角色_班级公告_查询班级公告"></a>
+              (4) 查询班级公告：class_bulletin/<strong>search</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;offset: 起始位置<br>&nbsp;&nbsp;length: 返回条数<br>&nbsp;&nbsp;class_id: 班级id<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result: [{<br>&nbsp;&nbsp;id: ID号<br>&nbsp;&nbsp;bulletin: 公告<br>&nbsp;&nbsp;created_at: 创建时间<br>}]<br>}
+              </div>
+          </div>
+          <h3 style="text-decoration: underline"><small>模块：</small> class_file</h3>
+          <div style="margin-left: 20px;">
+            <a  name="client_无页面_创建班级文件"></a>
+              (1) 创建班级文件：class_file/<strong>create</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;class_id: 班级id<br>&nbsp;&nbsp;file_name: 用户原文件名<br>&nbsp;&nbsp;file_as_name: 存储于服务器的文件名<br>}
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="无角色_班级文件_查询班级文件"></a>
+              (2) 查询班级文件：class_file/<strong>search</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;offset: 起始位置<br>&nbsp;&nbsp;length: 返回条数<br>&nbsp;&nbsp;class_id: 班级id<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result: [{<br>&nbsp;&nbsp;id: ID号<br>&nbsp;&nbsp;class_id: 班级id<br>&nbsp;&nbsp;file_name: 用户原文件名<br>&nbsp;&nbsp;file_as_name: 存储于服务器的文件名<br>}]<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="client_班级文件_删除班级文件"></a>
+              (3) 删除班级文件：class_file/<strong>delete</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;id: ID号<br>}
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <h3 style="text-decoration: underline"><small>模块：</small> class_bulletin_class_file</h3>
+          <h3 style="text-decoration: underline"><small>模块：</small> file</h3>
+          <h3 style="text-decoration: underline"><small>模块：</small> md5</h3>
+          <h3 style="text-decoration: underline"><small>模块：</small> polyv</h3>
+          <h3 style="text-decoration: underline"><small>模块：</small> selected</h3>
+          <div style="margin-left: 20px;">
+            <a  name="shop_批量选课_查询某批次的用户"></a>
+              (1) 查询某批次的用户：selected/<strong>search_group_by_user</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;offset: 起始位置<br>&nbsp;&nbsp;length: 返回条数<br>&nbsp;&nbsp;selected_batch_id: 批次id<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result: [{<br>&nbsp;&nbsp;id: ID号<br>&nbsp;&nbsp;selected: 是否选中<br>}]<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="shop_批量选课_查询某批次的产品"></a>
+              (2) 查询某批次的产品：selected/<strong>search_group_by_product</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;offset: 起始位置<br>&nbsp;&nbsp;length: 返回条数<br>&nbsp;&nbsp;selected_batch_id: 批次id<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result: [{<br>&nbsp;&nbsp;id: ID号<br>&nbsp;&nbsp;selected: 是否选中<br>}]<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="shop_批量选课_查询"></a>
+              (3) 查询：selected/<strong>search</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;offset: 起始位置<br>&nbsp;&nbsp;length: 返回条数<br>&nbsp;&nbsp;user_id: 用户id<br>&nbsp;&nbsp;id: ID号<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result: [{<br>&nbsp;&nbsp;id: ID号<br>&nbsp;&nbsp;selected: 是否选中<br>&nbsp;&nbsp;user_id: 用户id<br>}]<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="shop_批量选课_修改选中状态"></a>
+              (4) 修改选中状态：selected/<strong>update</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;selected: 是否选中<br>&nbsp;&nbsp;id: ID号<br>}
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="shop_批量选课_删除"></a>
+              (5) 删除：selected/<strong>delete</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;id: ID号<br>}
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <h3 style="text-decoration: underline"><small>模块：</small> search_history</h3>
+          <div style="margin-left: 20px;">
+            <a  name="client_用户搜索历史_查询用户搜索历史"></a>
+              (1) 查询用户搜索历史：search_history/<strong>search</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;offset: 起始位置<br>&nbsp;&nbsp;length: 返回条数<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result: [{<br>&nbsp;&nbsp;id: ID号<br>&nbsp;&nbsp;user_id: 用户id<br>&nbsp;&nbsp;search_content: 搜索内容<br>}]<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="client_用户搜索历史_增加用户搜索历史"></a>
+              (2) 增加用户搜索历史：search_history/<strong>create</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;search_content: 搜索内容<br>}
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="client_用户搜索历史_清空搜索历史"></a>
+              (3) 清空搜索历史：search_history/<strong>delete_all</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;id: ID号<br>}
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="client_用户搜索历史_删除指定用户搜索历史"></a>
+              (4) 删除指定用户搜索历史：search_history/<strong>delete</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;id: ID号<br>}
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <h3 style="text-decoration: underline"><small>模块：</small> selected_batch</h3>
+          <div style="margin-left: 20px;">
+            <a  name="shop_选课批次_查询批次"></a>
+              (1) 查询批次：selected_batch/<strong>search</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;offset: 起始位置<br>&nbsp;&nbsp;length: 返回条数<br>&nbsp;&nbsp;remarks: 备注<br>&nbsp;&nbsp;state: 状态:0代表无效，1代表有效，2代表已经开课<br>&nbsp;&nbsp;created_at: 创建时间<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result: [{<br>&nbsp;&nbsp;batch_num: 批号<br>&nbsp;&nbsp;remarks: 备注<br>&nbsp;&nbsp;state: 状态:0代表无效，1代表有效，2代表已经开课<br>&nbsp;&nbsp;id: ID号<br>&nbsp;&nbsp;created_at: 创建时间<br>}]<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="shop_选课批次_更新批次"></a>
+              (2) 更新批次：selected_batch/<strong>edit</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;remarks: 备注<br>&nbsp;&nbsp;state: 状态:0代表无效，1代表有效，2代表已经开课<br>&nbsp;&nbsp;id: ID号<br>}
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="shop_选课批次_新增批次"></a>
+              (3) 新增批次：selected_batch/<strong>create</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;batch_num: 批号<br>&nbsp;&nbsp;remarks: 备注<br>&nbsp;&nbsp;state: 状态:0代表无效，1代表有效，2代表已经开课<br>}
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <h3 style="text-decoration: underline"><small>模块：</small> discuss_theme</h3>
+          <div style="margin-left: 20px;">
+            <a  name="shop_主题讨论区_删除主题资源"></a>
+              (1) 删除主题资源：discuss_theme/<strong>delete</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;id: ID号<br>&nbsp;&nbsp;resource_id: 资源id<br>}
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="shop_主题讨论区_增加主题资源"></a>
+              (2) 增加主题资源：discuss_theme/<strong>create</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;content: 内容<br>&nbsp;&nbsp;sort: 排序<br>&nbsp;&nbsp;title: 标题<br>}
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="shop_主题讨论区_查询主题资源"></a>
+              (3) 查询主题资源：discuss_theme/<strong>search</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;offset: 起始位置<br>&nbsp;&nbsp;length: 返回条数<br>&nbsp;&nbsp;title: 标题<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result: [{<br>&nbsp;&nbsp;id: ID号<br>&nbsp;&nbsp;content: 内容<br>&nbsp;&nbsp;sort: 排序<br>&nbsp;&nbsp;title: 标题<br>&nbsp;&nbsp;resource_id: 资源id<br>}]<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="shop_主题讨论区_获取单个主题资源"></a>
+              (4) 获取单个主题资源：discuss_theme/<strong>get</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;id: ID号<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result: {<br>&nbsp;&nbsp;content: 内容<br>&nbsp;&nbsp;sort: 排序<br>&nbsp;&nbsp;title: 标题<br>}<br>}
+
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="client_主题讨论区_获取单个主题资源"></a>
+              (5) 获取单个主题资源：discuss_theme/<strong>get_with_comment</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;id: ID号<br>&nbsp;&nbsp;resource_id: 资源id<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result: {<br>&nbsp;&nbsp;id: ID号<br>&nbsp;&nbsp;content: 内容<br>&nbsp;&nbsp;sort: 排序<br>&nbsp;&nbsp;title: 标题<br>}<br>}
+
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="shop_主题讨论区_修改单个主题资源"></a>
+              (6) 修改单个主题资源：discuss_theme/<strong>edit</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;content: 内容<br>&nbsp;&nbsp;sort: 排序<br>&nbsp;&nbsp;title: 标题<br>&nbsp;&nbsp;id: ID号<br>}
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <h3 style="text-decoration: underline"><small>模块：</small> comment</h3>
+          <div style="margin-left: 20px;">
+            <a  name="client_主题讨论区_评论主题"></a>
+              (1) 评论主题：comment/<strong>create</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;discuss_theme_id: 主题表id<br>&nbsp;&nbsp;content: 评论内容<br>&nbsp;&nbsp;product_id: 产品id<br>}
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="client_主题讨论区_获取主题的评论"></a>
+              (2) 获取主题的评论：comment/<strong>get_comment_by_theme</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;offset: 起始位置<br>&nbsp;&nbsp;length: 返回条数<br>&nbsp;&nbsp;discuss_theme_id: 主题表id<br>&nbsp;&nbsp;class_id: 班级id<br>&nbsp;&nbsp;user_id: 用户id<br>&nbsp;&nbsp;product_id: 产品id<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result: [{<br>&nbsp;&nbsp;content: 评论内容<br>&nbsp;&nbsp;created_at: 创建时间<br>}]<br>}
+              </div>
+          </div>
+          <h3 style="text-decoration: underline"><small>模块：</small> banner</h3>
+          <div style="margin-left: 20px;">
+            <a  name="无角色_轮播图_查询轮播图"></a>
+              (1) 查询轮播图：banner/<strong>search</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;offset: 起始位置<br>&nbsp;&nbsp;length: 返回条数<br>&nbsp;&nbsp;shop_id: 店铺id<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result: [{<br>&nbsp;&nbsp;name: 名称<br>&nbsp;&nbsp;file_name: 图片名<br>&nbsp;&nbsp;shop_id: 店铺id<br>&nbsp;&nbsp;sort: 排序<br>&nbsp;&nbsp;url: 跳转地址<br>&nbsp;&nbsp;id: ID号<br>&nbsp;&nbsp;color: 颜色<br>}]<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="无角色_轮播图_查询轮播图"></a>
+              (2) 查询轮播图：banner/<strong>shop_search</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;offset: 起始位置<br>&nbsp;&nbsp;length: 返回条数<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result: [{<br>&nbsp;&nbsp;name: 名称<br>&nbsp;&nbsp;file_name: 图片名<br>&nbsp;&nbsp;shop_id: 店铺id<br>&nbsp;&nbsp;sort: 排序<br>&nbsp;&nbsp;url: 跳转地址<br>&nbsp;&nbsp;id: ID号<br>&nbsp;&nbsp;color: 颜色<br>}]<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="shop_轮播图_查询不报所传id的轮播图"></a>
+              (3) 查询不报所传id的轮播图：banner/<strong>search_not_id</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;offset: 起始位置<br>&nbsp;&nbsp;length: 返回条数<br>&nbsp;&nbsp;shop_id: 店铺id<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result: [{<br>&nbsp;&nbsp;id: ID号<br>&nbsp;&nbsp;sort: 排序<br>}]<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="shop_轮播图_增加轮播图"></a>
+              (4) 增加轮播图：banner/<strong>create</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;name: 名称<br>&nbsp;&nbsp;file_name: 图片名<br>&nbsp;&nbsp;shop_id: 店铺id<br>&nbsp;&nbsp;sort: 排序<br>&nbsp;&nbsp;url: 跳转地址<br>&nbsp;&nbsp;color: 颜色<br>}
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="shop_轮播图_修改轮播图"></a>
+              (5) 修改轮播图：banner/<strong>update</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;name: 名称<br>&nbsp;&nbsp;file_name: 图片名<br>&nbsp;&nbsp;shop_id: 店铺id<br>&nbsp;&nbsp;sort: 排序<br>&nbsp;&nbsp;url: 跳转地址<br>&nbsp;&nbsp;color: 颜色<br>&nbsp;&nbsp;id: ID号<br>}
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="shop_轮播图_删除轮播图"></a>
+              (6) 删除轮播图：banner/<strong>delete</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;id: ID号<br>}
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <h3 style="text-decoration: underline"><small>模块：</small> product_news</h3>
+          <div style="margin-left: 20px;">
+            <a  name="shop_项目店铺新闻_获取项目包下的新闻"></a>
+              (1) 获取项目包下的新闻：product_news/<strong>search</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;offset: 起始位置<br>&nbsp;&nbsp;length: 返回条数<br>&nbsp;&nbsp;package_id: 项目包<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result: [{<br>&nbsp;&nbsp;id: ID号<br>&nbsp;&nbsp;title: 新闻标题<br>&nbsp;&nbsp;url: 新闻跳转地址<br>&nbsp;&nbsp;content: 新闻内容（html）<br>}]<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="shop_项目店铺新闻_在项目包下增加一则新闻"></a>
+              (2) 在项目包下增加一则新闻：product_news/<strong>insert</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;package_id: 项目包<br>&nbsp;&nbsp;title: 新闻标题<br>&nbsp;&nbsp;content: 新闻内容（html）<br>&nbsp;&nbsp;url: 新闻跳转地址<br>}
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="shop_项目店铺新闻_在项目包下删除一则新闻"></a>
+              (3) 在项目包下删除一则新闻：product_news/<strong>delete</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;id: ID号<br>}
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="shop_项目店铺新闻_更新一则新闻"></a>
+              (4) 更新一则新闻：product_news/<strong>update</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;title: 新闻标题<br>&nbsp;&nbsp;content: 新闻内容（html）<br>&nbsp;&nbsp;url: 新闻跳转地址<br>&nbsp;&nbsp;id: ID号<br>}
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="shop_项目店铺新闻_获取一则新闻"></a>
+              (5) 获取一则新闻：product_news/<strong>news</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;id: ID号<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result: {<br>&nbsp;&nbsp;title: 新闻标题<br>&nbsp;&nbsp;content: 新闻内容（html）<br>&nbsp;&nbsp;url: 新闻跳转地址<br>}<br>}
+
+              </div>
+          </div>
+          <h3 style="text-decoration: underline"><small>模块：</small> product_notices</h3>
+          <div style="margin-left: 20px;">
+            <a  name="shop_项目店铺公告_获取项目包下的公告"></a>
+              (1) 获取项目包下的公告：product_notices/<strong>search</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;offset: 起始位置<br>&nbsp;&nbsp;length: 返回条数<br>&nbsp;&nbsp;package_id: 项目包<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result: [{<br>&nbsp;&nbsp;id: ID号<br>&nbsp;&nbsp;title: 公告标题<br>&nbsp;&nbsp;url: 公告跳转地址<br>&nbsp;&nbsp;content: 公告内容（html）<br>}]<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="shop_项目店铺公告_在项目包下增加一条公告"></a>
+              (2) 在项目包下增加一条公告：product_notices/<strong>insert</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;package_id: 项目包<br>&nbsp;&nbsp;title: 公告标题<br>&nbsp;&nbsp;content: 公告内容（html）<br>&nbsp;&nbsp;url: 公告跳转地址<br>}
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="shop_项目店铺公告_在项目包下删除一条公告"></a>
+              (3) 在项目包下删除一条公告：product_notices/<strong>delete</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;id: ID号<br>}
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="shop_项目店铺公告_更新一条公告"></a>
+              (4) 更新一条公告：product_notices/<strong>update</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;title: 公告标题<br>&nbsp;&nbsp;content: 公告内容（html）<br>&nbsp;&nbsp;url: 公告跳转地址<br>&nbsp;&nbsp;id: ID号<br>}
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="shop_项目店铺公告_获取一条公告"></a>
+              (5) 获取一条公告：product_notices/<strong>notice</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;id: ID号<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result: {<br>&nbsp;&nbsp;title: 公告标题<br>&nbsp;&nbsp;content: 公告内容（html）<br>&nbsp;&nbsp;url: 公告跳转地址<br>}<br>}
+
+              </div>
+          </div>
+          <h3 style="text-decoration: underline"><small>模块：</small> product_header</h3>
+          <h3 style="text-decoration: underline"><small>模块：</small> product_small_banner</h3>
+          <div style="margin-left: 20px;">
+            <a  name="无角色_项目店铺小轮播图信息_获取项目包下面的小轮播图"></a>
+              (1) 获取项目包下面的小轮播图：product_small_banner/<strong>search</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;offset: 起始位置<br>&nbsp;&nbsp;length: 返回条数<br>&nbsp;&nbsp;package_id: 项目包<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result: [{<br>&nbsp;&nbsp;id: ID号<br>&nbsp;&nbsp;img_file_name: 图片名字<br>&nbsp;&nbsp;url: 图片跳转地址<br>}]<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="无角色_项目店铺小轮播图信息_向项目包中插入一张小轮播图"></a>
+              (2) 向项目包中插入一张小轮播图：product_small_banner/<strong>insert</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;package_id: 项目包<br>&nbsp;&nbsp;img_file_name: 图片名字<br>&nbsp;&nbsp;url: 图片跳转地址<br>}
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="无角色_项目店铺小轮播图信息_删除项目包中的一张小轮播图"></a>
+              (3) 删除项目包中的一张小轮播图：product_small_banner/<strong>delete</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;id: ID号<br>}
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="无角色_项目店铺小轮播图信息_根据id查询轮播图"></a>
+              (4) 根据id查询轮播图：product_small_banner/<strong>banner</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;id: ID号<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result: {<br>&nbsp;&nbsp;id: ID号<br>&nbsp;&nbsp;img_file_name: 图片名字<br>&nbsp;&nbsp;url: 图片跳转地址<br>&nbsp;&nbsp;package_id: 项目包<br>}<br>}
+
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="无角色_项目店铺小轮播图信息_更新轮播图信息"></a>
+              (5) 更新轮播图信息：product_small_banner/<strong>update</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;img_file_name: 图片名字<br>&nbsp;&nbsp;url: 图片跳转地址<br>&nbsp;&nbsp;id: ID号<br>}
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <h3 style="text-decoration: underline"><small>模块：</small> product_start_notice</h3>
+          <h3 style="text-decoration: underline"><small>模块：</small> product_operation_guide</h3>
+          <h3 style="text-decoration: underline"><small>模块：</small> icon</h3>
+          <div style="margin-left: 20px;">
+            <a  name="shop_图标_获取对应图标"></a>
+              (1) 获取对应图标：icon/<strong>search</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;offset: 起始位置<br>&nbsp;&nbsp;length: 返回条数<br>&nbsp;&nbsp;state: 状态:0未开始，1正在进行，2是已经完成<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result: [{<br>&nbsp;&nbsp;file_name: 图标文件名<br>&nbsp;&nbsp;type: 类型<br>}]<br>}
+              </div>
+          </div>
+          <h3 style="text-decoration: underline"><small>模块：</small> icon_type</h3>
+          <div style="margin-left: 20px;">
+            <a  name="shop_图标类型_获取对应图标类型"></a>
+              (1) 获取对应图标类型：icon_type/<strong>search</strong><br><br>
+              输入参数：
+              <div class="code">
+              
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result: [{<br>&nbsp;&nbsp;id: ID号<br>&nbsp;&nbsp;type: 图标类型：课程，讨论区，心得体会<br>}]<br>}
+              </div>
+          </div>
+          <h3 style="text-decoration: underline"><small>模块：</small> private</h3>
+          <div style="margin-left: 20px;">
+            <a  name="client_用户答题答案记录_提交课后作业"></a>
+              (1) 提交课后作业：private/<strong>create</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;content: 答案json<br>&nbsp;&nbsp;resource_id: 资源id<br>&nbsp;&nbsp;purchased_id: 订单项id<br>}
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="client_用户答题答案记录_根据用户token,resources_id查询答案记录"></a>
+              (2) 根据用户token,resources_id查询答案记录：private/<strong>get</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;resource_id: 资源id<br>&nbsp;&nbsp;purchased_id: 订单项id<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result: {<br>&nbsp;&nbsp;id: ID号<br>&nbsp;&nbsp;content: 答案json<br>}<br>}
+
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="client_用户答题答案记录_根据订单项id和资源id查找答案"></a>
+              (3) 根据订单项id和资源id查找答案：private/<strong>get_by_purchased_id</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;purchased_id: 订单项id<br>&nbsp;&nbsp;resource_id: 资源id<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result: {<br>&nbsp;&nbsp;id: ID号<br>&nbsp;&nbsp;content: 答案json<br>}<br>}
+
+              </div>
+          </div>
+          <h3 style="text-decoration: underline"><small>模块：</small> answ_question</h3>
+          <div style="margin-left: 20px;">
+            <a  name="client_答疑区_新增答疑"></a>
+              (1) 新增答疑：answ_question/<strong>create</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;title: 标题<br>&nbsp;&nbsp;content: 内容<br>&nbsp;&nbsp;product_id: 项目id<br>}
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="client_答疑区_查询答疑"></a>
+              (2) 查询答疑：answ_question/<strong>search</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;offset: 起始位置<br>&nbsp;&nbsp;length: 返回条数<br>&nbsp;&nbsp;product_id: 项目id<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result: [{<br>&nbsp;&nbsp;id: ID号<br>&nbsp;&nbsp;title: 标题<br>&nbsp;&nbsp;content: 内容<br>&nbsp;&nbsp;created_at: 创建时间<br>}]<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="无角色_无页面_根据辅导员id查询"></a>
+              (3) 根据辅导员id查询：answ_question/<strong>search_by_instructor</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;offset: 起始位置<br>&nbsp;&nbsp;length: 返回条数<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result: [{<br>&nbsp;&nbsp;id: ID号<br>&nbsp;&nbsp;title: 标题<br>&nbsp;&nbsp;content: 内容<br>}]<br>}
+              </div>
+          </div>
+          <h3 style="text-decoration: underline"><small>模块：</small> answ_question_comment</h3>
+          <div style="margin-left: 20px;">
+            <a  name="client_答疑回复_查询回复"></a>
+              (1) 查询回复：answ_question_comment/<strong>search</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;offset: 起始位置<br>&nbsp;&nbsp;length: 返回条数<br>&nbsp;&nbsp;answ_question_id: 答疑表id<br>&nbsp;&nbsp;user_id: 用户id<br>&nbsp;&nbsp;class_id: 班级id<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result: [{<br>&nbsp;&nbsp;id: ID号<br>&nbsp;&nbsp;content: 回复内容<br>&nbsp;&nbsp;created_at: 创建时间<br>}]<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="client_答疑回复_增加回复"></a>
+              (2) 增加回复：answ_question_comment/<strong>create</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;answ_question_id: 答疑表id<br>&nbsp;&nbsp;content: 回复内容<br>&nbsp;&nbsp;class_id: 班级id<br>}
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <h3 style="text-decoration: underline"><small>模块：</small> package</h3>
+          <div style="margin-left: 20px;">
+            <a  name="无角色_项目包_获取项目下面的子项目"></a>
+              (1) 获取项目下面的子项目：package/<strong>search</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;offset: 起始位置<br>&nbsp;&nbsp;length: 返回条数<br>&nbsp;&nbsp;id: ID号<br>&nbsp;&nbsp;name: 名称<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result: [{<br>&nbsp;&nbsp;id: ID号<br>&nbsp;&nbsp;name: 名称<br>&nbsp;&nbsp;title1: 标题2<br>&nbsp;&nbsp;title2: 标题1<br>&nbsp;&nbsp;img: 图片<br>&nbsp;&nbsp;background: 背景图<br>}]<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="shop_店铺的项目包管理_店铺搜索项目包"></a>
+              (2) 店铺搜索项目包：package/<strong>shop_search</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;offset: 起始位置<br>&nbsp;&nbsp;length: 返回条数<br>&nbsp;&nbsp;name: 名称<br>&nbsp;&nbsp;shop_id: 店铺id<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result: [{<br>&nbsp;&nbsp;id: ID号<br>&nbsp;&nbsp;name: 名称<br>&nbsp;&nbsp;title1: 标题2<br>&nbsp;&nbsp;title2: 标题1<br>&nbsp;&nbsp;background: 背景图<br>&nbsp;&nbsp;img: 图片<br>}]<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="shop_店铺的项目包管理_店铺修改项目包"></a>
+              (3) 店铺修改项目包：package/<strong>shop_edit</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;name: 名称<br>&nbsp;&nbsp;title1: 标题2<br>&nbsp;&nbsp;title2: 标题1<br>&nbsp;&nbsp;background: 背景图<br>&nbsp;&nbsp;img: 图片<br>&nbsp;&nbsp;id: ID号<br>}
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="shop_店铺的项目包管理_店铺增加项目包"></a>
+              (4) 店铺增加项目包：package/<strong>shop_create</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;name: 名称<br>&nbsp;&nbsp;title1: 标题2<br>&nbsp;&nbsp;title2: 标题1<br>&nbsp;&nbsp;background: 背景图<br>&nbsp;&nbsp;img: 图片<br>&nbsp;&nbsp;shop_id: 店铺id<br>}
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="shop_店铺的项目包管理_店铺删除项目包"></a>
+              (5) 店铺删除项目包：package/<strong>shop_delete</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;id: ID号<br>}
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <h3 style="text-decoration: underline"><small>模块：</small> package_product</h3>
+          <div style="margin-left: 20px;">
+            <a  name="无角色_项目首页_查询项目包下面的产品"></a>
+              (1) 查询项目包下面的产品：package_product/<strong>search</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;offset: 起始位置<br>&nbsp;&nbsp;length: 返回条数<br>&nbsp;&nbsp;package_id: 项目包id<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result: [{<br>}]<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="shop_店铺的项目包管理_查询项目包包含的产品"></a>
+              (2) 查询项目包包含的产品：package_product/<strong>shop_search</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;offset: 起始位置<br>&nbsp;&nbsp;length: 返回条数<br>&nbsp;&nbsp;package_id: 项目包id<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result: [{<br>}]<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="shop_店铺的项目包管理_删除项目包包含的产品"></a>
+              (3) 删除项目包包含的产品：package_product/<strong>shop_delete</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;id: ID号<br>&nbsp;&nbsp;product_id: 项目包里面的产品id<br>&nbsp;&nbsp;package_id: 项目包id<br>}
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="shop_店铺的项目包管理_增加项目包包含的产品"></a>
+              (4) 增加项目包包含的产品：package_product/<strong>shop_create</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;product_id: 项目包里面的产品id<br>&nbsp;&nbsp;package_id: 项目包id<br>}
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <h3 style="text-decoration: underline"><small>模块：</small> proportion</h3>
+          <div style="margin-left: 20px;">
+            <a  name="无角色_无页面_增加分数比例"></a>
+              (1) 增加分数比例：proportion/<strong>create</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;resources: 比例json<br>&nbsp;&nbsp;product_id: 产品id<br>&nbsp;&nbsp;shop_id: 店铺id<br>}
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="无角色_无页面_查找分数比例"></a>
+              (2) 查找分数比例：proportion/<strong>get</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;product_id: 产品id<br>&nbsp;&nbsp;shop_id: 店铺id<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result: {<br>&nbsp;&nbsp;resources: 比例json<br>}<br>}
+
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="无角色_无页面_更新分数比例"></a>
+              (3) 更新分数比例：proportion/<strong>edit</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;resources: 比例json<br>&nbsp;&nbsp;product_id: 产品id<br>&nbsp;&nbsp;shop_id: 店铺id<br>}
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <h3 style="text-decoration: underline"><small>模块：</small> package_section</h3>
+          <div style="margin-left: 20px;">
+            <a  name="shop_板块管理_增加项目包"></a>
+              (1) 增加项目包：package_section/<strong>shop_create</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;package_id<br>&nbsp;&nbsp;section_id<br>}
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="shop_板块管理_删除项目包"></a>
+              (2) 删除项目包：package_section/<strong>shop_delete</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;id: ID号<br>}
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="shop_板块管理_查询项目包"></a>
+              (3) 查询项目包：package_section/<strong>shop_search</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;offset: 起始位置<br>&nbsp;&nbsp;length: 返回条数<br>&nbsp;&nbsp;section_id<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result: [{<br>&nbsp;&nbsp;id: ID号<br>}]<br>}
+              </div>
+          </div>
+          <h3 style="text-decoration: underline"><small>模块：</small> sms</h3>
+          <h3 style="text-decoration: underline"><small>模块：</small> attribute_value</h3>
+          <div style="margin-left: 20px;">
+            <a  name="shop_店铺项目包属性管理_修改项目包属性的属性值"></a>
+              (1) 修改项目包属性的属性值：attribute_value/<strong>shop_edit</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;sort: 排序<br>&nbsp;&nbsp;name: 属性值<br>&nbsp;&nbsp;id: ID号<br>}
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="shop_店铺项目包属性管理_删除项目包属性的属性值"></a>
+              (2) 删除项目包属性的属性值：attribute_value/<strong>shop_delete</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;id: ID号<br>}
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <h3 style="text-decoration: underline"><small>模块：</small> attribute</h3>
+          <div style="margin-left: 20px;">
+            <a  name="无角色_项目包属性_搜索出店铺的属性和对应的属性值"></a>
+              (1) 搜索出店铺的属性和对应的属性值：attribute/<strong>search</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;offset: 起始位置<br>&nbsp;&nbsp;length: 返回条数<br>&nbsp;&nbsp;id: ID号<br>&nbsp;&nbsp;shop_id: 店铺id<br>&nbsp;&nbsp;name: 属性名字<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result: [{<br>&nbsp;&nbsp;id: ID号<br>&nbsp;&nbsp;name: 属性名字<br>}]<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="shop_店铺项目包属性管理_查看店铺项目包属性"></a>
+              (2) 查看店铺项目包属性：attribute/<strong>shop_search</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;offset: 起始位置<br>&nbsp;&nbsp;length: 返回条数<br>&nbsp;&nbsp;shop_id: 店铺id<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result: [{<br>&nbsp;&nbsp;id: ID号<br>&nbsp;&nbsp;name: 属性名字<br>}]<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="shop_店铺项目包属性管理_更改店铺项目包属性"></a>
+              (3) 更改店铺项目包属性：attribute/<strong>shop_edit</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;name: 属性名字<br>&nbsp;&nbsp;id: ID号<br>}
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="shop_店铺项目包属性管理_删除项目包属性"></a>
+              (4) 删除项目包属性：attribute/<strong>shop_delete</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;id: ID号<br>}
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="shop_店铺项目包属性管理_增加项目包属性"></a>
+              (5) 增加项目包属性：attribute/<strong>shop_create</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;name: 属性名字<br>&nbsp;&nbsp;shop_id: 店铺id<br>}
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="shop_店铺项目包属性管理_获取项目包属性的属性值"></a>
+              (6) 获取项目包属性的属性值：attribute/<strong>shop_get_value</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;offset: 起始位置<br>&nbsp;&nbsp;length: 返回条数<br>&nbsp;&nbsp;id: ID号<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result: [{<br>&nbsp;&nbsp;id: ID号<br>&nbsp;&nbsp;name: 属性名字<br>}]<br>}
+              </div>
+          </div>
+          <h3 style="text-decoration: underline"><small>模块：</small> package_attribute_value</h3>
+          <div style="margin-left: 20px;">
+            <a  name="shop_无页面_test"></a>
+              (1) test：package_attribute_value/<strong>search</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;offset: 起始位置<br>&nbsp;&nbsp;length: 返回条数<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result: [{<br>&nbsp;&nbsp;package_id: 项目包id<br>&nbsp;&nbsp;attribute_value_id: 属性值id<br>}]<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="shop_店铺的项目包管理_搜索出项目包的属性和对应属性值"></a>
+              (2) 搜索出项目包的属性和对应属性值：package_attribute_value/<strong>shop_search</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;offset: 起始位置<br>&nbsp;&nbsp;length: 返回条数<br>&nbsp;&nbsp;package_id: 项目包id<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result: [{<br>&nbsp;&nbsp;id: ID号<br>}]<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="shop_店铺的项目包管理_删除项目包和属性的关联关系"></a>
+              (3) 删除项目包和属性的关联关系：package_attribute_value/<strong>shop_delete</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;id: ID号<br>}
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="shop_店铺的项目包管理_增加项目包和属性的关联关系"></a>
+              (4) 增加项目包和属性的关联关系：package_attribute_value/<strong>shop_create</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;package_id: 项目包id<br>&nbsp;&nbsp;attribute_value_id: 属性值id<br>}
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <h3 style="text-decoration: underline"><small>模块：</small> attribute_value_type</h3>
+          <div style="margin-left: 20px;">
+            <a  name="shop_店铺项目包属性管理_删除项目包关联属性"></a>
+              (1) 删除项目包关联属性：attribute_value_type/<strong>shop_delete</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;id: ID号<br>}
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <h3 style="text-decoration: underline"><small>模块：</small> navigation_bar</h3>
+          <div style="margin-left: 20px;">
+            <a  name="无角色_导航栏_undefined"></a>
+              (1) ：navigation_bar/<strong>search</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;offset: 起始位置<br>&nbsp;&nbsp;length: 返回条数<br>&nbsp;&nbsp;shop_id<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result: [{<br>&nbsp;&nbsp;id: ID号<br>&nbsp;&nbsp;name: 导航栏每个值得名字<br>&nbsp;&nbsp;url: 导航栏的链接<br>}]<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="shop_店铺导航栏管理_获取店铺对应导航栏"></a>
+              (2) 获取店铺对应导航栏：navigation_bar/<strong>shop_search</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;offset: 起始位置<br>&nbsp;&nbsp;length: 返回条数<br>}
+
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>&nbsp;&nbsp;result: [{<br>&nbsp;&nbsp;id: ID号<br>&nbsp;&nbsp;name: 导航栏每个值得名字<br>&nbsp;&nbsp;url: 导航栏的链接<br>&nbsp;&nbsp;sort: 排序<br>}]<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="shop_店铺导航管理_增加导航"></a>
+              (3) 增加导航：navigation_bar/<strong>shop_create</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;name: 导航栏每个值得名字<br>&nbsp;&nbsp;url: 导航栏的链接<br>&nbsp;&nbsp;sort: 排序<br>}
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="shop_店铺导航管理_修改导航"></a>
+              (4) 修改导航：navigation_bar/<strong>shop_edit</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;name: 导航栏每个值得名字<br>&nbsp;&nbsp;url: 导航栏的链接<br>&nbsp;&nbsp;sort: 排序<br>&nbsp;&nbsp;id: ID号<br>}
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+          <div style="margin-left: 20px;">
+            <a  name="shop_店铺导航管理_删除导航"></a>
+              (5) 删除导航：navigation_bar/<strong>shop_delete</strong><br><br>
+              输入参数：
+              <div class="code">
+              {<br>&nbsp;&nbsp;id: ID号<br>}
+              </div>
+              返回数据:
+              <div class="code">
+              {<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}
+              </div>
+          </div>
+      </div>
+        
+    </div>
+  </body>
+</html>

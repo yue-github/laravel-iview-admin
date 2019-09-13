@@ -1,0 +1,25 @@
+{
+  "name": "codec",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "private": true,
+  "author": "Yang",
+  "license": "ISC",
+  "dependencies": {
+    "@types/ejs": "^2.6.3",
+    "@types/express": "^4.16.1",
+    "@types/moment": "^2.13.0",
+    "@types/node": "^11.11.0",
+    "@types/xml2js": "^0.4.3",
+    "ejs": "^2.6.1",
+    "express": "^4.17.1",
+    "moment": "^2.24.0",
+    "node-cmd": "^3.0.0",
+    "xml2js": "^0.4.19",
+    "xmlbuilder": "^13.0.2"
+  }
+}

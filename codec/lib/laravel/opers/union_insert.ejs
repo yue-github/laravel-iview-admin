@@ -1,0 +1,31 @@
+    public function <%=oper.$.name%>(Request $request) {
+        DB::beginTransaction();
+    <%_ for (var i in locals.data) { 
+            var table_name_id_arr = i.split('.')
+            if (table_name_id_arr.length == 2) {
+                var t = entity(locals.model, table_name_id_arr[0])
+                echo('        $' + table_name_id_arr[1] + ' = DB::table("' + table_name_id_arr[0] + '")->insertGetId([\n');
+    
+                for (var j in locals.data[i]) {
+                    // echo(item.$.time)
+                    if (typeof(locals.data[i][j]) == "object") {
+                        echo('            "' + j + '" => ' + '$' + locals.data[i][j] + ',\n')
+                    } else if (locals.data[i][j].split('.')[0] == 'CONSTANT') {
+                        echo('            "'+ j +'" => ' + '"' + locals.data[i][j].split('.')[1] + '",\n')
+                    } else if (locals.data[i][j].split('.')[0] == 'token') {
+                        echo('            "'+ j +'" => ' + '$this->token->'+ locals.data[i][j].split('.')[1]+',\n')
+                    } else {
+                        echo('            "'+ j +'" => ' + '$request->input("'+ locals.data[i][j] + '"),\n')
+                    }
+                }
+                if (t.$.time === "true") {
+                        echo('            "created_at" => date("Y-m-d H:i:s"),\n')
+                        echo('            "updated_at" => date("Y-m-d H:i:s"),\n')
+                } 
+                        echo('          ]);\n')    
+            }
+    } _%>
+        
+        DB::commit();
+        return $this->success();
+    }

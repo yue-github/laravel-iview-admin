@@ -1,0 +1,34 @@
+    //<%=oper.$.label%>
+    public function <%=oper.$.name%>(Request $request)
+    {
+        <%- include('validate', {val: {params: locals.must}}) %>
+        $<%=table.$.name%> = DB::table('<%=table.$.name%>')
+        <%_ for (var i in locals.must) { _%>
+            ->where('<%=locals.must[i]%>', $request->input('<%=locals.must[i]%>'))
+        <%_ } _%>
+            ->first();
+
+        if (!$<%=table.$.name%>) {
+            return $this->fails('订单不存在！');
+        }
+        $time = time() - strtotime($<%=table.$.name%>->created_at);
+        if ($time < 3600) {
+            DB::table('<%=locals.tab.name%>')
+            <%_ for (var i in locals.tab.must) { _%>
+                <%_ if(i == 'id') { _%>
+                ->where('<%=i%>', $this->token->id)
+                <%_ } else { _%>
+                ->where('<%=i%>', $request->input('<%=locals.tab.must[i]%>'))
+                <%_ } _%>
+            <%_ } _%>
+                ->decrement('<%=locals.tab.dec%>', $order->total);
+
+            DB::table('<%=table.$.name%>')
+            <%_ for (var i in locals.must) { _%>
+                ->where('<%=locals.must[i]%>', $request->input('<%=locals.must[i]%>'))
+            <%_ } _%>
+                ->update(['state' => 4]);
+            return $this->success('取消成功');
+        }
+        return $this->fails('下单已超1小时,不能取消！');
+    }

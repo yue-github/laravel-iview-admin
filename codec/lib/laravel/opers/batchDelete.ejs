@@ -1,0 +1,18 @@
+    //批量删除
+    public function <%=oper.$.name%>(Request $request)
+    {
+        <%- include('validate', {val: {params: locals.with}}) %>
+        $ids = json_decode($request->input('id'));
+        $result = DB::table('<%=table.$.name%>')
+        <%_ for (var i in locals.with) { _%>
+            <%_ if(i != 'id'){ _%>
+            ->where('<%=i%>',<%-tcvt(locals.with[i])%>)
+            <%_ } _%>
+        <%_ } _%>
+            ->whereIn('id',$ids)
+            ->delete();
+        if ($result) {
+            return $this->content('删除成功');
+        }
+        return $this->fails('删除失败');
+    }

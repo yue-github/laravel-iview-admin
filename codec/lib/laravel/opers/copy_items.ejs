@@ -1,0 +1,43 @@
+    public function <%=oper.$.name%>(Request $request) {
+<%- include('validate', {hasItem: true, param: locals.data}) %>
+        $parentId = DB::table('<%=table.$.name%>')
+            ->insertGetId([
+                <%_ if (Array.isArray(locals.data)) { _%>
+                <%_ for (var i = 0; i < locals.data.length; i++) { _%>
+                '<%=locals.data[i]%>' => $request->input('<%=locals.data[i]%>'),
+                <%_ } _%>
+                <%_ } else if (typeof(locals.data) === 'object') { _%>
+                <%_ for (var i in locals.data) { _%>
+                '<%=i%>' => $request->input('<%=locals.data[i]%>'),
+                <%_ } _%>
+                <%_ } _%>
+                <%_ if (table.$.time === 'true') { _%>
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s')
+                <%_ } _%>
+            ]);
+        <%_ if (locals.with && locals.with.table && locals.with.key && locals.with.items) { _%>
+        $items = $request->input('items');
+        for (var $i = 0; $i < count($items); $i++) {
+            DB::table('<%=locals.with.table%>')
+                ->insert([
+                    '<%=locals.with.key%>' => $parentId,
+                    <%_ if (Array.isArray(locals.with.items)) { _%>
+                    <%_ for (var i = 0; i < locals.with.items.length; i++) { _%>
+                    '<%=locals.with.items[i]%>' => $items[$i]['<%=locals.with.items[i]%>'],
+                    <%_ } _%>
+                    <%_ } else if (typeof(locals.with.items) === 'object') { _%>
+                    <%_ for (var i in locals.with.items) { _%>
+                    '<%=i%>' => $items[$i]['<%=locals.with.items[i]%>'],
+                    <%_ } _%>
+                    <%_ } _%>
+                    <%_ var eid = entityId(model, locals.with.table); _%>
+                    <%_ if (model.entity[eid].$.time === 'true') { _%>
+                    'created_at' => date('Y-m-d H:i:s'),
+                    'updated_at' => date('Y-m-d H:i:s')
+                    <%_ } _%>
+                ]);
+        }
+        <%_ } _%>
+        return $this->success();
+    }

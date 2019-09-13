@@ -1,0 +1,32 @@
+    public function <%=oper.$.name%>(Request $request) {
+        $this->validate($request, [
+            'code' => 'required'
+        ]);
+            
+        $code = $request->input('code');
+        $open_id = \App\Utils\WxLoginUtil::getOpenid($code);
+        
+        $result = DB::table('users')->where('open_id', $open_id)->first();
+        
+        if ($result == null) {
+            $result = DB::table('instructor')->where('open_id', $open_id)->first();
+            if ($result == null) {
+                return $this->fails();
+            } else {
+                $instructor_id = $result->id;
+                $data = ["id"=>$instructor_id];
+                $token = Crypt::encrypt(json_encode($data).'.'.time());
+                $data['token'] = $token;
+                $data['is_user'] = 0;
+                return $this->success($data);
+            }
+
+        } else {
+            $user_id = $result->id;
+            $data = ["id"=>$user_id];
+            $token = Crypt::encrypt(json_encode($data).'.'.time());
+            $data['token'] = $token;
+            $data['is_user'] = 1;
+            return $this->success($data);
+        }       
+    }

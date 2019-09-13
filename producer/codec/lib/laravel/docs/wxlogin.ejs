@@ -1,0 +1,8 @@
+<%_ if (locals.mode === 'input') { _%>
+<%- include("object", {doc: locals.with}) %>
+<%_ } else if (locals.mode === 'output') { 
+    echo ("{<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）"
+    +"<br>&nbsp;&nbsp;errorMsg: 错误信息"
+    +"<br>&nbsp;&nbsp;result:{id:用户id, token:登录凭证}}"); 
+_%>
+<%_ } _%>

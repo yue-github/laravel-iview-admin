@@ -1,0 +1,6 @@
+    public function <%=oper.$.name%>(Request $request) {
+    <%- include('validate', {val: {params: locals.data}}) %>
+        $phone = $request->get("phone");
+        $id = \App\Utils\SMSUtil::create($phone);
+        return $this->success($id);
+    }

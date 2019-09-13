@@ -1,0 +1,62 @@
+<%_  
+var i = 0;
+var user = "";
+var duser = "";
+var shop = "";
+for(var d in locals.data) {
+    if(i === 0) {
+        user = d;
+        duser = locals.data[d];
+    } else if(i === 1) {
+        shop = d;
+    }
+    i++;
+}
+
+// var wuser = "";
+// var dwuser = "";
+// var wpwd = "";
+// var dwpwd = "";
+
+// i = 0;
+// for(var d in locals.with) {
+//     if(i === 0) {
+//         wuser = d;
+//         dwuser = locals.with[d];
+//     } else if(i === 1) {
+//         wpwd = d;
+//         dwpwd = locals.with[d];
+//     }
+//     i++;
+// }
+_%>
+    public function <%=oper.$.name%>(Request $request) {
+    <%- include('validate', {val: {params: locals.with}}) %>
+        $user = DB::table("<%=table.$.name%>")
+            <%_ for (var key in locals.with) { 
+                    if (key == "password") { _%>
+            ->where("<%=key%>", "=", md5($request->input('<%=locals.with[key]%>')))
+                    <%_ } else { _%>
+            ->where("<%=key%>", "=", $request->input('<%=locals.with[key]%>'))
+                    <%_ } _%>
+            <%_ } _%>
+            ->first();
+        if (!$user) {
+            return $this->fails('用户名或密码错误');
+        }
+
+        $data = ['<%=duser%>'=>$user-><%=user%>];
+
+        <%_ if(shop && shop == 'shop_id') { _%>
+        $shop = DB::table("shops")->where('owner_id', $user->id)->first();
+        if($shop) {
+            $data['shop_id'] = $shop->id;
+        }
+        <%_ } _%>
+
+        $token = Crypt::encrypt(json_encode($data).'.'.time());
+
+        $data['token'] = $token;
+
+        return $this->success($data);
+    }

@@ -1,0 +1,46 @@
+<%_
+function genData(v, n) {
+    echo("&nbsp;&nbsp;");
+    var a = attr(locals.table, n);
+    if (a.$ && a.$.label)
+        echo(v + ": " + a.$.label);
+    else echo(v);
+    echo("<br>");
+}
+function genLabel(v, l) {
+    echo("&nbsp;&nbsp;");
+    echo(v + ": " + l);
+    echo("<br>");
+}
+if (locals.doc) {
+    echo("{<br>");
+    if (locals.autoid === true)
+        genLabel('id', "ID号");
+    if (locals.ol === true) {
+        genLabel('offset', "起始位置");
+        genLabel('length', "返回条数");
+    }
+    for (var n in locals.doc) {
+        var v = locals.doc[n];
+        if (Array.isArray(v))
+            v = v[1];
+        if(typeof(v) === 'object') {
+            continue;
+        }
+        if(isInput(v)) {
+            if(v === "STA_SUM" ||v === "GEN_CODE") 
+                continue;
+            if(v === 'created_at') {
+                genLabel(v, '创建时间');
+            } else if(v === 'updated_at') {
+                genLabel(v, '修改时间');
+            } else if (v !== 'id') {
+                genData(v, n);
+            }  else if (!locals.autoid) {
+                genLabel("id", "ID号");
+            }
+        }
+    }
+    echo("}");
+}
+_%>

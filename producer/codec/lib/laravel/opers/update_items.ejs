@@ -1,0 +1,46 @@
+    public function <%=oper.$.name%>(Request $request) {
+<%- include('validate', {val: {hasItems: true, param: locals.data, mode: "required"}}) %>
+        DB::table('<%=table.$.name%>')
+            ->where('id', $request->input('id'))
+            ->update([
+                <%_ if (Array.isArray(locals.data)) { _%>
+                <%_ for (var i = 0; i < locals.data.length; i++) { _%>
+                '<%=locals.data[i]%>' => $request->input('<%=locals.data[i]%>'),
+                <%_ } _%>
+                <%_ } else if (typeof(locals.data) === 'object') { _%>
+                <%_ for (var i in locals.data) { _%>
+                '<%=i%>' => $request->input('<%=locals.data[i]%>'),
+                <%_ } _%>
+                <%_ } _%>
+                <%_ if (table.$.time === 'true') { _%>
+                'updated_at' => date('Y-m-d H:i:s')
+                <%_ } _%>
+            ]);
+        <%_ if (locals.with && locals.with.table && locals.with.key && locals.with.items) { _%>
+        DB::table('<%=locals.with.table%>')
+            ->where('<%=locals.with.key%>', $request->input('id'))
+            ->delete();
+        $items = $request->input('items');
+        for ($i = 0; $i < count($items); $i++) {
+            DB::table('<%=locals.with.table%>')
+                ->insert([
+                    '<%=locals.with.key%>' => $parentId,
+                    <%_ if (Array.isArray(locals.with.items)) { _%>
+                    <%_ for (var i = 0; i < locals.with.items.length; i++) { _%>
+                    '<%=locals.with.items[i]%>' => $items[$i]['<%=locals.with.items[i]%>'],
+                    <%_ } _%>
+                    <%_ } else if (typeof(locals.with.items) === 'object') { _%>
+                    <%_ for (var i in locals.with.items) { _%>
+                    '<%=i%>' => $items[$i]['<%=locals.with.items[i]%>'],
+                    <%_ } _%>
+                    <%_ } _%>
+                    <%_ var eid = entityId(model, locals.with.table); _%>
+                    <%_ if (model.entity[eid].$.time === 'true') { _%>
+                    'created_at' => date('Y-m-d H:i:s'),
+                    'updated_at' => date('Y-m-d H:i:s')
+                    <%_ } _%>
+                ]);
+        }
+        <%_ } _%>
+        return $this->success();
+    }

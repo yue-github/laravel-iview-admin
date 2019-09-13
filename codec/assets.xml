@@ -1,0 +1,274 @@
+<model>
+    <entity name="accredit_type" time="true">
+        <attr name="id" type="name"/>
+        <attr name="name" type="name"/>
+        <oper name="search" type="search">
+            data: {id: id, name: name},
+            with: {name: [like, name]}
+        </oper>
+    </entity>
+    <entity name="and_application_form_userinfo" time="true">
+        <attr name="id" type="name"/>
+        <attr name="a_id" type="name"/>
+        <attr name="u_id" type="name"/>
+        <attr name="sort" type="name"/>
+        <attr name="state" type="name"/>
+        <attr name="user_name" type="name"/>
+        <attr name="sort_name" type="name"/>
+    </entity>
+    <entity name="and_authority_user" time="true">
+        <attr name="id" type="name"/>
+        <attr name="a_id" type="name"/>
+        <attr name="user_id" type="name"/>
+    </entity>
+    <entity name="application_and_resource" time="true">
+        <attr name="id" type="name"/>
+        <attr name="application_id" type="name"/>
+        <attr name="resource_id" type="name"/>
+        <attr name="use_position" type="name"/>
+    </entity>
+    <entity name="application_form" time="true">
+        <attr name="id" type="name"/>
+        <attr name="name" type="name"/>
+        <attr name="type" type="name"/>
+    </entity>
+    <entity name="approval_opinion" time="true">
+        <attr name="id" type="name"/>
+        <attr name="my_application_id" type="name"/>
+        <attr name="appilcation_form_userinfo_id" type="name"/>
+        <attr name="application_time" type="name"/>
+        <attr name="approval_opinion" type="name"/>
+        <attr name="result_handling" type="name"/>
+        <attr name="proposer_user_id" type="name"/>
+        <attr name="approver_user_id" type="name"/>
+    </entity>
+    <entity name="authority" time="true">
+        <attr name="id" type="name"/>
+        <attr name="name" type="name"/>
+        <attr name="my_assets" type="name"/>
+        <attr name="asset_analysis" type="name"/>
+        <attr name="compliance_report" type="name"/>
+        <attr name="hardware_asset_flow" type="name"/>
+        <attr name="hardware_transfer_flow" type="name"/>
+        <attr name="hardware_return_process" type="name"/>
+        <attr name="software_asset_flow" type="name"/>
+        <attr name="software_uninstall_process" type="name"/>
+        <attr name="conservator" type="name"/>
+        <attr name="warehouse_asset_statement" type="name"/>
+        <attr name="detailed_sta_allocation" type="name"/>
+        <attr name="cost_allocation_grouping" type="name"/>
+        <attr name="statement_asset_variances" type="name"/>
+        <attr name="delete_report" type="name"/>
+        <attr name="new_inventory" type="name"/>
+        <attr name="modify_inventory" type="name"/>
+        <attr name="delete_inventory" type="name"/>
+        <attr name="small_y" type="name"/>
+        <attr name="directory_entry" type="name"/>
+        <attr name="center_cost" type="name"/>
+        <attr name="processing_method" type="name"/>
+        <attr name="manufacturer" type="name"/>
+        <attr name="supplier" type="name"/>
+        <attr name="user_profile" type="name"/>
+        <attr name="company" type="name"/>
+        <attr name="brand" type="name"/>
+        <attr name="storehouse" type="name"/>
+        <attr name="profit_center" type="name"/>
+        <attr name="borrowing_restriction" type="name"/>
+        <attr name="count_tasks" type="name"/>
+        <attr name="maintenance_state" type="name"/>
+        <attr name="authorization_type" type="name"/>
+        <attr name="license_type" type="name"/>
+        <attr name="hardware_information" type="name"/>
+        <attr name="software_Information" type="name"/>
+        <attr name="primary_maintenance" type="name"/>
+        <attr name="secondary_maintenance" type="name"/>
+        <attr name="role_authority_management" type="name"/>
+    </entity>
+    <entity name="brand" time="true">
+        <attr name="id" type="name"/>
+        <attr name="name" type="name"/>
+        <attr name="state" type="name"/>
+    </entity>
+    <entity name="company" time="true">
+        <attr name="id" type="name"/>
+        <attr name="name" type="name"/>
+        <attr name="log" type="name"/>
+        <attr name="site_id" type="name"/>
+        <attr name="code" type="name"/>
+        <attr name="accounting" type="name"/>
+        <attr name="regional_it" type="name"/>
+        <attr name="state" type="name"/>
+        <attr name="profit_center" type="name"/>
+    </entity>
+    <entity name="cost_center" time="true">
+        <attr name="id" type="name"/>
+        <attr name="name" type="name"/>
+        <attr name="code" type="name"/>
+        <attr name="company" type="name"/>
+        <attr name="accounting" type="name"/>
+        <attr name="equipment_manager" type="name"/>
+        <attr name="cost_controller" type="name"/>
+        <attr name="central_functional" type="name"/>
+        <attr name="state" type="name"/>
+    </entity>
+    <entity name="counting_task" time="true">
+        <attr name="id" type="name"/>
+        <attr name="name" type="name"/>
+        <attr name="blocking_time" type="name"/>
+        <attr name="create_time" type="name"/>
+        <attr name="creator" type="name"/>
+    </entity>
+    <entity name="directory_entry" time="true">
+        <attr name="id" type="name"/>
+        <attr name="name" type="name"/>
+        <attr name="number" type="name"/>
+        <attr name="share_prices" type="name"/>
+        <attr name="applicable_state" type="name"/>
+        <attr name="loanable_state" type="name"/>
+        <attr name="account" type="name"/>
+        <attr name="parent" type="name"/>
+        <attr name="parent_id" type="name"/>
+        <attr name="annotation" type="name"/>
+    </entity>
+    <entity name="handling_method" time="true">
+        <attr name="id" type="name"/>
+        <attr name="name" type="name"/>
+        <attr name="state" type="name"/>
+        <attr name="annotation" type="name"/>
+    </entity>
+    <entity name="license_type" time="true">
+        <attr name="id" type="name"/>
+        <attr name="name" type="name"/>
+    </entity>
+    <entity name="maintenance_state" time="true">
+        <attr name="id" type="name"/>
+        <attr name="name" type="name"/>
+    </entity>
+    <entity name="manufacturer" time="true">
+        <attr name="id" type="name"/>
+        <attr name="name" type="name"/>
+        <attr name="state" type="name"/>
+    </entity>
+    <entity name="my_application" time="true">
+        <attr name="id" type="name"/>
+        <attr name="serial_number" type="name"/>
+        <attr name="application_order_number" type="name"/>
+        <attr name="application_form_name" type="name"/>
+        <attr name="application_form_id" type="name"/>
+        <attr name="application_time" type="name"/>
+        <attr name="process_status" type="name"/>
+        <attr name="current_node_handlers" type="name"/>
+        <attr name="userinfo_id" type="name"/>
+        <attr name="userinfo" type="name"/>
+        <attr name="type" type="name"/>
+        <attr name="number" type="name"/>
+        <attr name="phone" type="name"/>
+        <attr name="reason_for_application" type="name"/>
+        <attr name="recipient_id" type="name"/>
+    </entity>
+    <entity name="profit_center" time="true">
+        <attr name="id" type="name"/>
+        <attr name="name" type="name"/>
+        <attr name="code" type="name"/>
+        <attr name="company" type="name"/>
+        <attr name="state" type="name"/>
+        <attr name="cost_center" type="name"/>
+    </entity>
+    <entity name="resource" time="true">
+        <attr name="id" type="name"/>
+        <attr name="asset_name" type="name"/>
+        <attr name="serial_number" type="name"/>
+        <attr name="storehouse_id" type="name"/>
+        <attr name="storehouse" type="name"/>
+        <attr name="model" type="name"/>
+        <attr name="maintenance_expiration_date" type="name"/>
+        <attr name="asset_number" type="name"/>
+        <attr name="user_id" type="name"/>
+        <attr name="fixed_asset_number" type="name"/>
+        <attr name="user" type="name"/>
+        <attr name="company_belongs_id" type="name"/>
+        <attr name="company_belongs" type="name"/>
+        <attr name="site" type="name"/>
+        <attr name="brand" type="name"/>
+        <attr name="asset_classification_id" type="name"/>
+        <attr name="asset_classification" type="name"/>
+        <attr name="ip_address" type="name"/>
+        <attr name="actual_user" type="name"/>
+        <attr name="place_use" type="name"/>
+        <attr name="cycle_state" type="name"/>
+        <attr name="cost_center_text" type="name"/>
+        <attr name="cost_center_code" type="name"/>
+        <attr name="state" type="name"/>
+        <attr name="image" type="name"/>
+        <attr name="software_version" type="name"/>
+        <attr name="software_description" type="name"/>
+        <attr name="application_process_id" type="name"/>
+        <attr name="transfer_process_id" type="name"/>
+        <attr name="return_process_id" type="name"/>
+        <attr name="catalogue1" type="name"/>
+        <attr name="catalogue2" type="name"/>
+        <attr name="catalogue3" type="name"/>
+    </entity>
+    <entity name="supplier" time="true">
+        <attr name="id" type="name"/>
+        <attr name="name" type="name"/>
+        <attr name="number" type="name"/>
+        <attr name="state" type="name"/>
+        <attr name="linkman" type="name"/>
+        <attr name="phone" type="name"/>
+        <attr name="site" type="name"/>
+    </entity>
+    <entity name="use_limit" time="true">
+        <attr name="id" type="name"/>
+        <attr name="war_id" type="name"/>
+        <attr name="acc_id" type="name"/>
+        <attr name="number" type="name"/>
+    </entity>
+    <entity name="use_position" time="true">
+        <attr name="id" type="name"/>
+        <attr name="name" type="name"/>
+    </entity>
+    <entity name="user" time="true">
+        <attr name="id" type="name"/>
+        <attr name="account" type="name"/>
+        <attr name="password" type="name"/>
+        <attr name="access" type="name"/>
+        <attr name="name" type="name"/>
+        <attr name="avatar" type="name"/>
+    </entity>
+    <entity name="user_and_resource" time="true">
+        <attr name="id" type="name"/>
+        <attr name="user_id" type="name"/>
+        <attr name="resource_id" type="name"/>
+    </entity>
+    <entity name="userinfo" time="true">
+        <attr name="id" type="name"/>
+        <attr name="name" type="name"/>
+        <attr name="user_number" type="name"/>
+        <attr name="user_mailbox" type="name"/>
+        <attr name="status" type="name"/>
+        <attr name="customer_name" type="name"/>
+        <attr name="code" type="name"/>
+        <attr name="contact_way" type="name"/>
+        <attr name="company" type="name"/>
+        <attr name="center_cost" type="name"/>
+        <attr name="history_gid" type="name"/>
+        <attr name="industry_title" type="name"/>
+        <attr name="annotation" type="name"/>
+        <attr name="y_account" type="name"/>
+        <attr name="outside_personnel" type="name"/>
+        <attr name="password" type="name"/>
+        <attr name="phone" type="name"/>
+        <attr name="avatar" type="name"/>
+        <attr name="account" type="name"/>
+    </entity>
+    <entity name="warehouse" time="true">
+        <attr name="id" type="name"/>
+        <attr name="name" type="name"/>
+        <attr name="company" type="name"/>
+        <attr name="regional_it" type="name"/>
+        <attr name="state" type="name"/>
+        <attr name="asset_manager" type="name"/>
+        <attr name="installed_personnel" type="name"/>
+    </entity>
+</model>

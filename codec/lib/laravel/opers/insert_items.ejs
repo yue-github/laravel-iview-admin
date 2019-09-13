@@ -1,0 +1,94 @@
+    public function <%=oper.$.name%>(Request $request) {
+<%- include('validate', {val: {params: locals.data}}) %>
+        $parentId = "";
+        DB::transaction(function () use($request, &$parentId) {
+            <%_ for (var i in locals.data) { 
+                if(typeof(locals.data[i]) == "object") { 
+                    var ns = i.split(".");
+                    if(ns.length > 1 && ns[0] == "items") { _%>
+            $items = json_decode($request->input('<%=ns[1]%>'));
+            $ids = [];
+            for($i = 0; $i < count($items); $i++) {
+                array_push($ids, $items[$i]->id);
+            }
+            $<%=ns[1]%> = DB::table("<%=ns[1]%>")->whereIn("id", $ids);
+            <%_ }
+                } _%>
+            <%_ } _%>
+        
+            $parentId = DB::table('<%=table.$.name%>')
+                ->insertGetId([
+                    <%_ if (Array.isArray(locals.data)) { _%>
+                    <%_ for (var i = 0; i < locals.data.length; i++) { _%>
+                    '<%=locals.data[i]%>' => $request->input('<%=locals.data[i]%>'),
+                    <%_ } _%>
+                    <%_ } else if (typeof(locals.data) === 'object') { _%>
+                    <%_ for (var i in locals.data) { _%>
+                    <%_ if(typeof(locals.data[i]) !== "object") {
+                        var ns = locals.data[i].split('.');
+                        if(ns[0] == "GEN_CODE") { _%>
+                    '<%=i%>' => date('YmdHis').time().mt_rand(1000,9999),
+                    <%_  } else if(ns.length > 1 && ns[0] === "STA_SUM") { _%>
+                    '<%=i%>' => $<%=ns[1]%>->sum("<%=ns[2]%>"),
+                    <%_ } else { _%>
+                    '<%=i%>' => <%-tcvt(locals.data[i])%>,
+                    <%_ } _%>
+                    <%_ } _%>
+                    <%_ } _%>
+                    <%_ } _%>
+                    <%_ if (table.$.time === 'true') { _%>
+                    'created_at' => date('Y-m-d H:i:s'),
+                    'updated_at' => date('Y-m-d H:i:s')
+                    <%_ } _%>
+                ]);
+            <%_ for (var i in locals.data) { 
+                if(typeof(locals.data[i]) == "object") { 
+                    var ns = i.split(".");
+                    if(ns.length > 1 && ns[0] == "items") { _%>
+            $<%=ns[1]%> = $<%=ns[1]%>->get();
+            <%_ }
+                } _%>
+            <%_ } _%>
+
+            <%_ for (var i in locals.data) { 
+                if(typeof(locals.data[i]) == "object") { 
+                    var ns = i.split(".");
+                    if(ns.length > 1 && ns[0] == "items") { _%>
+            for ($i = 0; $i < count($items); $i++) {
+                for ($k = 0; $k < count($<%=ns[1]%>); $k++) {
+                    if($items[$i]->id == $<%=ns[1]%>[$k]->id) {
+                        <%_ for (var k in locals.data[i]) { _%>
+                        if(property_exists($<%=ns[1]%>[$k], '<%=k%>'))
+                            $items[$i]-><%=k%> = $<%=ns[1]%>[$k]-><%=k%>;
+                        <%_ } _%>
+                    }
+                }
+            }
+            <%_ }
+                } 
+            }_%>
+
+            <%_ for (var i in locals.data) { 
+                if(typeof(locals.data[i]) == "object") { 
+                    var ns = i.split(".");
+                    if(ns.length > 1 && ns[0] == "items") { _%>
+            for ($i = 0; $i < count($items); $i++) {
+                DB::table('<%=ns[2]%>')
+                    ->insert([
+                        '<%=ns[3]%>' => $parentId,
+                        <%_ for (var k in locals.data[i]) { _%>
+                        '<%=locals.data[i][k]%>' => $items[$i]-><%=k%>,
+                        <%_ } _%>
+                        <%_ var eid = entityId(model, ns[2]); _%>
+                        <%_ if (model.entity[eid].$.time === 'true') { _%>
+                        'created_at' => date('Y-m-d H:i:s'),
+                        'updated_at' => date('Y-m-d H:i:s')
+                        <%_ } _%>
+                    ]);
+            }
+            <%_ }
+                } _%>
+            <%_ } _%>
+        });
+        return $this->success($parentId);
+    }

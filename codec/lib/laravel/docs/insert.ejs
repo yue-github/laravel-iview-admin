@@ -1,0 +1,9 @@
+<%_
+if (locals.mode === "input") {
+_%>
+<%- include("object", {doc: locals.data}) _%>
+<%_
+} else if (locals.mode === "output") {
+    echo ("{<br>&nbsp;&nbsp;status: 状态（成功: success; 失败: fail）<br>&nbsp;&nbsp;errorMsg: 错误信息<br>}"); 
+}
+_%>

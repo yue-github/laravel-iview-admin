@@ -1,0 +1,33 @@
+public function <%=oper.$.name%>(Request $request) {
+        $validator = Validator::make($request->all(), [
+            'product_id' => 'required|integer|min:0',
+            'num' => 'integer',
+        ]);
+        if($validator->fails()) {
+            return $this->fails( $validator->errors()->all());
+        }
+        //先查出购物车
+        $db_shopping_cart = DB::table('shopping_cart')->select()
+            ->where('user_id', '=', $this->token->id)
+            ->where('product_id', '=',  $request->input('product_id'))->first();
+        //如果购物车存在
+        if($db_shopping_cart != null){
+            //如果数量累加后为 0
+            $num = $db_shopping_cart->num + $request->input('num');
+            if($num <= 0){
+                DB::table('shopping_cart')->where('id', '=', $db_shopping_cart->id)->delete();
+                return $this->success();
+            }else{
+                DB::table('shopping_cart')->where('id', $db_shopping_cart->id)->update(['num' => $num]);
+                return $this->success();
+            }
+        }else{
+            DB::table('shopping_cart')->insert([
+                'user_id' => $this->token->id,
+                'product_id' => $request->input('product_id'),
+                'num' => $request->input('num'),
+            ]);
+            return $this->success();
+        }
+        return $this->success();
+    }
